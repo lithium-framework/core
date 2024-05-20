@@ -1,5 +1,5 @@
-import { Directive , directive } from './../directives/index.js';
-import { CSSObject , createCSS } from '../css-object/css-object.js'
+import { Directive , directive } from './../directives/index';
+import { CSSObject , createCSS } from '../css-object/css-object'
 
 export class UseStyleDirective extends Directive{
 

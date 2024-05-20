@@ -1,1 +1,1 @@
-export { _cssObject , CSSObject , createCSS } from './css-object.js';
+export { _cssObject , CSSObject , createCSS } from './css-object';

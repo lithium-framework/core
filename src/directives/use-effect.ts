@@ -1,6 +1,5 @@
 import { State } from '@lithium-framework/state';
-import { Directive , directive } from './../directives/index.js';
-import { render } from '../index.js';
+import { Directive , directive } from './../directives/index';
 
 export class UseEffectDirective extends Directive{
 
@@ -8,10 +7,6 @@ export class UseEffectDirective extends Directive{
   get part(){ return this["__part"] }
 
   private _isMounted = false;
-
-  // get _$isConnected(){
-  //   return this._isMounted;
-  // }
 
   set _$isConnected( value ){
     alert(value)

@@ -1,6 +1,6 @@
 import { State } from '@lithium-framework/state';
-import { Directive , directive } from './../directives/index.js';
-import { render } from '../index.js';
+import { Directive , directive } from './../directives/index';
+import { render } from '../index';
 
 export class UseStateDirective<T extends State<T> = State<any>> extends Directive{
 

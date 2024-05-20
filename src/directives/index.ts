@@ -23,6 +23,6 @@ export { when } from 'lit/directives/when.js';
 
 export { Directive , directive };
 
-export { useState , UseStateDirective } from './use-state.js';
-export { useStyle , UseStyleDirective } from './use-style.js';
-export { useEffect , UseEffectDirective } from './use-effect.js';
+export { useState , UseStateDirective } from './use-state';
+export { useStyle , UseStyleDirective } from './use-style';
+export { useEffect , UseEffectDirective } from './use-effect';

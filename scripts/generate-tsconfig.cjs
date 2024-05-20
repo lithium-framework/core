@@ -13,7 +13,7 @@ const tsconfig = {
     declaration: true,
     sourceMap: true,
     rootDir: "./src",
-    outDir: env === 'production' ? "./prod" : "./dist",
+    outDir: env === 'production' ? "." : "./dist",
     removeComments: false,
     preserveConstEnums: true,
     skipLibCheck: true,

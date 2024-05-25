@@ -96,9 +96,6 @@ jobs:
 
       - run: npm ci
 
-      - name: Generate tsconfig
-        run: npm run prod
-
       - run: npm run build:prod
 
       - name: Remove src directory

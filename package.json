@@ -9,8 +9,8 @@
     "test": "npx jest --watchAll",
     "build": "npm run build:webpack && npm run build:tsc",
     "build:webpack": "node ./scripts/generate-tsconfig.cjs && npx webpack --watch",
-    "build:tsc": "node ./scripts/generate-tsconfig.cjs && tsc --watch",
-    "prod": "NODE_ENV=production node ./scripts/generate-tsconfig.cjs && npx tsc"
+    "build:dev": "node ./scripts/generate-tsconfig.cjs && tsc --watch",
+    "build:prod": "NODE_ENV=production node ./scripts/generate-tsconfig.cjs && npx tsc"
   },
   "repository": {
     "type": "git",

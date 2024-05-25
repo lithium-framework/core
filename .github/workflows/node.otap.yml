@@ -33,9 +33,6 @@ jobs:
       - name: Remove dist directory
         run: rm -rf dist
 
-      - name: Remove browser directory
-        run: rm -rf dist
-
       - name: Add generated files
         run: git add .
 
@@ -99,15 +96,13 @@ jobs:
 
       - run: npm ci
 
-      - name: Generate tsconfig
-        run: npm run prod
-
-      - run: npx tsc
-
-      - run: npm run build:webpack
+      - run: npm run build:prod
 
       - name: Remove src directory
         run: rm -rf src
+
+      - name: Remove scripts directory
+        run: rm -rf scripts
 
       - name: Add generated files
         run: git add .

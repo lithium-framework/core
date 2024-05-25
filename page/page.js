@@ -1,4 +1,4 @@
-import { render } from '../index';
+import { render } from '../flyComponent/index.js';
 export function Page(options) {
     return () => {
         return new Promise((next) => {

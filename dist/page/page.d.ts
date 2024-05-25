@@ -1,4 +1,4 @@
-import { TemplateResult } from 'lit';
+import { TemplateResult } from '../flyComponent/index.js';
 export type PageDefinition = {
     template: TemplateResult;
     plugins?: (() => Promise<any>)[];

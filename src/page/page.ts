@@ -1,5 +1,4 @@
-import { TemplateResult } from 'lit';
-import { render } from '../index.js'
+import { render , TemplateResult } from '../flyComponent/index.js'
 
 export type PageDefinition = {
   template : TemplateResult;

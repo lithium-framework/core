@@ -1,9 +1,10 @@
 export { 
   customElement , 
-  css , 
-  html , 
-  Observable , 
-  ViewTemplate , 
+  css, 
+  html, 
+  Observable, 
+  ViewTemplate,
+  SyntheticView, 
   volatile 
 } from "@microsoft/fast-element";
 
@@ -24,4 +25,4 @@ export {
   ref,
   children,
   slotted
-} from './directives/index.js'
+} from './directives/index.js';

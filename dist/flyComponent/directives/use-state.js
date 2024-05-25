@@ -1,5 +1,5 @@
 import { Directive, directive } from './index.js';
-import { render } from '../../index.js';
+import { render } from '../index.js';
 export class UseStateDirective extends Directive {
     get parent() { return this["_$parent"]; }
     get part() { return this["__part"]; }

@@ -32,3 +32,16 @@ export {
 export {
 
 } from './decorators/index.js';
+
+export { 
+  html, 
+  css,
+  TemplateResult, 
+  TemplateInstance  
+} from 'lit';
+
+import { render as lit_render , TemplateResult } from 'lit';
+
+export function render( element:TemplateResult , parent:HTMLElement | DocumentFragment = document.createDocumentFragment() ){
+  return lit_render( element , parent );
+}

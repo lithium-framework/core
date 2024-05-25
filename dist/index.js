@@ -1,13 +1,15 @@
 // import { html as lithtml , render as litRender , TemplateResult } from 'lit-html';
-import { createState, State } from '@lithium-framework/state';
 import * as Utils from './utils/index.js';
-export { createPage } from './page/index.js';
-export { createState, State };
+import { createPage } from './page/index.js';
+import { WebComponent } from './webComponent/index.js';
+import { FlyComponent } from './flyComponent/models.js';
 (() => {
     if (!window["lithium"])
         window["lithium"] = {
-            createState,
-            Utils
+            Utils,
+            createPage,
+            WebComponent,
+            FlyComponent
         };
 })();
 //# sourceMappingURL=index.js.map

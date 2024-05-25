@@ -1,5 +1,5 @@
 import { TemplateResult } from 'lit';
-import { render } from '../index'
+import { render } from '../index.js'
 
 export type PageDefinition = {
   template : TemplateResult;

@@ -1,15 +1,15 @@
 // import { html as lithtml , render as litRender , TemplateResult } from 'lit-html';
 import { html as lithtml , render as litRender , TemplateResult , TemplateInstance  } from 'lit';
 import { createState , State } from '@lithium-framework/state';
-import { _cssObject , CSSObject , createCSS } from './css-object/index';
-import { useState } from './directives/use-state';
-import { useStyle } from './directives/use-style';
-import { useEffect } from './directives/use-effect';
-import { createPage } from './page';
+import { _cssObject , CSSObject , createCSS } from './utils/css-object/index.js';
+import { useState } from './flyComponent/directives/use-state.js';
+import { useStyle } from './flyComponent/directives/use-style.js';
+import { useEffect } from './flyComponent/directives/use-effect.js';
+import { createPage } from './page/index.js';
 
 export { RouterConfiguration, Route , FASTRouter } from '@microsoft/fast-router';
 export { html as fasthtml , FASTElement , customElement } from '@microsoft/fast-element';
-export { createPage } from './page';
+export { createPage } from './page/index.js';
 
 export type ThoriumTemplateResult = TemplateResult & {};
 
@@ -28,7 +28,7 @@ export function render( element:TemplateResult , parent:HTMLElement | DocumentFr
 export { TemplateInstance };
 export { _cssObject , CSSObject , createCSS };
 export { createState , State };
-export * as Directives from './directives/index';
+export * as Directives from './flyComponent/directives/index.js';
 
 (() => {
   if(!window["lithium"]) window["lithium"] = {

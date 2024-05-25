@@ -1,21 +1,27 @@
-import { FASTElement , customElement , css , html , attr , Observable , observable , ViewTemplate , when , repeat , ref , children , slotted , volatile } from "@microsoft/fast-element";
+export { 
+  customElement , 
+  css , 
+  html , 
+  Observable , 
+  ViewTemplate , 
+  volatile 
+} from "@microsoft/fast-element";
 
-export class WebComponent extends FASTElement{
-  
-}
+export { 
+  WebComponent 
+} from './model.js';
+
+export { 
+  attr,
+  observable,
+  state,
+  attrState,
+} from './decorators/index.js';
 
 export {
-  customElement,
-  css,
-  html,
-  attr,
-  Observable,
-  observable,
-  ViewTemplate,
   when,
   repeat,
   ref,
   children,
-  slotted,
-  volatile
-}
+  slotted
+} from './directives/index.js'

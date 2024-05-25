@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { updateDistributionPath } = require('./update-distribution-path.cjs');
 
 console.log({ env : process.env.NODE_ENV })
 
@@ -21,10 +22,15 @@ const tsconfig = {
     strict: false,
     noImplicitAny: false,
     esModuleInterop: true,
-    resolveJsonModule: true
+    resolveJsonModule: true,
+    baseUrl: "./",
+    paths: {
+      "@lithium-framework/*": ["node_modules/@lithium-framework/*"]
+    }
   },
   include: [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "node_modules/@lithium-framework/*"
   ],
   exclude: [
     "node_modules"
@@ -33,3 +39,5 @@ const tsconfig = {
 
 fs.writeFileSync(path.resolve(pwd, 'tsconfig.json'), JSON.stringify(tsconfig, null, 2));
 console.log(`tsconfig.json generated for ${env} environment.`);
+
+updateDistributionPath();

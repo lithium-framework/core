@@ -13,10 +13,17 @@
     "strict": false,
     "noImplicitAny": false,
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "paths": {
+      "@lithium-framework/*": [
+        "node_modules/@lithium-framework/*"
+      ]
+    }
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "node_modules/@lithium-framework/*"
   ],
   "exclude": [
     "node_modules"

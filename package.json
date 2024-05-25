@@ -2,14 +2,14 @@
   "name": "@lithium-framework/core",
   "version": "1.0.3-0",
   "description": "",
-  "main": "./index.js",
+  "main": "./dist/index.js",
   "type": "module",
   "module": "ESNext",
   "scripts": {
     "test": "npx jest --watchAll",
     "build": "npm run build:webpack && npm run build:tsc",
-    "build:webpack": "node ./scripts/generate-tsconfig.cjs && npx webpack",
-    "build:tsc": "node ./scripts/generate-tsconfig.cjs && npx tsc",
+    "build:webpack": "node ./scripts/generate-tsconfig.cjs && npx webpack --watch",
+    "build:tsc": "node ./scripts/generate-tsconfig.cjs && tsc --watch",
     "prod": "NODE_ENV=production node ./scripts/generate-tsconfig.cjs && npx tsc"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "path-browserify": "^1.0.1",
     "ts-loader": "^9.5.1",
+    "tsc-alias": "^1.8.10",
     "tslib": "^2.6.2",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4"

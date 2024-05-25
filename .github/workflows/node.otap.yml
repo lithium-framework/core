@@ -102,12 +102,13 @@ jobs:
       - name: Generate tsconfig
         run: npm run prod
 
-      - run: npx tsc
-
       - run: npm run build:webpack
 
       - name: Remove src directory
         run: rm -rf src
+
+      - name: Remove src directory
+        run: rm -rf scripts
 
       - name: Add generated files
         run: git add .

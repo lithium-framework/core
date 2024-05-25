@@ -1,1 +1,1 @@
-export { Page as createPage } from './page';
+export { Page as createPage } from './page.js';

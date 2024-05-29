@@ -30,7 +30,6 @@ const tsconfig = {
   },
   include: [
     "src/**/*.ts",
-    "node_modules/@lithium-framework/*"
   ],
   exclude: [
     "node_modules"

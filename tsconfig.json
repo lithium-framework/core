@@ -5,7 +5,7 @@
     "declaration": true,
     "sourceMap": true,
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": ".",
     "removeComments": false,
     "preserveConstEnums": true,
     "skipLibCheck": true,
@@ -22,8 +22,7 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "node_modules/@lithium-framework/*"
+    "src/**/*.ts"
   ],
   "exclude": [
     "node_modules"

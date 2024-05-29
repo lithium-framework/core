@@ -1,6 +1,6 @@
 {
   "name": "@lithium-framework/core",
-  "version": "1.0.5-0",
+  "version": "1.0.6-0",
   "description": "",
   "main": "./index.js",
   "type": "module",
@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@lithium-framework/context": "^1.0.0",
+    "@lithium-framework/core-dom": "^1.0.0",
     "@lithium-framework/huid": "^1.0.1-0",
     "@lithium-framework/state": "^1.0.0",
     "@microsoft/fast-element": "^1.13.0",

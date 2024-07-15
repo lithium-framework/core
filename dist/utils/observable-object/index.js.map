@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/utils/observable-object/index.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,aAAa,CAAC;AAE/C,MAAM,UAAU,sBAAsB,CAA4C,aAAmC;IACnH,OAAO,gBAAgB,CAAC,IAAI,CAAiB,aAAa,CAAE,CAAC;AAC/D,CAAC;AAED,OAAO,EAAE,gBAAgB,EAAE,CAAC"}

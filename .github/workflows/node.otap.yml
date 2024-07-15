@@ -98,6 +98,14 @@ jobs:
 
       - run: npm run build:prod
 
+      - name: Compare versions
+        id: compare_versions
+        run: node scripts/compare-release.cjs
+        continue-on-error: true
+
+      - name: Store diff output
+        run: echo "::set-output name=diff::${{ steps.compare_versions.outputs.stdout }}"
+
       - name: Remove src directory
         run: rm -rf src
 
@@ -190,7 +198,7 @@ jobs:
 
       - name: Compare versions
         id: compare_versions
-        run: node scripts/compare-release.cjs
+        run: echo "${{ needs.test-to-prod.outputs.diff }}" # Utilisation de la différence capturée de test-to-prod
         continue-on-error: true
 
       - name: Merge to main

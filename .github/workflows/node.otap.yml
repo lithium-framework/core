@@ -163,6 +163,10 @@ jobs:
       - name: Publish to GitHub Packages
         run: npm publish || echo "::warning::Publish failed, please check the logs"
 
+      - name: Set output for main-publish
+        id: set_main_publish_output
+        run: echo "::set-output name=diff::${{ needs.test-to-prod.outputs.store_diff }}"
+
       # Steps for building and publishing package for prod branch
 
   main-publish:
@@ -198,7 +202,7 @@ jobs:
 
       - name: Compare versions
         id: compare_versions
-        run: echo "${{ needs.test-to-prod.outputs.diff }}" # Utilisation de la différence capturée de test-to-prod
+        run: echo "${{ needs.prod-publish.outputs.diff }}" # Utilisation de la différence capturée de test-to-prod
         continue-on-error: true
 
       - name: Merge to main

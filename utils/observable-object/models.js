@@ -1,46 +1,35 @@
 import { Observable } from "@microsoft/fast-element";
-// export function ObservableObject( initialObject:Record<string , any> ){
-//   initialObject = Object.keys( initialObject ).reduce(( result , key ) => {
-//     let value = initialObject[key];
-//     result[`_${key}`] = value;
-//     Observable.defineProperty( result, key);
-//     return result;
-//   } , {})
-//   return new Proxy( initialObject , {
-//     get( store , propKey:string ){
-//       if( store[propKey] )return store[propKey];
-//       else return undefined;
-//     },
-//     set( store , propKey: string, value: any ){
-//       if( store[propKey] ){
-//         store[propKey] = value;
-//       }
-//       else{
-//         store[ `_${propKey}` ] = value;
-//         Observable.defineProperty( store, propKey);
-//       }
-//       return true;
-//     }
-//   } )
-// }
 export class ObservableObject extends Object {
     static init(initialObject) {
-        return new ObservableObject(initialObject);
+        let observabe = new ObservableObject(initialObject);
+        return observabe.createProxy();
     }
+    $data = {};
     constructor(initialObject) {
         super();
-        initialObject = Object.keys(initialObject).reduce((result, key) => {
-            let value = initialObject[key];
-            result[`_${key}`] = value;
-            Observable.defineProperty(result, key);
-            return result;
-        }, {});
-        return new Proxy(initialObject, {
+        Object.keys(initialObject).forEach((key) => {
+            this.set(key, initialObject[key]);
+        });
+    }
+    ;
+    set = (key, value) => {
+        this.$data[`_${key}`] = value;
+        Observable.defineProperty(this.$data, key);
+        return this.$data[key];
+    };
+    createProxy() {
+        return new Proxy(this.$data, {
             get(store, propKey) {
-                if (store[propKey])
-                    return store[propKey];
-                else
-                    return undefined;
+                let result = undefined;
+                try {
+                    result = store[propKey];
+                }
+                catch (error) {
+                    console.error(error);
+                }
+                finally {
+                    return result;
+                }
             },
             set(store, propKey, value) {
                 if (store[propKey]) {
@@ -54,6 +43,5 @@ export class ObservableObject extends Object {
             }
         });
     }
-    ;
 }
 //# sourceMappingURL=models.js.map

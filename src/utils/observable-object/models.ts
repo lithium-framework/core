@@ -1,84 +1,64 @@
 import { Observable } from "@microsoft/fast-element";
 
-// export function ObservableObject( initialObject:Record<string , any> ){
-
-//   initialObject = Object.keys( initialObject ).reduce(( result , key ) => {
-
-//     let value = initialObject[key];
-
-//     result[`_${key}`] = value;
-//     Observable.defineProperty( result, key);
-
-//     return result;
-
-//   } , {})
-
-//   return new Proxy( initialObject , {
-//     get( store , propKey:string ){
-//       if( store[propKey] )return store[propKey];
-//       else return undefined;
-//     },
-//     set( store , propKey: string, value: any ){
-
-//       if( store[propKey] ){
-//         store[propKey] = value;
-//       }
-//       else{
-
-//         store[ `_${propKey}` ] = value;
-//         Observable.defineProperty( store, propKey);
-
-//       }
-
-//       return true;
-
-//     }
-//   } )
-
-// }
-
-export class ObservableObject< key extends string , value extends any > extends Object{
+export class ObservableObject< key extends string , value extends any = any > extends Object{
 
   static init< key extends string , value extends any >( initialObject:Record<key , value> ){
-    return new ObservableObject< key , value >( initialObject );
+    let observabe = new ObservableObject< key , value >( initialObject );
+    return observabe.createProxy();
   }
+
+  $data:Record<string , value> = {};
 
   constructor( initialObject:Record<key , value> ){
     super();
 
-    initialObject = Object.keys( initialObject ).reduce(( result , key:string ) => {
+    Object.keys( initialObject ).forEach(( key:key ) => {
+      this.set( key , initialObject[key] );
+    })
 
-      let value = initialObject[key];
-  
-      result[`_${key}`] = value;
-      Observable.defineProperty( result, key);
-  
-      return result;
-  
-    } , {}) as Record< string , value >;
-  
-    return new Proxy( initialObject , {
+  };
+
+  set = <T extends value = any>( key:key , value:T ) => {   
+
+    this.$data[`_${key}`] = value as any;
+    Observable.defineProperty( this.$data, key);
+    return this.$data[key];
+
+  }
+
+  createProxy(){
+
+    return new Proxy( this.$data , {
       get( store , propKey:string ){
-        if( store[propKey] )return store[propKey];
-        else return undefined;
+
+        let result = undefined;
+
+        try{
+          result = store[propKey];
+        }
+        catch(error){
+          console.error(error);
+        }
+        finally{
+          return result;
+        }
+
       },
       set( store , propKey: string, value: any ){
-  
-        if( store[propKey] ){
+
+        if(store[propKey]){
           store[propKey] = value;
         }
-        else{
-  
+        else {
           store[ `_${propKey}` ] = value;
           Observable.defineProperty( store, propKey);
-  
         }
-  
+
         return true;
   
       }
     })
 
-  };
+  }
 
 }

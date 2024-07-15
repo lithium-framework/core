@@ -1,32 +1,23 @@
 import { FASTElement } from "@microsoft/fast-element";
 import { ObservableObject } from '../utils/observable-object/index.js';
 
-import {
-  state,
-  attrState
-} from './decorators/index.js';
-
-import {
-  when,
-  repeat,
-  ref,
-  children,
-  slotted
-} from './directives/index.js';
-
+/* The WebComponent class extends FASTElement and provides state management functionality using
+ObservableObject. */
 export class WebComponent extends FASTElement{
 
+  /* The `static states = {};` line is declaring a static property named `states` on the `WebComponent`
+  class and initializing it as an empty object `{}`. This property is intended to hold the initial
+  state values for the component. By defining it as a static property, it is shared among all
+  instances of the `WebComponent` class rather than being specific to individual instances. This
+  allows all instances of the class to access and modify the same set of state values. */
   static states = {};
 
-  static get state(){ return state };
-  static get attrState(){ return attrState };
-  static get when(){ return when }
-  static get repeat(){ return repeat }
-  static get ref(){ return ref }
-  static get children(){ return children }
-  static get slotted(){ return slotted }
-
-  $states = new ObservableObject( this.constructor["states"] );
+  /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
+  instance property named `` on the `WebComponent` class. This property is being set to the
+  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
+  values defined in the `states` static property of the `WebComponent` class
+  (`this.constructor["states"]`). */
+  $states = ObservableObject.init( this.constructor["states"] );
 
   constructor(){
     super();
@@ -41,6 +32,7 @@ export class WebComponent extends FASTElement{
           this.$states[key] = value;
         }
       } )
+      
     });
 
   }

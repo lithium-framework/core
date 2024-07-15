@@ -4,6 +4,7 @@ export {
   html, 
   Observable, 
   ViewTemplate,
+  HTMLView,
   SyntheticView, 
   volatile 
 } from "@microsoft/fast-element";
@@ -17,7 +18,7 @@ export {
   observable,
   state,
   attrState,
-} from './decorators/index.js';
+} from '../decorators/index.js';
 
 export {
   when,
@@ -25,4 +26,4 @@ export {
   ref,
   children,
   slotted
-} from './directives/index.js';
+} from '../directives/index.js';

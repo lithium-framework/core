@@ -156,3 +156,61 @@ jobs:
         run: npm publish || echo "::warning::Publish failed, please check the logs"
 
       # Steps for building and publishing package for prod branch
+
+  main-publish:
+    runs-on: ubuntu-latest
+    needs: prod-publish
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+          cache: 'npm'
+
+      - name: Configure Git with token
+        run: |
+            git config --global user.email "MortallicaXxX@hotmail.com"
+            git config --global user.name "MortallicaXxX"
+            git config --global credential.helper store
+            echo "https://github.com:${{ secrets.PUBLISH_TOKEN }}" > ~/.git-credentials
+            chmod 0600 ~/.git-credentials
+  
+      - name: Fetch branchs information from remote
+        run: git fetch
+  
+      - name: Switch branch dev to prod
+        run: git switch -c test origin/prod
+
+      - name: Pull branch from remote
+        run: git pull
+
+      - name: Compare versions
+        id: compare_versions
+        run: node scripts/compare-release.cjs
+        continue-on-error: true
+
+      - name: Merge to main
+        id: merge_prod_to_main
+        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        run: |
+          git checkout main || git checkout -b main origin/main
+          git merge --no-ff --allow-unrelated-histories -X theirs test
+          git push origin main
+
+      - name: Switch branch prod to main
+        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        run: git switch -c prod origin/main
+
+      - name: Pull branch from remote
+        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        run: git pull
+
+      - name: Publish to npm
+        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        run: npm publish
+
+      

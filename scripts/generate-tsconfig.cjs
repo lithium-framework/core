@@ -23,6 +23,8 @@ const tsconfig = {
     noImplicitAny: false,
     esModuleInterop: true,
     resolveJsonModule: true,
+    experimentalDecorators: true,
+    emitDecoratorMetadata: true,
     baseUrl: "./",
     paths: {
       "@lithium-framework/*": ["node_modules/@lithium-framework/*"]

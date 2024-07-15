@@ -8,7 +8,6 @@ async function main() {
   let npmPackageJson = await result.json();
 
   if (npmPackageJson == 'Not Found') {
-    console.log('Not Found');
     return 'Not Found';
   } else {
     let { version: npmVersion } = npmPackageJson;
@@ -30,11 +29,7 @@ async function main() {
 main()
   .then((diff) => {
     console.log(diff);
-    if (diff === 'Not Found') {
-      process.exit(0);
-    } else {
-      process.exit(0);
-    }
+    process.exit(0);
   })
   .catch((err) => {
     console.error('Error:', err);

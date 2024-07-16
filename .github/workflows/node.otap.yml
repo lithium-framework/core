@@ -106,7 +106,7 @@ jobs:
           diff=$(node scripts/compare-release.cjs)
           echo "Diff result: $diff"
           echo "diff=$diff" >> $GITHUB_ENV
-          echo "diff=$diff" >> "$GITHUB_OUTPUT"
+          echo "::set-output name=diff::$diff"
         continue-on-error: true
 
       - name: Remove src directory

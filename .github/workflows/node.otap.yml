@@ -36,13 +36,13 @@ jobs:
       - name: Add generated files
         run: git add .
 
-      - name: Commit changess
+      - name: Commit changes
         run: |
           git commit -m "Clean dist folder"
           git push
         continue-on-error: true
       
-      - name: Fetch branchs information from remote
+      - name: Fetch branch information from remote
         run: git fetch
       
       - name: Show Git status before push
@@ -79,7 +79,7 @@ jobs:
           echo "https://github.com:${{ secrets.PUBLISH_TOKEN }}" > ~/.git-credentials
           chmod 0600 ~/.git-credentials
 
-      - name: Fetch branchs information from remote
+      - name: Fetch branch information from remote
         run: git fetch
 
       - name: Switch branch dev to test
@@ -104,7 +104,8 @@ jobs:
         continue-on-error: true
 
       - name: Store diff output
-        run: echo "::set-output name=diff::${{ steps.compare_versions.outputs.stdout }}"
+        id: store_diff
+        run: echo "diff=${{ steps.compare_versions.outputs.stdout }}" >> $GITHUB_ENV
 
       - name: Remove src directory
         run: rm -rf src
@@ -134,14 +135,14 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses : actions/checkout@v2
+        uses: actions/checkout@v2
 
       - name: Setup Node.js
-        uses : actions/setup-node@v1
-        with :
-          node-version : 18
-          registry-url : https://npm.pkg.github.com
-          scope : '@lithium-framework'
+        uses: actions/setup-node@v1
+        with:
+          node-version: 18
+          registry-url: https://npm.pkg.github.com
+          scope: '@lithium-framework'
       
       - name: Configure Git with token
         run: |
@@ -154,20 +155,18 @@ jobs:
       - name: Add authentication token to ~/.npmrc
         run: echo "@lithium-framework:registry=https://npm.pkg.github.com/" > .npmrc && echo "//npm.pkg.github.com/:_authToken=${{secrets.PUBLISH_TOKEN}}" >> .npmrc
 
-      - name: Fetch branchs information from remote
+      - name: Fetch branch information from remote
         run: git fetch
 
       - name: Switch branch prod
-        run: git switch -c test origin/prod
+        run: git switch -c prod origin/prod
 
       - name: Publish to GitHub Packages
         run: npm publish || echo "::warning::Publish failed, please check the logs"
 
       - name: Set output for main-publish
         id: set_main_publish_output
-        run: echo "::set-output name=diff::${{ needs.test-to-prod.outputs.store_diff }}"
-
-      # Steps for building and publishing package for prod branch
+        run: echo "::set-output name=diff::${{ env.diff }}"
 
   main-publish:
     runs-on: ubuntu-latest
@@ -191,18 +190,18 @@ jobs:
             echo "https://github.com:${{ secrets.PUBLISH_TOKEN }}" > ~/.git-credentials
             chmod 0600 ~/.git-credentials
   
-      - name: Fetch branchs information from remote
+      - name: Fetch branch information from remote
         run: git fetch
   
       - name: Switch branch dev to prod
-        run: git switch -c test origin/prod
+        run: git switch -c prod origin/prod
 
       - name: Pull branch from remote
         run: git pull
 
       - name: Compare versions
         id: compare_versions
-        run: echo "${{ needs.prod-publish.outputs.diff }}" # Utilisation de la différence capturée de test-to-prod
+        run: echo "${{ env.diff }}" # Utilisation de la différence capturée de test-to-prod
         continue-on-error: true
 
       - name: Merge to main
@@ -210,7 +209,7 @@ jobs:
         if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
         run: |
           git checkout main || git checkout -b main origin/main
-          git merge --no-ff --allow-unrelated-histories -X theirs test
+          git merge --no-ff --allow-unrelated-histories -X theirs prod
           git push origin main
 
       - name: Switch branch prod to main
@@ -224,5 +223,3 @@ jobs:
       - name: Publish to npm
         if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
         run: npm publish
-
-      

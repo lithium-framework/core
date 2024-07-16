@@ -185,6 +185,9 @@ jobs:
         with:
           node-version: 18.x
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org/'
+          scope: 'mortallicaxxx'
+          always-auth: true
 
       - name: Configure Git with token
         run: |
@@ -226,10 +229,9 @@ jobs:
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
         run: git pull
 
-      - name: Add authentication token to ~/.npmrc
-        if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_PUBLISH_TOKEN }}" >> ~/.npmrc
-
       - name: Publish to npm
+        env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
         run: npm publish || echo "::warning::Publish failed, please check the logs"
+        

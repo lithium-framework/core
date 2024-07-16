@@ -175,6 +175,9 @@ jobs:
   main-publish:
     runs-on: ubuntu-latest
     needs: prod-publish
+    permissions:
+      contents: read
+      id-token: write
 
     steps:
       - name: Checkout code

@@ -28,7 +28,8 @@ async function main() {
 
 main()
   .then((diff) => {
-    process.stdout.write( diff );
+    console.log(diff);
+    process.stdout.write(`::set-output name=diff::${diff}`);
     process.exit(0);
   })
   .catch((err) => {

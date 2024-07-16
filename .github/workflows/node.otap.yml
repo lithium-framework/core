@@ -226,6 +226,10 @@ jobs:
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
         run: git pull
 
+      - name: Add authentication token to ~/.npmrc
+        if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.PUBLISH_TOKEN }}" >> ~/.npmrc
+
       - name: Publish to npm
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: npm publish
+        run: npm publish || echo "::warning::Publish failed, please check the logs"

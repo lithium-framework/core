@@ -5,7 +5,7 @@
   "main": "./dist/index.js",
   "type": "module",
   "module": "ESNext",
-  "private" : "false",
+  "private" : false,
   "scripts": {
     "test": "npx jest --watchAll",
     "build": "npm run build:webpack && npm run build:tsc",

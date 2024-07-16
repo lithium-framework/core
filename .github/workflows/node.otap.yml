@@ -102,6 +102,7 @@ jobs:
         id: compare_versions
         run: |
           diff=$(node scripts/compare-release.cjs)
+          echo "Diff result: $diff"
           echo "diff=$diff" >> $GITHUB_ENV
         continue-on-error: true
 

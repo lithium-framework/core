@@ -2,10 +2,10 @@
   "name": "@lithium-framework/core",
   "version": "1.0.8-0",
   "description": "Lithium",
-  "main": "./dist/index.js",
+  "main": "./index.js",
   "type": "module",
   "module": "ESNext",
-  "private" : "false",
+  "private": "false",
   "scripts": {
     "test": "npx jest --watchAll",
     "build": "npm run build:webpack && npm run build:tsc",

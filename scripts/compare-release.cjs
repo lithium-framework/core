@@ -28,7 +28,7 @@ async function main() {
 
 main()
   .then((diff) => {
-    console.log(diff);
+    process.stdout.write( diff );
     process.exit(0);
   })
   .catch((err) => {

@@ -165,7 +165,7 @@ jobs:
 
       - name: Set output for main-publish
         id: set_main_publish_output
-        run: echo "::set-output name=diff::${{ env.diff }}"
+        run: echo "diff=${{ env.diff }}" >> $GITHUB_ENV
 
   main-publish:
     runs-on: ubuntu-latest
@@ -200,25 +200,25 @@ jobs:
 
       - name: Compare versions
         id: compare_versions
-        run: echo "${{ env.diff }}" # Utilisation de la différence capturée de test-to-prod
+        run: echo "diff=${{ env.diff }}" # Utilisation de la différence capturée de test-to-prod
         continue-on-error: true
 
       - name: Merge to main
         id: merge_prod_to_main
-        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        if: env.diff == 'Not Found' || env.diff == 'patch' || env.diff == 'minor' || env.diff == 'major'
         run: |
           git checkout main || git checkout -b main origin/main
           git merge --no-ff --allow-unrelated-histories -X theirs prod
           git push origin main
 
       - name: Switch branch prod to main
-        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        if: env.diff == 'Not Found' || env.diff == 'patch' || env.diff == 'minor' || env.diff == 'major'
         run: git switch -c prod origin/main
 
       - name: Pull branch from remote
-        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        if: env.diff == 'Not Found' || env.diff == 'patch' || env.diff == 'minor' || env.diff == 'major'
         run: git pull
 
       - name: Publish to npm
-        if: steps.compare_versions.outputs.diff == 'Not found' || steps.compare_versions.outputs.diff == 'patch' || steps.compare_versions.outputs.diff == 'minor' || steps.compare_versions.outputs.diff == 'major'
+        if: env.diff == 'Not Found' || env.diff == 'patch' || env.diff == 'minor' || env.diff == 'major'
         run: npm publish

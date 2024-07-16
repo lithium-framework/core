@@ -100,12 +100,10 @@ jobs:
 
       - name: Compare versions
         id: compare_versions
-        run: node scripts/compare-release.cjs
+        run: |
+          diff=$(node scripts/compare-release.cjs)
+          echo "diff=$diff" >> $GITHUB_ENV
         continue-on-error: true
-
-      - name: Store diff output
-        id: store_diff
-        run: echo "diff=${{ steps.compare_versions.outputs.stdout }}" >> $GITHUB_ENV
 
       - name: Remove src directory
         run: rm -rf src

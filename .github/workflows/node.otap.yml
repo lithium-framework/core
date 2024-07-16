@@ -222,7 +222,7 @@ jobs:
 
       - name: Switch branch prod to main
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: git switch -c prod origin/main
+        run: git switch -c main origin/main
 
       - name: Pull branch from remote
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'

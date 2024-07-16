@@ -236,5 +236,5 @@ jobs:
         env:
             NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: npm publish || echo "::warning::Publish failed, please check the logs"
+        run: npm publish  --provenance --access public || echo "::warning::Publish failed, please check the logs"
         

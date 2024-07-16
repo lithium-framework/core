@@ -27,12 +27,11 @@ async function main() {
 }
 
 main()
-  .then((diff) => {
-    console.log(diff);
-    process.stdout.write(`::set-output name=diff::${diff}`);
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error('Error:', err);
-    process.exit(1);
-  });
+.then((diff) => {
+  process.stdout.write(diff);
+  process.exit(0);
+})
+.catch((err) => {
+  console.error('Error:', err);
+  process.exit(1);
+});

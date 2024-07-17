@@ -144,7 +144,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@lithium-framework'
 
-      - name: write output
+      - name: Write output
         env:
           DIFF: ${{needs.test-to-prod.outputs.diff}}
         id: store-version-diff

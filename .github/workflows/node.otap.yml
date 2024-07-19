@@ -50,7 +50,7 @@ jobs:
       - name: Merge and push to test branch
         run: |
           git checkout test || git checkout -b test origin/test
-          git merge --no-ff --allow-unrelated-histories -X ours dev
+          git merge --no-ff --allow-unrelated-histories -X theirs dev
           git push origin test
       - name: Show Git log after push
         run: git log -1 --oneline
@@ -106,11 +106,20 @@ jobs:
           echo "diff=$diff" >> "$GITHUB_OUTPUT"
         continue-on-error: true
 
+      - name: Use npm registry ~/.npmrc
+        run: echo "//registry.npmjs.org/" > .npmrc
+
+      - name : use last npm lithium packages
+        run: node scripts/update-packages.cjs
+
       - name: Remove src directory
         run: rm -rf src
 
       - name: Remove scripts directory
         run: rm -rf scripts
+
+      - name: Remove scripts directory
+        run: rm -rf tests
 
       - name: Add generated files
         run: git add .
@@ -144,7 +153,7 @@ jobs:
           registry-url: https://npm.pkg.github.com
           scope: '@lithium-framework'
 
-      - name: write output
+      - name: Write output
         env:
           DIFF: ${{needs.test-to-prod.outputs.diff}}
         id: store-version-diff
@@ -213,20 +222,6 @@ jobs:
         id: compare_versions
         run: echo "diff=${{ needs.prod-publish.outputs.diff }}" # Utilisation de la différence capturée de prod-publish
         continue-on-error: true
-
-      - name: Merge to main
-        id: merge_prod_to_main
-        if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: |
-          git checkout main || git checkout -b main origin/main
-          git merge --no-ff --allow-unrelated-histories -X theirs prod
-          git push origin main
-
-      - name: Switch branch prod to main
-        if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'
-        run: |
-            git fetch
-            git switch main
 
       - name: Pull branch from remote
         if: needs.prod-publish.outputs.diff == 'Not found' || needs.prod-publish.outputs.diff == 'patch' || needs.prod-publish.outputs.diff == 'minor' || needs.prod-publish.outputs.diff == 'major'

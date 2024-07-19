@@ -1,4 +1,3 @@
-import { useStyle } from '@lithium-framework/core-dom';
 import { render } from '../../dom/index.js';
 import { customElement , WebComponent , ViewTemplate , html } from '../../webComponent/index.js';
 import RouteRecognizer, { Params } from 'route-recognizer';

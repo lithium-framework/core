@@ -112,6 +112,15 @@ jobs:
       - name: Remove scripts directory
         run: rm -rf scripts
 
+      - name: Remove scripts directory
+        run: rm -rf tests
+
+      - name: Use npm registry ~/.npmrc
+        run: echo "//registry.npmjs.org/" > .npmrc
+
+      - name : use last npm lithium packages
+        run: node scripts/update-packages.cjs
+
       - name: Add generated files
         run: git add .
 

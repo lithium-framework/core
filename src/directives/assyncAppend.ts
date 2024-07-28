@@ -1,4 +1,5 @@
-import { ViewTemplate, HTMLDirective , HTMLBindingDirective, HTMLView , html , Binding, BindingDirective, ExpressionObserver, Subscriber } from '@microsoft/fast-element';
+import { ViewTemplate, HTMLDirective , HTMLBindingDirective, HTMLView , html , Binding } from '@microsoft/fast-element';
+import type { Subscriber , BindingDirective, ExpressionObserver } from '@microsoft/fast-element';
 
 export class AsyncAppendBindig extends Binding{
 
@@ -58,6 +59,8 @@ export class AsyncAppendDirective<T = any> extends HTMLBindingDirective {
 
 }
 
-HTMLDirective.define( AsyncAppendDirective )
+HTMLDirective.define( AsyncAppendDirective );
+
+export { Subscriber }
 
 export const asyncAppend = <T = any>( fn:Promise<T> , callback:( result:T ) => ViewTemplate ) => AsyncAppendDirective.use<T>( fn , callback );

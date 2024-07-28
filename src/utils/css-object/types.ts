@@ -1,4 +1,3 @@
-import type { Properties as CSSProperties } from 'csstype'; 
+import { Properties } from 'csstype'; 
 
-export { CSSProperties };
-export type CSSObject = Partial<CSSProperties>;
+export { Properties as CSSProperties };

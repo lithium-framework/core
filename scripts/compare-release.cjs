@@ -15,7 +15,7 @@ async function main() {
 
     let diff = semver.diff(npmVersion, localVersion);
 
-    if (diff === 'patch' || diff === 'minor' || diff === 'major') {
+    if (diff === 'patch' || diff === 'minor' || diff === 'major' || diff === 'preminor' || diff === 'premajor') {
       return diff;
     } else {
       return 'no significant difference';

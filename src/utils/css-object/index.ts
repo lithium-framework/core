@@ -2,17 +2,15 @@ import {
   _cssObject 
 } from './models.js';
 
-import {
+import type {
   CSSProperties,
-  CSSObject
 } from './types.js'
 
 export{
   _cssObject,
-  CSSProperties,
-  CSSObject
+  CSSProperties
 }
 
-export function createCSS( css:CSSObject ){
+export function createCSS( css:Partial<CSSProperties> ){
   return _cssObject.init( css );
 }

@@ -3,7 +3,7 @@ import { customElement , WebComponent , ViewTemplate , html } from '../../webCom
 import RouteRecognizer, { Params } from 'route-recognizer';
 
 if ('URLPattern' in globalThis == false) { 
-  await import("urlpattern-polyfill");
+  import("urlpattern-polyfill").then(({ URLPattern }) => { window["URLPattern"] = URLPattern; })
 }
 
 /* The `BaseRouteConfig` interface is defining a structure for the configuration options that can be
@@ -66,7 +66,7 @@ class Routes extends RouteRecognizer{
 /* The `Router` class is a custom web component that handles routing based on either pathname or hash,
 with configurable routes and templates for header and footer. */
 @customElement({
-  name:"lithium-router",
+  name : "lithium-router",
   template : html`<slot></slot>`
 })
 class Router extends WebComponent{

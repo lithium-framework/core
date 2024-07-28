@@ -1,6 +1,6 @@
 {
   "name": "@lithium-framework/core",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "description": "Lithium Framework",
   "source": "src/index.ts",
   "main": "dist/main.js",

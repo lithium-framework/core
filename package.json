@@ -1,6 +1,6 @@
 {
   "name": "@lithium-framework/core",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Lithium Framework",
   "source": "src/index.ts",
   "main": "dist/main.js",
@@ -45,14 +45,13 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@lithium-framework/context": "^1.1.0",
-    "@lithium-framework/huid": "^1.1.0",
-    "@lithium-framework/state": "^1.1.0",
+    "@lithium-framework/context": "file:../context",
+    "@lithium-framework/huid": "file:../huid",
+    "@lithium-framework/state": "file:../state",
     "@microsoft/fast-element": "^2.0.0-beta.26",
     "@microsoft/fast-router": "^0.4.9",
     "csstype": "^3.1.3",
     "decamelize": "^6.0.0",
-    "install": "^0.13.0",
     "route-recognizer": "^0.3.4",
     "urlpattern-polyfill": "^10.0.0"
   },

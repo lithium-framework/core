@@ -1,10 +1,6 @@
 import {Observable as $hgUW1$Observable, attr as $535bb7ac3b1a1d6d$re_export$attr, observable as $535bb7ac3b1a1d6d$re_export$observable, customElement as $c5a7ff2cef84a00c$re_export$customElement, css as $c5a7ff2cef84a00c$re_export$css, html as $c5a7ff2cef84a00c$re_export$html, ViewTemplate as $c5a7ff2cef84a00c$re_export$ViewTemplate, HTMLView as $c5a7ff2cef84a00c$re_export$HTMLView, SyntheticView as $c5a7ff2cef84a00c$re_export$SyntheticView, volatile as $c5a7ff2cef84a00c$re_export$volatile, FASTElement as $hgUW1$FASTElement, when as $5193209399721411$re_export$when, repeat as $5193209399721411$re_export$repeat, children as $5193209399721411$re_export$children, elements as $5193209399721411$re_export$elements, slotted as $5193209399721411$re_export$slotted, Binding as $hgUW1$Binding, HTMLBindingDirective as $hgUW1$HTMLBindingDirective, HTMLDirective as $hgUW1$HTMLDirective, StatelessAttachedAttributeDirective as $hgUW1$StatelessAttachedAttributeDirective} from "@microsoft/fast-element";
 import $hgUW1$routerecognizer from "route-recognizer";
 import {URLPattern as $hgUW1$URLPattern} from "urlpattern-polyfill";
-import {State as $fde9406d76ec24a9$re_export$State, createState as $fde9406d76ec24a9$re_export$createState} from "@lithium-framework/state";
-import {createStorage as $fde9406d76ec24a9$re_export$createStorage, Storage as $fde9406d76ec24a9$re_export$Storage, StorageKeys as $fde9406d76ec24a9$re_export$StorageKeys, StorageValues as $fde9406d76ec24a9$re_export$StorageValues, StateValidator as $fde9406d76ec24a9$re_export$StateValidator} from "@lithium-framework/context";
-import {ComponentId as $fde9406d76ec24a9$re_export$ComponentId, Segment as $fde9406d76ec24a9$re_export$Segment, ParentSegementId as $fde9406d76ec24a9$re_export$ParentSegementId, CollectionId as $fde9406d76ec24a9$re_export$CollectionId, HUID as $fde9406d76ec24a9$re_export$HUID, HierarchicalUUIDOptions as $fde9406d76ec24a9$re_export$HierarchicalUUIDOptions, uuid as $fde9406d76ec24a9$re_export$uuid} from "@lithium-framework/huid";
-import $hgUW1$decamelize from "decamelize";
 
 
 function $parcel$export(e, n, v, s) {
@@ -655,76 +651,6 @@ function $ed2a677aa7485959$export$b3890eb0ae9dca99(template, container = documen
 
 
 
-var $fde9406d76ec24a9$exports = {};
-
-$parcel$export($fde9406d76ec24a9$exports, "_cssObject", () => $06e447d8f61749b9$export$15012639c08ec430);
-$parcel$export($fde9406d76ec24a9$exports, "createCSS", () => $0b02886c31255e61$export$2bc3f05cf97be9e);
-$parcel$export($fde9406d76ec24a9$exports, "createObservableObject", () => $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41);
-$parcel$export($fde9406d76ec24a9$exports, "ObservableObject", () => $f0b90d4a5f4da766$export$b176171395436676);
-$parcel$export($fde9406d76ec24a9$exports, "Observable", () => $fde9406d76ec24a9$re_export$Observable);
-$parcel$export($fde9406d76ec24a9$exports, "volatile", () => $fde9406d76ec24a9$re_export$volatile);
-$parcel$export($fde9406d76ec24a9$exports, "State", () => $fde9406d76ec24a9$re_export$State);
-$parcel$export($fde9406d76ec24a9$exports, "createState", () => $fde9406d76ec24a9$re_export$createState);
-$parcel$export($fde9406d76ec24a9$exports, "createStorage", () => $fde9406d76ec24a9$re_export$createStorage);
-$parcel$export($fde9406d76ec24a9$exports, "Storage", () => $fde9406d76ec24a9$re_export$Storage);
-$parcel$export($fde9406d76ec24a9$exports, "StorageKeys", () => $fde9406d76ec24a9$re_export$StorageKeys);
-$parcel$export($fde9406d76ec24a9$exports, "StorageValues", () => $fde9406d76ec24a9$re_export$StorageValues);
-$parcel$export($fde9406d76ec24a9$exports, "StateValidator", () => $fde9406d76ec24a9$re_export$StateValidator);
-$parcel$export($fde9406d76ec24a9$exports, "ComponentId", () => $fde9406d76ec24a9$re_export$ComponentId);
-$parcel$export($fde9406d76ec24a9$exports, "Segment", () => $fde9406d76ec24a9$re_export$Segment);
-$parcel$export($fde9406d76ec24a9$exports, "ParentSegementId", () => $fde9406d76ec24a9$re_export$ParentSegementId);
-$parcel$export($fde9406d76ec24a9$exports, "CollectionId", () => $fde9406d76ec24a9$re_export$CollectionId);
-$parcel$export($fde9406d76ec24a9$exports, "HUID", () => $fde9406d76ec24a9$re_export$HUID);
-$parcel$export($fde9406d76ec24a9$exports, "HierarchicalUUIDOptions", () => $fde9406d76ec24a9$re_export$HierarchicalUUIDOptions);
-$parcel$export($fde9406d76ec24a9$exports, "uuid", () => $fde9406d76ec24a9$re_export$uuid);
-
-
-
-class $06e447d8f61749b9$export$15012639c08ec430 {
-    static init(css) {
-        return new $06e447d8f61749b9$export$15012639c08ec430(css);
-    }
-    constructor(css){
-        this._css = {};
-        Object.assign(this._css, css);
-    }
-    // Transformation du cssObject en String
-    _toCssString() {
-        return `${Array.from(Object.keys(this._css), (key)=>{
-            return [
-                (0, $hgUW1$decamelize)(key, {
-                    separator: "-"
-                }),
-                this._css[key]
-            ].join(":");
-        }).join(";")};`;
-    }
-    [Symbol.toPrimitive]() {
-        return this._toCssString();
-    }
-    /**
-   * La fonction génère un UUID aléatoire en codant trois groupes de quatre zéros et en les concaténant
-   * avec des traits de soulignement.
-   * @returns une chaîne composée de trois parties séparées par des traits de soulignement. Chaque
-   * partie est un UUID (Universally Unique Identifier) codé sous la forme d'une chaîne de longueur
-   * fixe de 4 caractères.
-   */ static randomUUID() {
-        return `${(0, $fde9406d76ec24a9$re_export$uuid).encode("0000")}_${(0, $fde9406d76ec24a9$re_export$uuid).encode("0000")}${(0, $fde9406d76ec24a9$re_export$uuid).encode("0000")}`;
-    }
-}
-
-
-function $0b02886c31255e61$export$2bc3f05cf97be9e(css) {
-    return (0, $06e447d8f61749b9$export$15012639c08ec430).init(css);
-}
-
-
-
-
-
-
-
-
 
  // namespace Lithium{
  //   export const DOM = require('./dom/index.js');
@@ -742,5 +668,5 @@ function $0b02886c31255e61$export$2bc3f05cf97be9e(css) {
  // })()
 
 
-export {$ed2a677aa7485959$export$6dad889f9b7e7685 as ComponentExecutionContext, $ed2a677aa7485959$export$b3890eb0ae9dca99 as render, $535bb7ac3b1a1d6d$re_export$attr as attr, $535bb7ac3b1a1d6d$re_export$attr as attr, $535bb7ac3b1a1d6d$re_export$observable as observable, $535bb7ac3b1a1d6d$re_export$observable as observable, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $5193209399721411$re_export$when as when, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $06e447d8f61749b9$export$15012639c08ec430 as _cssObject, $0b02886c31255e61$export$2bc3f05cf97be9e as createCSS, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $fde9406d76ec24a9$re_export$Observable as Observable, $fde9406d76ec24a9$re_export$volatile as volatile, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$Storage as Storage, $fde9406d76ec24a9$re_export$StorageKeys as StorageKeys, $fde9406d76ec24a9$re_export$StorageValues as StorageValues, $fde9406d76ec24a9$re_export$StateValidator as StateValidator, $fde9406d76ec24a9$re_export$ComponentId as ComponentId, $fde9406d76ec24a9$re_export$Segment as Segment, $fde9406d76ec24a9$re_export$ParentSegementId as ParentSegementId, $fde9406d76ec24a9$re_export$CollectionId as CollectionId, $fde9406d76ec24a9$re_export$HUID as HUID, $fde9406d76ec24a9$re_export$HierarchicalUUIDOptions as HierarchicalUUIDOptions, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$html as html, $c5a7ff2cef84a00c$re_export$Observable as Observable, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$SyntheticView as SyntheticView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent};
+export {$ed2a677aa7485959$export$6dad889f9b7e7685 as ComponentExecutionContext, $ed2a677aa7485959$export$b3890eb0ae9dca99 as render, $535bb7ac3b1a1d6d$re_export$attr as attr, $535bb7ac3b1a1d6d$re_export$attr as attr, $535bb7ac3b1a1d6d$re_export$observable as observable, $535bb7ac3b1a1d6d$re_export$observable as observable, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $5193209399721411$re_export$when as when, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$html as html, $c5a7ff2cef84a00c$re_export$Observable as Observable, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$SyntheticView as SyntheticView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent};
 //# sourceMappingURL=module.js.map

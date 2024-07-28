@@ -1,10 +1,6 @@
 var $8zHUo$microsoftfastelement = require("@microsoft/fast-element");
 var $8zHUo$routerecognizer = require("route-recognizer");
 var $8zHUo$urlpatternpolyfill = require("urlpattern-polyfill");
-var $8zHUo$lithiumframeworkstate = require("@lithium-framework/state");
-var $8zHUo$lithiumframeworkcontext = require("@lithium-framework/context");
-var $8zHUo$lithiumframeworkhuid = require("@lithium-framework/huid");
-var $8zHUo$decamelize = require("decamelize");
 
 
 function $parcel$exportWildcard(dest, source) {
@@ -659,76 +655,6 @@ function $3b1c062b22b18c7f$export$b3890eb0ae9dca99(template, container = documen
 
 
 
-var $d7167569386d0d4c$exports = {};
-
-$parcel$export($d7167569386d0d4c$exports, "_cssObject", () => $69691895e61c11d6$export$15012639c08ec430);
-$parcel$export($d7167569386d0d4c$exports, "createCSS", () => $33a6e1f5eef63392$export$2bc3f05cf97be9e);
-$parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
-$parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
-$parcel$export($d7167569386d0d4c$exports, "Observable", () => $d7167569386d0d4c$re_export$Observable);
-$parcel$export($d7167569386d0d4c$exports, "volatile", () => $d7167569386d0d4c$re_export$volatile);
-$parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
-$parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
-$parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
-$parcel$export($d7167569386d0d4c$exports, "Storage", () => $d7167569386d0d4c$re_export$Storage);
-$parcel$export($d7167569386d0d4c$exports, "StorageKeys", () => $d7167569386d0d4c$re_export$StorageKeys);
-$parcel$export($d7167569386d0d4c$exports, "StorageValues", () => $d7167569386d0d4c$re_export$StorageValues);
-$parcel$export($d7167569386d0d4c$exports, "StateValidator", () => $d7167569386d0d4c$re_export$StateValidator);
-$parcel$export($d7167569386d0d4c$exports, "ComponentId", () => $d7167569386d0d4c$re_export$ComponentId);
-$parcel$export($d7167569386d0d4c$exports, "Segment", () => $d7167569386d0d4c$re_export$Segment);
-$parcel$export($d7167569386d0d4c$exports, "ParentSegementId", () => $d7167569386d0d4c$re_export$ParentSegementId);
-$parcel$export($d7167569386d0d4c$exports, "CollectionId", () => $d7167569386d0d4c$re_export$CollectionId);
-$parcel$export($d7167569386d0d4c$exports, "HUID", () => $d7167569386d0d4c$re_export$HUID);
-$parcel$export($d7167569386d0d4c$exports, "HierarchicalUUIDOptions", () => $d7167569386d0d4c$re_export$HierarchicalUUIDOptions);
-$parcel$export($d7167569386d0d4c$exports, "uuid", () => $d7167569386d0d4c$re_export$uuid);
-
-
-
-class $69691895e61c11d6$export$15012639c08ec430 {
-    static init(css) {
-        return new $69691895e61c11d6$export$15012639c08ec430(css);
-    }
-    constructor(css){
-        this._css = {};
-        Object.assign(this._css, css);
-    }
-    // Transformation du cssObject en String
-    _toCssString() {
-        return `${Array.from(Object.keys(this._css), (key)=>{
-            return [
-                (0, ($parcel$interopDefault($8zHUo$decamelize)))(key, {
-                    separator: "-"
-                }),
-                this._css[key]
-            ].join(":");
-        }).join(";")};`;
-    }
-    [Symbol.toPrimitive]() {
-        return this._toCssString();
-    }
-    /**
-   * La fonction génère un UUID aléatoire en codant trois groupes de quatre zéros et en les concaténant
-   * avec des traits de soulignement.
-   * @returns une chaîne composée de trois parties séparées par des traits de soulignement. Chaque
-   * partie est un UUID (Universally Unique Identifier) codé sous la forme d'une chaîne de longueur
-   * fixe de 4 caractères.
-   */ static randomUUID() {
-        return `${(0, $8zHUo$lithiumframeworkhuid.uuid).encode("0000")}_${(0, $8zHUo$lithiumframeworkhuid.uuid).encode("0000")}${(0, $8zHUo$lithiumframeworkhuid.uuid).encode("0000")}`;
-    }
-}
-
-
-function $33a6e1f5eef63392$export$2bc3f05cf97be9e(css) {
-    return (0, $69691895e61c11d6$export$15012639c08ec430).init(css);
-}
-
-
-
-
-
-
-
-
 
  // namespace Lithium{
  //   export const DOM = require('./dom/index.js');
@@ -747,7 +673,6 @@ function $33a6e1f5eef63392$export$2bc3f05cf97be9e(css) {
 $parcel$exportWildcard(module.exports, $3b1c062b22b18c7f$exports);
 $parcel$exportWildcard(module.exports, $0fe2052b2c651410$exports);
 $parcel$exportWildcard(module.exports, $3f98161bb563abdf$exports);
-$parcel$exportWildcard(module.exports, $d7167569386d0d4c$exports);
 $parcel$exportWildcard(module.exports, $5e6879fad66e268c$exports);
 
 

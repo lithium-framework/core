@@ -1,4 +1,4 @@
-export {
+import {
   when,
   repeat,
   // ref,
@@ -6,6 +6,14 @@ export {
   elements,
   slotted,
 } from '@microsoft/fast-element';
+
+export {
+  when,
+  repeat,
+  children,
+  elements,
+  slotted
+}
 
 export * from './assyncAppend.js';
 export * from './ref.js';

@@ -1,22 +1,21 @@
 
-import type { Properties as CSSProperties } from 'csstype'; 
 import { uuid , FixedLengthString } from '@lithium-framework/huid';
 import decamelize from 'decamelize';
 
-import { CSSObject } from './types.js'
+import { CSSProperties } from './types.js'
 
 /** La classe `_cssObject` fournit des méthodes statiques pour travailler avec des objets CSS dans
 TypeScript, notamment l'encodage, le décodage, l'aplatissement, la normalisation et la compilation
 d'objets CSS. */
 export class _cssObject{
 
-  private _css : CSSObject = {};
+  private _css : Partial<CSSProperties> = {};
 
-  static init( css:CSSObject ){
+  static init( css:Partial<CSSProperties> ){
     return new _cssObject( css );
   }
 
-  constructor( css:CSSObject ){
+  constructor( css:Partial<CSSProperties> ){
     Object.assign( this._css , css );
   }
 

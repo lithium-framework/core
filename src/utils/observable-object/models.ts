@@ -62,3 +62,5 @@ export class ObservableObject< key extends string , value extends any = any > ex
   }
 
 }
+
+export { Observable };

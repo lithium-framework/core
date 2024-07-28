@@ -40,5 +40,7 @@ export class WebComponent extends FASTElement{
   connectedCallback() {
     super.connectedCallback();
   }
+
+  static define = FASTElement.define
   
 }

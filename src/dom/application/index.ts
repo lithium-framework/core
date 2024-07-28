@@ -1,5 +1,5 @@
-import { customElement , html } from '../../webComponent/index.js';
-import { Router , RouteConfig } from '../router/index.js'
+import { customElement , html , WebComponent } from '../../webComponent/index.js';
+import { Router , RouteConfig } from '../router/index.js';
 
 /* The MainApplication class extends Router and specifies a type property for routing configuration. */
 @customElement({

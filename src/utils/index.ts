@@ -1,7 +1,6 @@
 export {
   Observable,
-  volatile
-} from '@microsoft/fast-element';
+} from '@microsoft/fast-element/dist/esm';
 
 export {
   // _cssObject,

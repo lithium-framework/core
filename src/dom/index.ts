@@ -1,4 +1,4 @@
-import { ViewTemplate } from '@microsoft/fast-element';
+import { ViewTemplate } from '@microsoft/fast-element/dist/esm';
 import { ObservableObject } from '../utils/observable-object';
 import { state } from '../decorators';
 

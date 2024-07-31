@@ -1,4 +1,5 @@
-import { DecoratorAttributeConfiguration, attr, observable, ViewTemplate, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted, FASTElement } from "@microsoft/fast-element";
+import { DecoratorAttributeConfiguration, attr, ViewTemplate as _ViewTemplate2, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView as _HTMLView1, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted, FASTElement } from "@microsoft/fast-element";
+import { ViewTemplate as _ViewTemplate1, customElement, css, html, ViewTemplate, HTMLView, volatile } from "@microsoft/fast-element/dist/esm";
 import { State } from "@lithium-framework/state";
 import { Properties } from "csstype";
 export class ObservableObject<key extends string, value extends any = any> extends Object {
@@ -71,7 +72,7 @@ export function state(target: any, propertyKey: string, value?: any, constructib
  * ```
  */
 export function attrState(options?: DecoratorAttributeConfiguration): (target: any, propertyKey: string) => void;
-export { attr, observable };
+export { attr };
 export class ComponentExecutionContext<T = any, States extends Record<string, any> = Record<string, any>> {
     #private;
     $states: Record<string, any>;
@@ -83,19 +84,19 @@ export class ComponentExecutionContext<T = any, States extends Record<string, an
     static init<T extends Record<string, any> = {}>(data?: T): ComponentContext<T>;
 }
 export type ComponentContext<T = Record<string, any>, States = Record<string, any>> = ComponentExecutionContext<T, States> & T;
-export function render<T extends Record<string, any> = {}, Storage extends Record<string, any> = Record<string, any>>(template: ViewTemplate<ComponentContext<any, Record<string, any>>, any>, container?: HTMLElement, data?: {}): import("@microsoft/fast-element").HTMLView<any, any>;
+export function render<T extends Record<string, any> = {}, Storage extends Record<string, any> = Record<string, any>>(template: _ViewTemplate1<ComponentContext<any, Record<string, any>>, any>, container?: HTMLElement, data?: {}): any;
 export class AsyncAppendBindig extends Binding {
     createObserver(subscriber: Subscriber, directive: BindingDirective): ExpressionObserver<any, any, any>;
 }
 export class AsyncAppendDirective<T = any> extends HTMLBindingDirective {
     fn: Promise<T>;
-    callback: (result: T) => ViewTemplate;
-    constructor(fn: Promise<T>, callback: (result: T) => ViewTemplate);
+    callback: (result: T) => _ViewTemplate2;
+    constructor(fn: Promise<T>, callback: (result: T) => _ViewTemplate2);
     createBehavior(): any;
-    static use<T>(fn: Promise<T>, callback: (result: T) => ViewTemplate): AsyncAppendDirective<T>;
+    static use<T>(fn: Promise<T>, callback: (result: T) => _ViewTemplate2): AsyncAppendDirective<T>;
 }
 export { Subscriber };
-export const asyncAppend: <T = any>(fn: Promise<T>, callback: (result: T) => ViewTemplate) => AsyncAppendDirective<T>;
+export const asyncAppend: <T = any>(fn: Promise<T>, callback: (result: T) => _ViewTemplate2) => AsyncAppendDirective<T>;
 export interface IElementRef<T extends Node> {
     value: T | null;
 }
@@ -103,7 +104,7 @@ export function createRef<T extends Node>(): IElementRef<T>;
 export class RefDirective<T extends Node> extends StatelessAttachedAttributeDirective<IElementRef<T>> {
     options: IElementRef<T>;
     constructor(options: IElementRef<T>);
-    bind(controller: HTMLView): void;
+    bind(controller: _HTMLView1): void;
     static use<T extends Node>(options: IElementRef<T>): RefDirective<T>;
 }
 export const ref: <T extends Node>(options: IElementRef<T>) => RefDirective<T>;
@@ -114,12 +115,12 @@ export class StateDirective<T = any> extends HTMLBindingDirective {
     _state: State<T>;
     get state(): T;
     set state(value: T);
-    _callback: (newValue: T) => ViewTemplate;
-    constructor(state: State<T>, callback: (newValue: T) => ViewTemplate);
+    _callback: (newValue: T) => _ViewTemplate2;
+    constructor(state: State<T>, callback: (newValue: T) => _ViewTemplate2);
     createBehavior(): any;
     static use<T = any>(state: any, callback: any): StateDirective<T>;
 }
-export const useState: <T>(state: State<T>, callback?: (newValue: T) => ViewTemplate) => StateDirective<T>;
+export const useState: <T>(state: State<T>, callback?: (newValue: T) => _ViewTemplate2) => StateDirective<T>;
 export class StyleBindig extends Binding {
     createObserver(subscriber: _Subscriber1, directive: BindingDirective): ExpressionObserver<any, any, any>;
 }
@@ -134,15 +135,15 @@ export class UntilBindig extends Binding {
     createObserver(subscriber: _Subscriber1, directive: BindingDirective): ExpressionObserver<any, any, any>;
 }
 export class UntilDirective extends HTMLBindingDirective {
-    fn: Promise<ViewTemplate>;
-    template: ViewTemplate;
-    constructor(fn: Promise<ViewTemplate>, template: ViewTemplate);
+    fn: Promise<_ViewTemplate2>;
+    template: _ViewTemplate2;
+    constructor(fn: Promise<_ViewTemplate2>, template: _ViewTemplate2);
     createBehavior(): any;
-    static use(fn: Promise<ViewTemplate>, template: ViewTemplate): UntilDirective;
+    static use(fn: Promise<_ViewTemplate2>, template: _ViewTemplate2): UntilDirective;
 }
-export const until: (fn: Promise<ViewTemplate>, template: ViewTemplate) => UntilDirective;
+export const until: (fn: Promise<_ViewTemplate2>, template: _ViewTemplate2) => UntilDirective;
 export { when, repeat, children, elements, slotted };
-export { Observable, volatile } from '@microsoft/fast-element';
+export { Observable, } from '@microsoft/fast-element/dist/esm';
 export { State, createState } from '@lithium-framework/state';
 export { createStorage, } from '@lithium-framework/context';
 export { uuid } from '@lithium-framework/huid';
@@ -156,7 +157,7 @@ export class WebComponent extends FASTElement {
         <TType extends import("@microsoft/fast-element").Constructable<HTMLElement> = import("@microsoft/fast-element").Constructable<HTMLElement>>(type: TType, nameOrDef?: string | import("@microsoft/fast-element").PartialFASTElementDefinition): TType;
     };
 }
-export { customElement, css, html, Observable, ViewTemplate, HTMLView, volatile, } from "@microsoft/fast-element";
+export { customElement, css, html, ViewTemplate, HTMLView, volatile };
 export declare namespace global {
     interface HTMLElementTagNameMap {
     }

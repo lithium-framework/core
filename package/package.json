@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/module.js",
   "types": "dist/types.d.ts",
+  "source": "src/index.ts",
   "private": false,
   "public": false,
   "scripts": {
@@ -59,7 +60,8 @@
     "urlpattern-polyfill": "^10.0.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ],
   "keywords": [
     "lithium",

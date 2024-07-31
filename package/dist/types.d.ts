@@ -144,8 +144,6 @@ export const until: (fn: Promise<ViewTemplate>, template: ViewTemplate) => Until
 export { when, repeat, children, elements, slotted };
 export { Observable, volatile } from '@microsoft/fast-element';
 export { State, createState } from '@lithium-framework/state';
-export { createStorage, } from '@lithium-framework/context';
-export { uuid } from '@lithium-framework/huid';
 export class WebComponent extends FASTElement {
     static states: {};
     $states: Record<string, unknown>;

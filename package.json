@@ -47,9 +47,9 @@
     "typescript": "^5.5.4"
   },
   "dependencies": {
-    "@lithium-framework/context": "^1.1.0",
+    "@lithium-framework/context": "^1.2.0",
     "@lithium-framework/huid": "^1.2.0",
-    "@lithium-framework/state": "^1.1.0",
+    "@lithium-framework/state": "^1.2.0",
     "@microsoft/fast-element": "^2.0.0-beta.26",
     "@microsoft/fast-router": "^0.4.9",
     "csstype": "^3.1.3",

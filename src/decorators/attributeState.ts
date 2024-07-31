@@ -40,3 +40,5 @@ export function attrState( options:DecoratorAttributeConfiguration = {} ){
   }
 
 }
+
+export { attr };

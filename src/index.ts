@@ -1,9 +1,3 @@
-import * as DOM from './dom/index.js';
-import * as Decorators from './decorators/index.js';
-import * as Directives from './directives/index.js';
-import * as Utils from './utils/index.js';
-import * as Component from './webComponent/index.js'
-
 export * from './dom';
 export * from './decorators';
 export * from './directives';

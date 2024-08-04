@@ -1,7 +1,7 @@
 import { HTMLDirective, HTMLView, Binding, BindingDirective, ExpressionObserver, Subscriber, StatelessAttachedAttributeDirective } from '@microsoft/fast-element';
 
 export interface IElementRef< T extends Node >{
-  value : T | null;
+  value : T;
 }
 
 export function createRef< T extends Node >():IElementRef<T>{

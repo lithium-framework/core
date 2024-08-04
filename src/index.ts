@@ -6,13 +6,6 @@ export * from './webComponent';
 
 // import { MainApplication } from './dom/index.js';
 
-export declare module global{
-  interface HTMLElementTagNameMap{
-    // 'lithium-router' : Router;
-    // 'main-application' : MainApplication;
-  }
-}
-
 // namespace Lithium{
 //   export const DOM = require('./dom/index.js');
 //   export const Decorators = require('./decorators/index.js');

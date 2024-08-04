@@ -1,20 +1,18 @@
-import { 
+export { 
   customElement , 
-  css, 
-  html, 
+  css,
+  // html,
   ViewTemplate,
   HTMLView,
-  volatile
-} from "@microsoft/fast-element/dist/esm";
+  volatile,
+} from "@microsoft/fast-element";
 
-export {
-  customElement , 
-  css, 
-  html, 
-  ViewTemplate,
-  HTMLView,
-  volatile
-};
+import {
+  html as _html,
+  HTMLTemplateTag
+} from "@microsoft/fast-element"
+
+export const html:HTMLTemplateTag = _html;
 
 export { 
   WebComponent 

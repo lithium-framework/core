@@ -1,6 +1,6 @@
 {
   "name": "@lithium-framework/core",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "description": "Lithium Framework",
   "main": "dist/index.js",
   "module": "dist/module.js",

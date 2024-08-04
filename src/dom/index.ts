@@ -2,10 +2,7 @@ import { ViewTemplate } from '@microsoft/fast-element/dist/esm';
 import { ObservableObject } from '../utils/observable-object';
 import { state } from '../decorators';
 
-// import './router/index.js'
-// import './application/index.js'
-
-export class ComponentExecutionContext< T = any , States extends Record<string , any> = Record<string , any> >{
+export class ViewExecutionContext< T = any , States extends Record<string , any> = Record<string , any> >{
 
   $states = ObservableObject.init< any , any >({});
   get states(){ return this.$states }
@@ -65,20 +62,17 @@ export class ComponentExecutionContext< T = any , States extends Record<string ,
       Object.assign( this , data );
   }
 
-  static init< T extends Record<string , any> = {} >( data?:T ):ComponentContext<T>{
-      return new ComponentExecutionContext( data ) as any as ComponentContext<T>;
+  static init< T extends Record<string , any> = {} >( data?:T ):ViewContext<T>{
+      return new ViewExecutionContext( data ) as any as ViewContext<T>;
   }
 
 }
 
-export type ComponentContext< T = Record<string , any> , States = Record<string , any> > = ComponentExecutionContext<T , States> & T;
+export type ViewContext< T = Record<string , any> , States = Record<string , any> > = ViewExecutionContext<T , States> & T;
 
-export function render< T extends Record<string , any> = {} , Storage extends Record<string , any> = Record<string , any> >(template: ViewTemplate<ComponentContext<any, Record<string, any>>, any>, container: HTMLElement = document.body , data = {} ) {
+export function render< T extends Record<string , any> = {} , Storage extends Record<string , any> = Record<string , any> >(template: ViewTemplate<ViewExecutionContext<any, Record<string, any>>, any>, container: HTMLElement = document.body , data = {} ) {
 
-  let context = ComponentExecutionContext.init(data);
+  let context = ViewExecutionContext.init(data);
   return template.render( context , container);
 
 }
-
-// export * from './router';
-// export * from './application/index.js';

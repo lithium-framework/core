@@ -9,7 +9,7 @@ if ('URLPattern' in globalThis == false) {
 /* The `BaseRouteConfig` interface is defining a structure for the configuration options that can be
 provided for a route in the routing system. Here's a breakdown of each property within the
 `BaseRouteConfig` interface: */
-interface BaseRouteConfig {
+export interface BaseRouteConfig {
   name?: string | undefined;
   render?: ViewTemplate<{ [key: string]: string | undefined }>;
   enter?: (params: {
@@ -22,7 +22,7 @@ property `path` of type string to it. This means that any object that implements
 `PathRouteConfig` interface must have all the properties defined in `BaseRouteConfig` interface
 (like `name`, `render`, `enter`) along with the additional `path` property of type string. This
 allows for more specific route configurations that include a path string for routing purposes. */
-interface PathRouteConfig extends BaseRouteConfig {
+export interface PathRouteConfig extends BaseRouteConfig {
   path: string;
 }
 
@@ -31,19 +31,19 @@ property `pattern` of type `URLPattern` to it. This means that any object that i
 `URLPatternRouteConfig` interface must have all the properties defined in the `BaseRouteConfig`
 interface (such as `name`, `render`, `enter`) along with the additional `pattern` property of type
 `URLPattern`. */
-interface URLPatternRouteConfig extends BaseRouteConfig {
+export interface URLPatternRouteConfig extends BaseRouteConfig {
   pattern: URLPattern;
 }
 
-type RouteConfig = PathRouteConfig | URLPatternRouteConfig;
+export type RouteConfig = PathRouteConfig | URLPatternRouteConfig;
 
 /* The `Routes` class extends `RouteRecognizer` and constructs routes based on the provided
 `routeConfig` array. */
-class Routes extends RouteRecognizer{
+export class Routes extends RouteRecognizer{
 
   routeConfig;
 
-  constructor( router:Router , routeConfig:RouteConfig[] ){
+  constructor( router:LithiumRouterElement , routeConfig:RouteConfig[] ){
     super();
 
     routeConfig.forEach(( route:PathRouteConfig ) => {
@@ -69,7 +69,7 @@ with configurable routes and templates for header and footer. */
   name : "lithium-router",
   template : html`<slot></slot>`
 })
-class Router extends WebComponent{
+export class LithiumRouterElement extends WebComponent{
 
   /* The line `type : 'pathname-router' | 'hash-router' = 'hash-router';` is defining a property `type`
   in the `Router` class with a type of string literal union `'pathname-router' | 'hash-router'`.
@@ -87,8 +87,8 @@ class Router extends WebComponent{
   class is responsible for constructing routes based on the provided `routeConfig` array. */
   private _routes = new Routes(this, this._config || []);
 
-  header:ViewTemplate<Router>;
-  footer:ViewTemplate<Router>;
+  header:ViewTemplate<LithiumRouterElement>;
+  footer:ViewTemplate<LithiumRouterElement>;
 
   get routes(){
     return new Proxy( this._routes , {
@@ -167,12 +167,12 @@ class Router extends WebComponent{
 
 };
 
-export { 
-  // BaseRouteConfig,
-  // PathRouteConfig,
-  // URLPatternRouteConfig,
-  // RouteConfig,
-  // Routes,
-  // Router,
+export {
   RouteRecognizer
+}
+
+export declare module global{
+  interface HTMLElementTagNameMap{
+    'lithium-router' : typeof LithiumRouterElement;
+  }
 }

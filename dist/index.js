@@ -1,7 +1,8 @@
 var $8zHUo$microsoftfastelementdistesm = require("@microsoft/fast-element/dist/esm");
 var $8zHUo$microsoftfastelement = require("@microsoft/fast-element");
 var $8zHUo$lithiumframeworkstate = require("@lithium-framework/state");
-var $8zHUo$lithiumframeworkhuiddistmodule = require("@lithium-framework/huid/dist/module");
+var $8zHUo$lithiumframeworkcontext = require("@lithium-framework/context");
+var $8zHUo$lithiumframeworkhuid = require("@lithium-framework/huid");
 
 
 function $parcel$exportWildcard(dest, source) {
@@ -26,7 +27,7 @@ function $parcel$export(e, n, v, s) {
 }
 var $3b1c062b22b18c7f$exports = {};
 
-$parcel$export($3b1c062b22b18c7f$exports, "ComponentExecutionContext", () => $3b1c062b22b18c7f$export$6dad889f9b7e7685);
+$parcel$export($3b1c062b22b18c7f$exports, "ViewExecutionContext", () => $3b1c062b22b18c7f$export$1053a9be1bcefef9);
 $parcel$export($3b1c062b22b18c7f$exports, "render", () => $3b1c062b22b18c7f$export$b3890eb0ae9dca99);
 
 class $7ce92075f2794ab1$export$b176171395436676 extends Object {
@@ -77,12 +78,10 @@ function $529142902ff67758$export$dcc5cf24d8fb3b41(initialObject) {
 
 
 var $0fe2052b2c651410$exports = {};
-
-$parcel$export($0fe2052b2c651410$exports, "attr", () => $0fe2052b2c651410$re_export$attr);
-$parcel$export($0fe2052b2c651410$exports, "observable", () => $0fe2052b2c651410$re_export$observable);
 var $6b1d12931f09e2bd$exports = {};
 
 $parcel$export($6b1d12931f09e2bd$exports, "attrState", () => $6b1d12931f09e2bd$export$683a0e8baad8b9c3);
+$parcel$export($6b1d12931f09e2bd$exports, "attr", () => $8zHUo$microsoftfastelement.attr);
 
 var $25b99ce497008ca4$exports = {};
 
@@ -115,7 +114,6 @@ function $6b1d12931f09e2bd$export$683a0e8baad8b9c3(options = {}) {
 
 
 
-
 $parcel$exportWildcard($0fe2052b2c651410$exports, $6b1d12931f09e2bd$exports);
 $parcel$exportWildcard($0fe2052b2c651410$exports, $25b99ce497008ca4$exports);
 
@@ -128,10 +126,8 @@ var $3b1c062b22b18c7f$var$id = 0;
 function $3b1c062b22b18c7f$var$_classPrivateFieldLooseKey(e) {
     return "__private_" + $3b1c062b22b18c7f$var$id++ + "_" + e;
 }
-// import './router/index.js'
-// import './application/index.js'
 var $3b1c062b22b18c7f$var$_state_keys = /*#__PURE__*/ $3b1c062b22b18c7f$var$_classPrivateFieldLooseKey("_state_keys");
-class $3b1c062b22b18c7f$export$6dad889f9b7e7685 {
+class $3b1c062b22b18c7f$export$1053a9be1bcefef9 {
     get states() {
         return this.$states;
     }
@@ -183,14 +179,13 @@ class $3b1c062b22b18c7f$export$6dad889f9b7e7685 {
         Object.assign(this, data);
     }
     static init(data) {
-        return new $3b1c062b22b18c7f$export$6dad889f9b7e7685(data);
+        return new $3b1c062b22b18c7f$export$1053a9be1bcefef9(data);
     }
 }
 function $3b1c062b22b18c7f$export$b3890eb0ae9dca99(template, container = document.body, data = {}) {
-    let context = $3b1c062b22b18c7f$export$6dad889f9b7e7685.init(data);
+    let context = $3b1c062b22b18c7f$export$1053a9be1bcefef9.init(data);
     return template.render(context, container);
-} // export * from './router';
- // export * from './application/index.js';
+}
 
 
 
@@ -476,18 +471,17 @@ $parcel$exportWildcard($3f98161bb563abdf$exports, $76501f7f02d11920$exports);
 var $d7167569386d0d4c$exports = {};
 
 $parcel$export($d7167569386d0d4c$exports, "Observable", () => $d7167569386d0d4c$re_export$Observable);
-$parcel$export($d7167569386d0d4c$exports, "volatile", () => $d7167569386d0d4c$re_export$volatile);
 $parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
 $parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
 $parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
 $parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
+$parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
+$parcel$export($d7167569386d0d4c$exports, "uuid", () => $d7167569386d0d4c$re_export$uuid);
 
 
 
 
-console.log({
-    HUID: $8zHUo$lithiumframeworkhuiddistmodule
-});
+
  // export{
  //   Observable,
  //   volatile,
@@ -510,23 +504,13 @@ console.log({
 
 var $5e6879fad66e268c$exports = {};
 
+$parcel$export($5e6879fad66e268c$exports, "html", () => $5e6879fad66e268c$export$c0bb0b647f701bb5);
 $parcel$export($5e6879fad66e268c$exports, "customElement", () => $5e6879fad66e268c$re_export$customElement);
 $parcel$export($5e6879fad66e268c$exports, "css", () => $5e6879fad66e268c$re_export$css);
-$parcel$export($5e6879fad66e268c$exports, "html", () => $5e6879fad66e268c$re_export$html);
-$parcel$export($5e6879fad66e268c$exports, "Observable", () => $5e6879fad66e268c$re_export$Observable);
 $parcel$export($5e6879fad66e268c$exports, "ViewTemplate", () => $5e6879fad66e268c$re_export$ViewTemplate);
 $parcel$export($5e6879fad66e268c$exports, "HTMLView", () => $5e6879fad66e268c$re_export$HTMLView);
 $parcel$export($5e6879fad66e268c$exports, "volatile", () => $5e6879fad66e268c$re_export$volatile);
 $parcel$export($5e6879fad66e268c$exports, "WebComponent", () => $55a177ca025730f0$export$7f8b9f308979d41d);
-$parcel$export($5e6879fad66e268c$exports, "attr", () => $0fe2052b2c651410$re_export$attr);
-$parcel$export($5e6879fad66e268c$exports, "observable", () => $0fe2052b2c651410$re_export$observable);
-$parcel$export($5e6879fad66e268c$exports, "state", () => $25b99ce497008ca4$export$ca000e230c0caa3e);
-$parcel$export($5e6879fad66e268c$exports, "attrState", () => $6b1d12931f09e2bd$export$683a0e8baad8b9c3);
-$parcel$export($5e6879fad66e268c$exports, "when", () => $3f98161bb563abdf$re_export$when);
-$parcel$export($5e6879fad66e268c$exports, "repeat", () => $3f98161bb563abdf$re_export$repeat);
-$parcel$export($5e6879fad66e268c$exports, "ref", () => $6ac08f3136e84148$export$eff4d24c3ff7876e);
-$parcel$export($5e6879fad66e268c$exports, "children", () => $3f98161bb563abdf$re_export$children);
-$parcel$export($5e6879fad66e268c$exports, "slotted", () => $3f98161bb563abdf$re_export$slotted);
 
 
 
@@ -562,10 +546,10 @@ allows all instances of the class to access and modify the same set of state val
 $55a177ca025730f0$export$7f8b9f308979d41d.define = (0, $8zHUo$microsoftfastelement.FASTElement).define;
 
 
+const $5e6879fad66e268c$export$c0bb0b647f701bb5 = (0, $8zHUo$microsoftfastelement.html);
 
 
-
-
+ // import { MainApplication } from './dom/index.js';
  // namespace Lithium{
  //   export const DOM = require('./dom/index.js');
  //   export const Decorators = require('./decorators/index.js');

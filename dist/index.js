@@ -1,4 +1,3 @@
-var $8zHUo$microsoftfastelementdistesm = require("@microsoft/fast-element/dist/esm");
 var $8zHUo$microsoftfastelement = require("@microsoft/fast-element");
 var $8zHUo$lithiumframeworkstate = require("@lithium-framework/state");
 var $8zHUo$lithiumframeworkcontext = require("@lithium-framework/context");
@@ -40,7 +39,7 @@ class $7ce92075f2794ab1$export$b176171395436676 extends Object {
         this.$data = {};
         this.set = (key, value)=>{
             this.$data[`_${key}`] = value;
-            (0, $8zHUo$microsoftfastelementdistesm.Observable).defineProperty(this.$data, key);
+            (0, $8zHUo$microsoftfastelement.Observable).defineProperty(this.$data, key);
             return this.$data[key];
         };
         Object.keys(initialObject).forEach((key)=>{
@@ -63,17 +62,12 @@ class $7ce92075f2794ab1$export$b176171395436676 extends Object {
                 if (store[propKey]) store[propKey] = value;
                 else {
                     store[`_${propKey}`] = value;
-                    (0, $8zHUo$microsoftfastelementdistesm.Observable).defineProperty(store, propKey);
+                    (0, $8zHUo$microsoftfastelement.Observable).defineProperty(store, propKey);
                 }
                 return true;
             }
         });
     }
-}
-
-
-function $529142902ff67758$export$dcc5cf24d8fb3b41(initialObject) {
-    return (0, $7ce92075f2794ab1$export$b176171395436676).init(initialObject);
 }
 
 
@@ -470,13 +464,18 @@ $parcel$exportWildcard($3f98161bb563abdf$exports, $76501f7f02d11920$exports);
 
 var $d7167569386d0d4c$exports = {};
 
-$parcel$export($d7167569386d0d4c$exports, "Observable", () => $d7167569386d0d4c$re_export$Observable);
 $parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
 $parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
+$parcel$export($d7167569386d0d4c$exports, "Observable", () => $7ce92075f2794ab1$import$843d46ff018552b8$77cea355fa80b5f4);
 $parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
 $parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
 $parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
 $parcel$export($d7167569386d0d4c$exports, "uuid", () => $d7167569386d0d4c$re_export$uuid);
+
+function $529142902ff67758$export$dcc5cf24d8fb3b41(initialObject) {
+    return (0, $7ce92075f2794ab1$export$b176171395436676).init(initialObject);
+}
+
 
 
 

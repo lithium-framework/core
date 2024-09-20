@@ -1,5 +1,4 @@
-import {Observable as $hgUW1$Observable} from "@microsoft/fast-element/dist/esm";
-import {attr as $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd, observable as $hgUW1$observable, when as $5193209399721411$re_export$when, repeat as $5193209399721411$re_export$repeat, children as $5193209399721411$re_export$children, elements as $5193209399721411$re_export$elements, slotted as $5193209399721411$re_export$slotted, Binding as $hgUW1$Binding, html as $hgUW1$html, HTMLBindingDirective as $hgUW1$HTMLBindingDirective, HTMLDirective as $hgUW1$HTMLDirective, StatelessAttachedAttributeDirective as $hgUW1$StatelessAttachedAttributeDirective, customElement as $c5a7ff2cef84a00c$re_export$customElement, css as $c5a7ff2cef84a00c$re_export$css, ViewTemplate as $c5a7ff2cef84a00c$re_export$ViewTemplate, HTMLView as $c5a7ff2cef84a00c$re_export$HTMLView, volatile as $c5a7ff2cef84a00c$re_export$volatile, FASTElement as $hgUW1$FASTElement} from "@microsoft/fast-element";
+import {Observable as $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4, attr as $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd, observable as $hgUW1$observable, when as $5193209399721411$re_export$when, repeat as $5193209399721411$re_export$repeat, children as $5193209399721411$re_export$children, elements as $5193209399721411$re_export$elements, slotted as $5193209399721411$re_export$slotted, Binding as $hgUW1$Binding, html as $hgUW1$html, HTMLBindingDirective as $hgUW1$HTMLBindingDirective, HTMLDirective as $hgUW1$HTMLDirective, StatelessAttachedAttributeDirective as $hgUW1$StatelessAttachedAttributeDirective, customElement as $c5a7ff2cef84a00c$re_export$customElement, css as $c5a7ff2cef84a00c$re_export$css, ViewTemplate as $c5a7ff2cef84a00c$re_export$ViewTemplate, HTMLView as $c5a7ff2cef84a00c$re_export$HTMLView, volatile as $c5a7ff2cef84a00c$re_export$volatile, FASTElement as $hgUW1$FASTElement} from "@microsoft/fast-element";
 import {State as $fde9406d76ec24a9$re_export$State, createState as $fde9406d76ec24a9$re_export$createState} from "@lithium-framework/state";
 import {createStorage as $fde9406d76ec24a9$re_export$createStorage} from "@lithium-framework/context";
 import {uuid as $fde9406d76ec24a9$re_export$uuid} from "@lithium-framework/huid";
@@ -40,7 +39,7 @@ class $f0b90d4a5f4da766$export$b176171395436676 extends Object {
         this.$data = {};
         this.set = (key, value)=>{
             this.$data[`_${key}`] = value;
-            (0, $hgUW1$Observable).defineProperty(this.$data, key);
+            (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(this.$data, key);
             return this.$data[key];
         };
         Object.keys(initialObject).forEach((key)=>{
@@ -63,17 +62,12 @@ class $f0b90d4a5f4da766$export$b176171395436676 extends Object {
                 if (store[propKey]) store[propKey] = value;
                 else {
                     store[`_${propKey}`] = value;
-                    (0, $hgUW1$Observable).defineProperty(store, propKey);
+                    (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(store, propKey);
                 }
                 return true;
             }
         });
     }
-}
-
-
-function $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41(initialObject) {
-    return (0, $f0b90d4a5f4da766$export$b176171395436676).init(initialObject);
 }
 
 
@@ -470,13 +464,18 @@ $parcel$exportWildcard($5193209399721411$exports, $15db1e855f042fe6$exports);
 
 var $fde9406d76ec24a9$exports = {};
 
-$parcel$export($fde9406d76ec24a9$exports, "Observable", () => $fde9406d76ec24a9$re_export$Observable);
 $parcel$export($fde9406d76ec24a9$exports, "createObservableObject", () => $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41);
 $parcel$export($fde9406d76ec24a9$exports, "ObservableObject", () => $f0b90d4a5f4da766$export$b176171395436676);
+$parcel$export($fde9406d76ec24a9$exports, "Observable", () => $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4);
 $parcel$export($fde9406d76ec24a9$exports, "State", () => $fde9406d76ec24a9$re_export$State);
 $parcel$export($fde9406d76ec24a9$exports, "createState", () => $fde9406d76ec24a9$re_export$createState);
 $parcel$export($fde9406d76ec24a9$exports, "createStorage", () => $fde9406d76ec24a9$re_export$createStorage);
 $parcel$export($fde9406d76ec24a9$exports, "uuid", () => $fde9406d76ec24a9$re_export$uuid);
+
+function $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41(initialObject) {
+    return (0, $f0b90d4a5f4da766$export$b176171395436676).init(initialObject);
+}
+
 
 
 
@@ -566,5 +565,5 @@ const $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 = (0, $hgUW1$html);
  // })()
 
 
-export {$ed2a677aa7485959$export$1053a9be1bcefef9 as ViewExecutionContext, $ed2a677aa7485959$export$b3890eb0ae9dca99 as render, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $fde9406d76ec24a9$re_export$Observable as Observable, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent};
+export {$ed2a677aa7485959$export$1053a9be1bcefef9 as ViewExecutionContext, $ed2a677aa7485959$export$b3890eb0ae9dca99 as render, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4 as Observable, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent};
 //# sourceMappingURL=module.js.map

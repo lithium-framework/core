@@ -1,5 +1,5 @@
 import { FASTElement } from "@microsoft/fast-element";
-import { ObservableObject } from '../utils/observable-object';
+import { ObservableObject } from '../utils/observable-object/models';
 
 /* The WebComponent class extends FASTElement and provides state management functionality using
 ObservableObject. */

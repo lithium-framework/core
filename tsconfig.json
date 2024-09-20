@@ -14,7 +14,7 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "dist",
+    "outDir": "dist2",
     "baseUrl": "./",
     "paths": {
       "@lithium-framework/*": [

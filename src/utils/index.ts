@@ -1,8 +1,4 @@
 export {
-  Observable,
-} from '@microsoft/fast-element/dist/esm';
-
-export {
   // _cssObject,
   // Properties,
   // createCSS
@@ -10,8 +6,12 @@ export {
 
 export {
   createObservableObject,
-  ObservableObject
 } from './observable-object';
+
+export {
+  ObservableObject,
+  Observable
+} from './observable-object/models';
 
 export { 
   State,

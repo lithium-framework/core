@@ -1,4 +1,4 @@
-import { Observable } from "@microsoft/fast-element/dist/esm";
+import { Observable } from "@microsoft/fast-element";
 
 export class ObservableObject< key extends string , value extends any = any > extends Object{
 

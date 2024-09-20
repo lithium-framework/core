@@ -1,4 +1,4 @@
-import { DecoratorAttributeConfiguration, attr, ViewTemplate as _ViewTemplate1, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted, FASTElement, HTMLTemplateTag } from "@microsoft/fast-element";
+import { Observable, DecoratorAttributeConfiguration, attr, ViewTemplate as _ViewTemplate1, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted, FASTElement, HTMLTemplateTag } from "@microsoft/fast-element";
 import { ViewTemplate } from "@microsoft/fast-element/dist/esm";
 import { State } from "@lithium-framework/state";
 import { Properties } from "csstype";
@@ -9,7 +9,7 @@ export class ObservableObject<key extends string, value extends any = any> exten
     set: <T extends value = any>(key: key, value: T) => value;
     createProxy(): Record<string, value>;
 }
-export function createObservableObject<Key extends string, Value extends any>(initialObject: Record<Key, Value>): Record<string, Value>;
+export { Observable };
 /**
  * @State decorator
  * A decorator to define a state property on a WebComponent.
@@ -143,7 +143,7 @@ export class UntilDirective extends HTMLBindingDirective {
 }
 export const until: (fn: Promise<_ViewTemplate1>, template: _ViewTemplate1) => UntilDirective;
 export { when, repeat, children, elements, slotted };
-export { Observable, } from '@microsoft/fast-element/dist/esm';
+export function createObservableObject<Key extends string, Value extends any>(initialObject: Record<Key, Value>): Record<string, Value>;
 export { State, createState } from '@lithium-framework/state';
 export { createStorage, } from '@lithium-framework/context';
 export { uuid } from '@lithium-framework/huid';

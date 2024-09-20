@@ -1,5 +1,5 @@
 import { ViewTemplate } from '@microsoft/fast-element/dist/esm';
-import { ObservableObject } from '../utils/observable-object';
+import { ObservableObject } from '../utils/observable-object/models';
 import { state } from '../decorators';
 
 export class ViewExecutionContext< T = any , States extends Record<string , any> = Record<string , any> >{

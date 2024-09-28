@@ -1,12 +1,8 @@
-import {Observable as $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4, attr as $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd, observable as $hgUW1$observable, when as $5193209399721411$re_export$when, repeat as $5193209399721411$re_export$repeat, children as $5193209399721411$re_export$children, elements as $5193209399721411$re_export$elements, slotted as $5193209399721411$re_export$slotted, Binding as $hgUW1$Binding, html as $hgUW1$html, HTMLBindingDirective as $hgUW1$HTMLBindingDirective, HTMLDirective as $hgUW1$HTMLDirective, StatelessAttachedAttributeDirective as $hgUW1$StatelessAttachedAttributeDirective, customElement as $c5a7ff2cef84a00c$re_export$customElement, css as $c5a7ff2cef84a00c$re_export$css, ViewTemplate as $c5a7ff2cef84a00c$re_export$ViewTemplate, HTMLView as $c5a7ff2cef84a00c$re_export$HTMLView, volatile as $c5a7ff2cef84a00c$re_export$volatile, FASTElement as $hgUW1$FASTElement} from "@microsoft/fast-element";
+import {attr as $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd, observable as $hgUW1$observable, Observable as $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4, FASTElement as $hgUW1$FASTElement, when as $5193209399721411$re_export$when, repeat as $5193209399721411$re_export$repeat, children as $5193209399721411$re_export$children, elements as $5193209399721411$re_export$elements, slotted as $5193209399721411$re_export$slotted, Binding as $hgUW1$Binding, html as $hgUW1$html, HTMLBindingDirective as $hgUW1$HTMLBindingDirective, HTMLDirective as $hgUW1$HTMLDirective, StatelessAttachedAttributeDirective as $hgUW1$StatelessAttachedAttributeDirective, customElement as $c5a7ff2cef84a00c$re_export$customElement, css as $c5a7ff2cef84a00c$re_export$css, ViewTemplate as $c5a7ff2cef84a00c$re_export$ViewTemplate, HTMLView as $c5a7ff2cef84a00c$re_export$HTMLView, volatile as $c5a7ff2cef84a00c$re_export$volatile} from "@microsoft/fast-element";
 import {State as $fde9406d76ec24a9$re_export$State, createState as $fde9406d76ec24a9$re_export$createState} from "@lithium-framework/state";
 import {createStorage as $fde9406d76ec24a9$re_export$createStorage} from "@lithium-framework/context";
 import {uuid as $fde9406d76ec24a9$re_export$uuid} from "@lithium-framework/huid";
 
-
-function $parcel$export(e, n, v, s) {
-  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
-}
 
 function $parcel$exportWildcard(dest, source) {
   Object.keys(source).forEach(function(key) {
@@ -24,53 +20,11 @@ function $parcel$exportWildcard(dest, source) {
 
   return dest;
 }
-var $ed2a677aa7485959$exports = {};
 
-$parcel$export($ed2a677aa7485959$exports, "ViewExecutionContext", () => $ed2a677aa7485959$export$1053a9be1bcefef9);
-$parcel$export($ed2a677aa7485959$exports, "render", () => $ed2a677aa7485959$export$b3890eb0ae9dca99);
-
-class $f0b90d4a5f4da766$export$b176171395436676 extends Object {
-    static init(initialObject) {
-        let observabe = new $f0b90d4a5f4da766$export$b176171395436676(initialObject);
-        return observabe.createProxy();
-    }
-    constructor(initialObject){
-        super();
-        this.$data = {};
-        this.set = (key, value)=>{
-            this.$data[`_${key}`] = value;
-            (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(this.$data, key);
-            return this.$data[key];
-        };
-        Object.keys(initialObject).forEach((key)=>{
-            this.set(key, initialObject[key]);
-        });
-    }
-    createProxy() {
-        return new Proxy(this.$data, {
-            get (store, propKey) {
-                let result = undefined;
-                try {
-                    result = store[propKey];
-                } catch (error) {
-                    console.error(error);
-                } finally{
-                    return result;
-                }
-            },
-            set (store, propKey, value) {
-                if (store[propKey]) store[propKey] = value;
-                else {
-                    store[`_${propKey}`] = value;
-                    (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(store, propKey);
-                }
-                return true;
-            }
-        });
-    }
+function $parcel$export(e, n, v, s) {
+  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
 }
-
-
+// export * from './dom';
 var $535bb7ac3b1a1d6d$exports = {};
 var $b1b98f19caab25c2$exports = {};
 
@@ -81,21 +35,303 @@ var $a1f8df21dd3b8ee9$exports = {};
 
 $parcel$export($a1f8df21dd3b8ee9$exports, "state", () => $a1f8df21dd3b8ee9$export$ca000e230c0caa3e);
 
+var $899e8805cec15bdd$exports = {};
+
+$parcel$export($899e8805cec15bdd$exports, "ViewExecutionContext", () => $899e8805cec15bdd$export$1053a9be1bcefef9);
+
+class $f0b90d4a5f4da766$export$b176171395436676 extends Object {
+    static init(initialObject) {
+        let observabe = new $f0b90d4a5f4da766$export$b176171395436676(initialObject);
+        return observabe.createProxy();
+    }
+    constructor(initialObject){
+        super();
+        this.$data = {};
+        this.observers = {};
+        // Enregistre un observateur pour une propriété spécifique
+        this.subscribe = (propKey, callback)=>{
+            if (!this.observers[propKey]) this.observers[propKey] = new Set();
+            this.observers[propKey].add(callback);
+        };
+        // Supprime un observateur pour une propriété spécifique
+        this.unsubscribe = (propKey, callback)=>{
+            if (this.observers[propKey]) this.observers[propKey].delete(callback);
+        };
+        this.set = (key, value)=>{
+            const oldValue = this.$data[`_${key}`];
+            this.$data[`_${key}`] = value;
+            (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(this.$data, key);
+            this.notify(key, value, oldValue);
+            return this.$data[key];
+        };
+        Object.assign(this.$data, initialObject);
+    }
+    // Méthode appelée pour notifier les observateurs d'un changement de valeur
+    notify(propKey, newValue, oldValue) {
+        if (this.observers[propKey]) this.observers[propKey].forEach((callback)=>callback(newValue, oldValue));
+    }
+    createProxy() {
+        return new Proxy(this.$data, {
+            get: (store, propKey)=>{
+                let result = undefined;
+                if (propKey == "subscribe") return this.subscribe;
+                else if (propKey == "unsubscribe") return this.unsubscribe;
+                else if (propKey == "keys") return ()=>Object.keys(this.$data);
+                else if (propKey == "values") return ()=>Object.values(this.$data);
+                try {
+                    result = store[propKey];
+                } catch (error) {
+                    console.error(error);
+                } finally{
+                    return result;
+                }
+            },
+            set: (store, propKey, value)=>{
+                const oldValue = store[propKey];
+                if (store[propKey]) store[propKey] = value;
+                else {
+                    store[`_${propKey}`] = value;
+                    (0, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4).defineProperty(store, propKey);
+                }
+                this.notify(propKey, value, oldValue);
+                return true;
+            }
+        });
+    }
+}
+
+
+class $935380081e1d8be7$export$af73ab700e00763e extends Map {
+    bind(target) {
+        this.target = target;
+        return this;
+    }
+    execute() {
+        let effects = this.target.constructor["effects"];
+        let effects_without_depedencies = [
+            ...this.values()
+        ].filter((effect)=>!effect.dependencies || effect.dependencies.length == 0 ? effect : null);
+        let effects_with_depedencies = [
+            ...this.values()
+        ].filter((effect)=>effect.dependencies && effect.dependencies.length > 0 ? effect : null);
+        effects_with_depedencies.forEach((effect)=>{
+            let { dependencies: dependencies, callback: useEffect, name: name } = effect;
+            dependencies.forEach((dependency)=>{
+                console.log({
+                    "subscribe": this.target.$states
+                });
+                this.target.$states.subscribe(dependency, useEffect);
+            });
+        });
+        effects_without_depedencies.forEach((effect)=>{
+            console.log({
+                effect: effect
+            });
+            let { callback: useEffect } = effect;
+            useEffect();
+        });
+    // this.forEach( effect => {
+    //   let { dependencies , callback:useEffect } = effect;
+    //   if(!dependencies)dependencies = [];
+    //   if(dependencies.length > 0){
+    //     dependencies.forEach(( dependency ) => {
+    //       this.target.$states.subscribe( dependency , useEffect )
+    //     })
+    //   }
+    //   else useEffect();
+    // });
+    }
+    constructor(effects){
+        super();
+        this.target = null;
+        if (effects) Object.values(effects).forEach((effect)=>{
+            console.log({
+                effect: effect
+            });
+            this.set(effect.name, effect);
+        });
+        console.log({
+            self: this,
+            effects: effects,
+            values: Object.values({
+                ...effects
+            }),
+            keys: Object.keys({
+                ...effects
+            })
+        });
+    }
+}
+
+
+
+function $46dc60c1cf1be4f3$export$855330f8a2a9f2e8(effect_name, callback, dependencies) {
+    (0, $f24f9f18a7b99a68$export$dc573d8a6576cdb3)(dependencies)(this, effect_name, callback);
+}
+
+
+
+function $facec54f608d45db$export$ad300186e7a01246(key, value) {
+    function useState(key) {
+        return [
+            this[key],
+            (newValue)=>{
+                this[key] = newValue;
+            }
+        ];
+    }
+    (0, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e)(this, key, value);
+    return useState.bind(this)(key);
+}
+
+
+
+function $7d8e02f1fed4bf94$export$366cf43304d85757(key, value) {
+    (0, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e)(this, key, value, false);
+}
+
+
+class $899e8805cec15bdd$export$1053a9be1bcefef9 extends Object {
+    // bindState = <T>( key:keyof States , value:T ):[ state:T , setter:( newValue:T ) => void ] => {
+    //   function useState( this:ViewExecutionContext , key:keyof States ):[ state:T , setter:( newValue:T ) => void ]{
+    //     return [ this[key as string] , ( newValue ) => {
+    //       console.log({ newValue })
+    //       this[key as string] = newValue;
+    //     } ]
+    //   }
+    //   if(this.#_state_keys.includes(key as string))return useState.bind(this)( key );
+    //   Object.defineProperty( this , key , {
+    //     get(){
+    //       return JSON.parse(this.states[key]);
+    //     },
+    //     set( value ){
+    //       if(!this.#_state_keys.includes(key)){
+    //         this.#_state_keys.push( key );
+    //         this.$states = ObservableObject.init({
+    //           [key] :  JSON.stringify(value),
+    //           ...Object.fromEntries(
+    //             new Map(
+    //               Array.from( this.#_state_keys , ( key ) => {
+    //                 return [ key , this.$states[`${key}`] ]
+    //               } )
+    //             )
+    //           )
+    //         });
+    //       }
+    //       this.$states[key] = JSON.stringify(value);
+    //     }
+    //   });
+    //   this[key as string] = value;
+    //   return useState.bind(this)( key );
+    // }
+    // bindConsumable = <T = any>( key:string , value:T ) => {
+    //   state( this , key , value , false );
+    // }
+    // bindEffect = ( callback : () => void , dependencies : any[] ) => {
+    //   this.$effects.push( {
+    //     dependencies,
+    //     callback
+    //   } as IEffect )
+    // }
+    get bindState() {
+        return (0, $facec54f608d45db$export$ad300186e7a01246).bind(this);
+    }
+    get bindConsumable() {
+        return (0, $7d8e02f1fed4bf94$export$366cf43304d85757).bind(this);
+    }
+    get bindEffect() {
+        return (0, $46dc60c1cf1be4f3$export$855330f8a2a9f2e8).bind(this);
+    }
+    constructor(data){
+        super();
+        this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init(this.constructor["states"]);
+        this.$effects = new (0, $935380081e1d8be7$export$af73ab700e00763e)(this.constructor["effects"]).bind(this);
+        Object.assign(this, data);
+    }
+    static init(data) {
+        return new $899e8805cec15bdd$export$1053a9be1bcefef9(data);
+    }
+}
+$899e8805cec15bdd$export$1053a9be1bcefef9.states = {};
+$899e8805cec15bdd$export$1053a9be1bcefef9.effects = {};
+
+
+
+
+
+
+
+
+class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) {
+    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
+  instance property named `` on the `WebComponent` class. This property is being set to the
+  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
+  values defined in the `states` static property of the `WebComponent` class
+  (`this.constructor["states"]`). */ get $states() {
+        return this.constructor["states"];
+    }
+    get $effects() {
+        return new (0, $935380081e1d8be7$export$af73ab700e00763e)(this.constructor["effects"]).bind(this);
+    }
+    constructor(){
+        super();
+    }
+    get bindState() {
+        return (0, $facec54f608d45db$export$ad300186e7a01246).bind(this);
+    }
+    get bindConsumable() {
+        return (0, $7d8e02f1fed4bf94$export$366cf43304d85757).bind(this);
+    }
+    get bindEffect() {
+        return (0, $46dc60c1cf1be4f3$export$855330f8a2a9f2e8).bind(this);
+    }
+    connectedCallback() {
+        this.$effects.execute();
+        super.connectedCallback();
+    }
+}
+/* The `static states = {};` line is declaring a static property named `states` on the `WebComponent`
+class and initializing it as an empty object `{}`. This property is intended to hold the initial
+state values for the component. By defining it as a static property, it is shared among all
+instances of the `WebComponent` class rather than being specific to individual instances. This
+allows all instances of the class to access and modify the same set of state values. */ $284c1ee70f828408$export$7f8b9f308979d41d.states = (0, $f0b90d4a5f4da766$export$b176171395436676).init({});
+$284c1ee70f828408$export$7f8b9f308979d41d.effects = {};
+$284c1ee70f828408$export$7f8b9f308979d41d.define = (0, $hgUW1$FASTElement).define;
+
+
 function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e(target, propertyKey, value = null, constructible = false) {
-    if (constructible) target.constructor.states = target.constructor.states || {};
-    Object.defineProperty(target, propertyKey, {
-        get () {
-            return target.$states[propertyKey];
-        },
-        set (newValue) {
-            target.$states[propertyKey] = newValue;
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    (0, $hgUW1$observable)(target, propertyKey);
-    if (value) target[propertyKey] = value;
+    if (constructible) target.constructor["states"] = target.constructor["states"] || {};
+    if (target instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d)) {
+        Object.defineProperty(target, propertyKey, {
+            get () {
+                return target.constructor["states"][propertyKey];
+            },
+            set (newValue) {
+                target.constructor["states"][propertyKey] = newValue;
+                return true;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        (0, $hgUW1$observable)(target.constructor["states"], propertyKey);
+    }
+    if (target instanceof (0, $899e8805cec15bdd$export$1053a9be1bcefef9)) {
+        if (propertyKey in target == false) {
+            Object.defineProperty(target, propertyKey, {
+                get () {
+                    return target.$states[propertyKey];
+                },
+                set (newValue) {
+                    target.$states[propertyKey] = newValue;
+                    return true;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            (0, $hgUW1$observable)(target.$states, propertyKey);
+            if (value && target[propertyKey] == null) target[propertyKey] = value;
+        }
+    }
 }
 
 
@@ -108,79 +344,65 @@ function $b1b98f19caab25c2$export$683a0e8baad8b9c3(options = {}) {
 
 
 
+var $f24f9f18a7b99a68$exports = {};
+
+$parcel$export($f24f9f18a7b99a68$exports, "effect", () => $f24f9f18a7b99a68$export$dc573d8a6576cdb3);
+var $407cc31aa7cd1215$exports = {};
+
+var $3905e9ecff2931d2$exports = {};
+
+
+var $dad4474276f9eead$exports = {};
+
+
+$parcel$exportWildcard($407cc31aa7cd1215$exports, $899e8805cec15bdd$exports);
+$parcel$exportWildcard($407cc31aa7cd1215$exports, $3905e9ecff2931d2$exports);
+$parcel$exportWildcard($407cc31aa7cd1215$exports, $dad4474276f9eead$exports);
+
+
+
+function $f24f9f18a7b99a68$export$dc573d8a6576cdb3(dependencies) {
+    return (target, propertyKey, value = null)=>{
+        if (target instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d)) Object.defineProperty(target, propertyKey, {
+            get () {
+                return target.constructor["effects"][propertyKey];
+            },
+            set (newValue) {
+                target.constructor["effects"][propertyKey] = {
+                    name: propertyKey,
+                    dependencies: dependencies,
+                    callback: newValue
+                };
+                return true;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        if (target instanceof (0, $899e8805cec15bdd$export$1053a9be1bcefef9)) {
+            if (!target[propertyKey]) Object.defineProperty(target, propertyKey, {
+                get () {
+                    return target.$effects.get(propertyKey);
+                },
+                set (newValue) {
+                    target.$effects.set(propertyKey, {
+                        name: propertyKey,
+                        dependencies: dependencies,
+                        callback: newValue
+                    });
+                    return true;
+                },
+                enumerable: true,
+                configurable: true
+            });
+            if (value) target[propertyKey] = value;
+        }
+    };
+}
+
+
 $parcel$exportWildcard($535bb7ac3b1a1d6d$exports, $b1b98f19caab25c2$exports);
 $parcel$exportWildcard($535bb7ac3b1a1d6d$exports, $a1f8df21dd3b8ee9$exports);
-
-
-function $ed2a677aa7485959$var$_classPrivateFieldLooseBase(e, t) {
-    if (!({}).hasOwnProperty.call(e, t)) throw new TypeError("attempted to use private field on non-instance");
-    return e;
-}
-var $ed2a677aa7485959$var$id = 0;
-function $ed2a677aa7485959$var$_classPrivateFieldLooseKey(e) {
-    return "__private_" + $ed2a677aa7485959$var$id++ + "_" + e;
-}
-var $ed2a677aa7485959$var$_state_keys = /*#__PURE__*/ $ed2a677aa7485959$var$_classPrivateFieldLooseKey("_state_keys");
-class $ed2a677aa7485959$export$1053a9be1bcefef9 {
-    get states() {
-        return this.$states;
-    }
-    constructor(data){
-        this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init({});
-        Object.defineProperty(this, $ed2a677aa7485959$var$_state_keys, {
-            writable: true,
-            value: []
-        });
-        this.createState = (key, value)=>{
-            if ($ed2a677aa7485959$var$_classPrivateFieldLooseBase(this, $ed2a677aa7485959$var$_state_keys)[$ed2a677aa7485959$var$_state_keys].includes(key)) return this.useState(key);
-            Object.defineProperty(this, key, {
-                get () {
-                    return JSON.parse(this.states[key]);
-                },
-                set (value) {
-                    if (!$ed2a677aa7485959$var$_classPrivateFieldLooseBase(this, $ed2a677aa7485959$var$_state_keys)[$ed2a677aa7485959$var$_state_keys].includes(key)) {
-                        $ed2a677aa7485959$var$_classPrivateFieldLooseBase(this, $ed2a677aa7485959$var$_state_keys)[$ed2a677aa7485959$var$_state_keys].push(key);
-                        this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init({
-                            [key]: JSON.stringify(value),
-                            ...Object.fromEntries(new Map(Array.from($ed2a677aa7485959$var$_classPrivateFieldLooseBase(this, $ed2a677aa7485959$var$_state_keys)[$ed2a677aa7485959$var$_state_keys], (key)=>{
-                                return [
-                                    key,
-                                    this.$states[`${key}`]
-                                ];
-                            })))
-                        });
-                    }
-                    this.$states[key] = JSON.stringify(value);
-                }
-            });
-            this[key] = value;
-            return this.useState(key);
-        };
-        this.useState = (key)=>{
-            return [
-                this[key],
-                (newValue)=>{
-                    console.log({
-                        newValue: newValue
-                    });
-                    this[key] = newValue;
-                }
-            ];
-        };
-        this.createConsumable = (key, value)=>{
-            (0, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e)(this, key, value, false);
-        };
-        Object.assign(this, data);
-    }
-    static init(data) {
-        return new $ed2a677aa7485959$export$1053a9be1bcefef9(data);
-    }
-}
-function $ed2a677aa7485959$export$b3890eb0ae9dca99(template, container = document.body, data = {}) {
-    let context = $ed2a677aa7485959$export$1053a9be1bcefef9.init(data);
-    return template.render(context, container);
-}
-
+$parcel$exportWildcard($535bb7ac3b1a1d6d$exports, $f24f9f18a7b99a68$exports);
 
 
 var $5193209399721411$exports = {};
@@ -512,58 +734,58 @@ $parcel$export($c5a7ff2cef84a00c$exports, "volatile", () => $c5a7ff2cef84a00c$re
 $parcel$export($c5a7ff2cef84a00c$exports, "WebComponent", () => $284c1ee70f828408$export$7f8b9f308979d41d);
 
 
-
-class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) {
-    constructor(){
-        super();
-        /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
-    instance property named `` on the `WebComponent` class. This property is being set to the
-    result of calling the `init` method of the `ObservableObject` class, passing in the initial state
-    values defined in the `states` static property of the `WebComponent` class
-    (`this.constructor["states"]`). */ this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init(this.constructor["states"]);
-        Object.keys(this.constructor["states"]).forEach((key)=>{
-            // delete this[key];
-            Object.defineProperty(this, key, {
-                get () {
-                    return this.$states[key];
-                },
-                set (value) {
-                    this.$states[key] = value;
-                }
-            });
-        });
-    }
-    connectedCallback() {
-        super.connectedCallback();
-    }
-}
-/* The `static states = {};` line is declaring a static property named `states` on the `WebComponent`
-class and initializing it as an empty object `{}`. This property is intended to hold the initial
-state values for the component. By defining it as a static property, it is shared among all
-instances of the `WebComponent` class rather than being specific to individual instances. This
-allows all instances of the class to access and modify the same set of state values. */ $284c1ee70f828408$export$7f8b9f308979d41d.states = {};
-$284c1ee70f828408$export$7f8b9f308979d41d.define = (0, $hgUW1$FASTElement).define;
-
-
 const $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 = (0, $hgUW1$html);
 
 
- // import { MainApplication } from './dom/index.js';
- // namespace Lithium{
- //   export const DOM = require('./dom/index.js');
- //   export const Decorators = require('./decorators/index.js');
- //   export const Directives = require('./directives/index.js');
- //   export const Utils = require('./utils/index.js');
- //   export const Component = require('./webComponent/index.js');
- // };
- // export default Lithium;
- // (() => {
- //   if(globalThis.window){
- //     window['lithium'] = {
- //     };
- //   }
- // })()
+
+var $4c5fb5bb6e826a01$exports = {};
+var $ea70625fa1b5e3d6$exports = {};
+
+$parcel$export($ea70625fa1b5e3d6$exports, "render", () => $ea70625fa1b5e3d6$export$b3890eb0ae9dca99);
 
 
-export {$ed2a677aa7485959$export$1053a9be1bcefef9 as ViewExecutionContext, $ed2a677aa7485959$export$b3890eb0ae9dca99 as render, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4 as Observable, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent};
+// Fonction pour observer les enfants ajoutés
+const $ea70625fa1b5e3d6$var$observeChilds = (container, config, callback)=>{
+    // Crée un MutationObserver
+    const observer = new MutationObserver((mutationsList, observer)=>{
+        // Parcourt toutes les mutations détectées
+        mutationsList.forEach((mutation)=>{
+            if (mutation.type === "childList") // Vérifie si des nœuds ont été ajoutés
+            mutation.addedNodes.forEach((node)=>{
+                if (node.nodeType === Node.ELEMENT_NODE) {
+                    console.log("Nouvel \xe9l\xe9ment ajout\xe9 :", node);
+                    callback(node); // Exécute le callback avec le nœud ajouté
+                }
+            });
+        });
+    });
+    // Démarre l'observation
+    observer.observe(container, config);
+    // Retourne l'observer pour pouvoir le déconnecter si besoin
+    return observer;
+};
+function $ea70625fa1b5e3d6$export$b3890eb0ae9dca99(template, container = document.body, data = {}) {
+    let context = (0, $899e8805cec15bdd$export$1053a9be1bcefef9).init(data);
+    let observer = $ea70625fa1b5e3d6$var$observeChilds(container, {
+        childList: true,
+        // Observe les ajouts et suppressions d'enfants
+        subtree: false // Si true, observe tous les descendants du parent
+    }, (node)=>{
+        if (node instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d) == false) {
+            if (context["$effects"]) context["$effects"].execute();
+        }
+        observer.disconnect();
+    });
+    let element = template.render(context, container);
+    return element;
+}
+
+
+$parcel$exportWildcard($4c5fb5bb6e826a01$exports, $ea70625fa1b5e3d6$exports);
+
+
+
+
+
+export {$935380081e1d8be7$export$af73ab700e00763e as Effects, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $f24f9f18a7b99a68$export$dc573d8a6576cdb3 as effect, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4 as Observable, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent, $899e8805cec15bdd$export$1053a9be1bcefef9 as ViewExecutionContext, $ea70625fa1b5e3d6$export$b3890eb0ae9dca99 as render};
 //# sourceMappingURL=module.js.map

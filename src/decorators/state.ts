@@ -1,4 +1,6 @@
 import { observable } from "@microsoft/fast-element";
+import { ViewExecutionContext } from "../templateComponent/model";
+import { WebComponent } from "../webComponent/model";
 
 /**
  * @State decorator
@@ -29,24 +31,50 @@ import { observable } from "@microsoft/fast-element";
  * }
  * ```
  */
-export function state(target, propertyKey: string , value:any = null , constructible = false){
+export function state(target: WebComponent | ViewExecutionContext, propertyKey: string , value:any = null , constructible = false){
 
-  if(constructible)target.constructor.states = target.constructor.states || {};
+  if(constructible)target.constructor["states"] = target.constructor["states"] || {};
 
-  Object.defineProperty( target , propertyKey , {
-    get(){
-      return target.$states[propertyKey];
-    },
-    set(newValue){
-      target.$states[propertyKey] = newValue;
-      return true;
-    },
-    enumerable: true,
-    configurable: true
-  } );
+  if( target instanceof WebComponent ){
 
-  observable(target, propertyKey);
+    Object.defineProperty( target , propertyKey , {
+      get(){
+        return target.constructor["states"][propertyKey];
+      },
+      set(newValue){
+        target.constructor["states"][propertyKey] = newValue;
+        return true;
+      },
+      enumerable: true,
+      configurable: true
+    } );
 
-  if(value)target[propertyKey] = value;
+    observable( target.constructor["states"] , propertyKey);
+
+  }
+
+  if( target instanceof ViewExecutionContext ){
+
+    if( propertyKey in target == false ){
+
+      Object.defineProperty( target , propertyKey , {
+        get(){
+          return target.$states[propertyKey];
+        },
+        set(newValue){
+          target.$states[propertyKey] = newValue;
+          return true;
+        },
+        enumerable: true,
+        configurable: true
+      } );
+  
+      observable( target.$states , propertyKey);
+  
+      if(value && target[propertyKey] == null)target[propertyKey] = value;
+  
+    }
+
+  }
 
 }

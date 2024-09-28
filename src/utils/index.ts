@@ -10,6 +10,7 @@ export {
 
 export {
   ObservableObject,
+  type ObservableProxy,
   Observable
 } from './observable-object/models';
 

@@ -2,7 +2,7 @@
   "name": "@lithium-framework/core",
   "version": "1.7.0",
   "description": "Lithium Framework",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
   "module": "dist/module.js",
   "types": "dist/types.d.ts",
   "private": false,

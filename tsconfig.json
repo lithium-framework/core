@@ -4,6 +4,8 @@
     "target": "ESNext",
     "declaration": true,
     "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "./dist",
     "removeComments": false,
     "preserveConstEnums": true,
     "skipLibCheck": true,
@@ -14,7 +16,6 @@
     "resolveJsonModule": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "outDir": "dist2",
     "baseUrl": "./",
     "paths": {
       "@lithium-framework/*": [

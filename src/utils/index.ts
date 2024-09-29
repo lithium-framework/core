@@ -9,6 +9,10 @@ export {
 } from './observable-object';
 
 export {
+  ObservableArray,
+} from './observable-array';
+
+export {
   ObservableObject,
   type ObservableProxy,
   Observable

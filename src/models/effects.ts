@@ -28,8 +28,6 @@ export class Effects extends Map< string , IEffect >{
 
       dependencies.forEach(( dependency ) => {
 
-        console.log({ 'subscribe' : dependency })
-
         this.target.states.subscribe( dependency , useEffect );
 
       })
@@ -38,28 +36,10 @@ export class Effects extends Map< string , IEffect >{
 
     effects_without_depedencies.forEach(( effect ) => {
 
-      console.log({ effect })
-
       let { callback:useEffect } = effect;
       useEffect();
 
     })
-
-    this.forEach( effect => {
-      
-      let { dependencies , callback:useEffect } = effect;
-      if(!dependencies)dependencies = [];
-
-      if(dependencies.length > 0){
-
-        dependencies.forEach(( dependency ) => {
-          this.target.states.subscribe( dependency , useEffect )
-        })
-
-      }
-      else useEffect();
-
-    });
 
   }
 
@@ -70,8 +50,6 @@ export class Effects extends Map< string , IEffect >{
       console.log({ effect })
       this.set( effect.name , effect )
     });
-
-    console.log({ self : this , effects , values : Object.values({...effects}) , keys : Object.keys({...effects}) });
 
   }
 

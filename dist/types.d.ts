@@ -36,7 +36,7 @@ export class WebComponent extends FASTElement implements IWebComponent {
     get bindState(): <States, Value>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
-    connectedCallback(): void;
+    connectedCallback(this: IWebComponent): void;
     static define: {
         <TType extends import("@microsoft/fast-element").Constructable<HTMLElement> = import("@microsoft/fast-element").Constructable<HTMLElement>>(this: TType, nameOrDef: string | import("@microsoft/fast-element").PartialFASTElementDefinition): TType;
         <TType extends import("@microsoft/fast-element").Constructable<HTMLElement> = import("@microsoft/fast-element").Constructable<HTMLElement>>(type: TType, nameOrDef?: string | import("@microsoft/fast-element").PartialFASTElementDefinition): TType;

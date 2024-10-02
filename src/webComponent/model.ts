@@ -27,8 +27,8 @@ export class WebComponent extends FASTElement implements IWebComponent{
   get bindConsumable():< Value >(key: string, value: Value) => void{ return bindConsumable.bind(this) }
   get bindEffect():( effect_name : string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
 
-  connectedCallback() {
-    (this as IWebComponent).effects?.execute();
+  connectedCallback( this:IWebComponent ) {
+    this.effects?.execute();
     super.connectedCallback();
   }
 

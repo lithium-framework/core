@@ -116,26 +116,12 @@ class $935380081e1d8be7$export$af73ab700e00763e extends Map {
         effects_with_depedencies.forEach((effect)=>{
             let { dependencies: dependencies, callback: useEffect, name: name } = effect;
             dependencies.forEach((dependency)=>{
-                console.log({
-                    "subscribe": dependency
-                });
                 this.target.states.subscribe(dependency, useEffect);
             });
         });
         effects_without_depedencies.forEach((effect)=>{
-            console.log({
-                effect: effect
-            });
             let { callback: useEffect } = effect;
             useEffect();
-        });
-        this.forEach((effect)=>{
-            let { dependencies: dependencies, callback: useEffect } = effect;
-            if (!dependencies) dependencies = [];
-            if (dependencies.length > 0) dependencies.forEach((dependency)=>{
-                this.target.states.subscribe(dependency, useEffect);
-            });
-            else useEffect();
         });
     }
     constructor(effects){
@@ -146,16 +132,6 @@ class $935380081e1d8be7$export$af73ab700e00763e extends Map {
                 effect: effect
             });
             this.set(effect.name, effect);
-        });
-        console.log({
-            self: this,
-            effects: effects,
-            values: Object.values({
-                ...effects
-            }),
-            keys: Object.keys({
-                ...effects
-            })
         });
     }
 }

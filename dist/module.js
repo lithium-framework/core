@@ -116,6 +116,9 @@ class $935380081e1d8be7$export$af73ab700e00763e extends Map {
         effects_with_depedencies.forEach((effect)=>{
             let { dependencies: dependencies, callback: useEffect, name: name } = effect;
             dependencies.forEach((dependency)=>{
+                console.log({
+                    "subscribe": dependency
+                });
                 this.target.states.subscribe(dependency, useEffect);
             });
         });
@@ -394,7 +397,7 @@ function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e(target, propertyKey, value = 
         const originalConnectedCallback = target["connectedCallback"] || function() {};
         target.connectedCallback = function() {
             // Initialise l'état à la création de l'instance
-            $a1f8df21dd3b8ee9$var$initializeState.call(this);
+            $a1f8df21dd3b8ee9$var$initializeState.call(this, target, propertyKey, value);
             // Appelle la méthode originale connectedCallback si elle existe
             originalConnectedCallback.call(this);
         };
@@ -429,45 +432,86 @@ $parcel$exportWildcard($407cc31aa7cd1215$exports, $dad4474276f9eead$exports);
 
 
 
+const $f24f9f18a7b99a68$var$initializeEffect = function(target, propertyKey, dependencies, value) {
+    if (!this.$effects) {
+        this.$effects = new (0, $935380081e1d8be7$export$af73ab700e00763e)().bind(this);
+        Object.defineProperty(target, "effects", {
+            get: ()=>{
+                return this.$effects;
+            }
+        });
+    }
+    // Initialisation de la propriété d'état dans $states si elle n'existe pas
+    if (!(propertyKey in this.$effects)) this.$effects.set(propertyKey, value);
+    Object.defineProperty(target, propertyKey, {
+        get () {
+            return target.effects.get(propertyKey);
+        },
+        set (newValue) {
+            target.effects.set(propertyKey, {
+                name: propertyKey,
+                dependencies: dependencies,
+                callback: newValue
+            });
+            return true;
+        },
+        enumerable: true,
+        configurable: true
+    });
+};
 function $f24f9f18a7b99a68$export$dc573d8a6576cdb3(dependencies) {
     return (target, propertyKey, value = null)=>{
-        if (target instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d)) {
-            if ("$effects" in target == false) target.$effects = new (0, $935380081e1d8be7$export$af73ab700e00763e)().bind(target);
-            Object.defineProperty(target, propertyKey, {
-                get () {
-                    return target["$effects"]?.get(propertyKey);
-                },
-                set (newValue) {
-                    target["$effects"].set(propertyKey, {
-                        name: propertyKey,
-                        dependencies: dependencies,
-                        callback: newValue
-                    });
-                    return true;
-                },
-                enumerable: true,
-                configurable: true
-            });
+        const isWebComponent = target instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d);
+        const isViewExecutionContext = target instanceof (0, $899e8805cec15bdd$export$1053a9be1bcefef9);
+        // Si le décorateur est appliqué directement sur une instance
+        if (isWebComponent || isViewExecutionContext) $f24f9f18a7b99a68$var$initializeEffect.call(target, target, propertyKey, dependencies, value);
+        else {
+            // Si le décorateur est appliqué sur le prototype (classe)
+            const originalConnectedCallback = target["connectedCallback"] || function() {};
+            target.connectedCallback = function() {
+                // Initialise l'état à la création de l'instance
+                $f24f9f18a7b99a68$var$initializeEffect.call(this, target, propertyKey, dependencies, value);
+                // Appelle la méthode originale connectedCallback si elle existe
+                originalConnectedCallback.call(this, target, propertyKey, dependencies, value);
+            };
         }
-        if (target instanceof (0, $899e8805cec15bdd$export$1053a9be1bcefef9)) {
-            if ("$effects" in target == false) target.$effects = new (0, $935380081e1d8be7$export$af73ab700e00763e)().bind(target);
-            if (!target[propertyKey]) Object.defineProperty(target, propertyKey, {
-                get () {
-                    return target.effects.get(propertyKey);
-                },
-                set (newValue) {
-                    target.effects.set(propertyKey, {
-                        name: propertyKey,
-                        dependencies: dependencies,
-                        callback: newValue
-                    });
-                    return true;
-                },
-                enumerable: true,
-                configurable: true
-            });
-            if (value) target[propertyKey] = value;
-        }
+    // if( target instanceof WebComponent ){
+    //   if('$effects' in target == false)(target as any).$effects = new Effects().bind( target );
+    //   Object.defineProperty( target , propertyKey , {
+    //     get(){
+    //       return target["$effects"]?.get( propertyKey );
+    //     },
+    //     set(newValue){
+    //       target["$effects"].set( propertyKey , {
+    //         name : propertyKey,
+    //         dependencies : dependencies as any,
+    //         callback : newValue
+    //       });
+    //       return true;
+    //     },
+    //     enumerable: true,
+    //     configurable: true
+    //   });
+    // }
+    // if( target instanceof ViewExecutionContext ){
+    //   if('$effects' in target == false)(target as any).$effects = new Effects().bind( target );
+    //   if(!target[propertyKey])Object.defineProperty( target , propertyKey , {
+    //     get(){
+    //       return target.effects.get( propertyKey );
+    //     },
+    //     set(newValue){
+    //       target.effects.set( propertyKey , {
+    //         name : propertyKey,
+    //         dependencies : dependencies as any,
+    //         callback : newValue
+    //       });
+    //       return true;
+    //     },
+    //     enumerable: true,
+    //     configurable: true
+    //   });
+    //   if( value )target[ propertyKey ] = value;
+    // }
     };
 }
 

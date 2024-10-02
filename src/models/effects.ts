@@ -28,6 +28,8 @@ export class Effects extends Map< string , IEffect >{
 
       dependencies.forEach(( dependency ) => {
 
+        console.log({ 'subscribe' : dependency })
+
         this.target.states.subscribe( dependency , useEffect );
 
       })

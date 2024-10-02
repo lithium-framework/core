@@ -63,35 +63,6 @@ export class ViewExecutionContext<T = any, States extends Record<string, any> = 
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
     static init<T extends Record<string, any> = {}>(data?: T): ViewContext<T>;
 }
-/**
- * @State decorator
- * A decorator to define a state property on a WebComponent.
- * This state property is observable, and its changes are detected and handled.
- *
- * @param {Object} target - The prototype of the class where the state property is defined.
- * @param {string} propertyKey - The name of the property to be defined as a state.
- *
- * @example
- * ```typescript
- * /// Define a counter component using the State decorator
-
- * customElement({
- *     name: 'counter-element',
- *     template: html`...`
- * })
- * class CounterElement extends WebComponent {
- *     State count: number = 0;
- *
- *     increment() {
- *         this.count += 1;
- *     }
- *
- *     connectedCallback() {
- *         super.connectedCallback();s
- *     }
- * }
- * ```
- */
 type _WebComponent = (typeof WebComponent & {
     $states: ObservableProxy<any, any>;
 });
@@ -104,6 +75,7 @@ type _ViewExecutionContext = (typeof ViewExecutionContext & {
  *
  * @param {Object} target - La cible (prototype ou instance) sur laquelle le décorateur est appliqué.
  * @param {string} propertyKey - Le nom de la propriété d'état.
+ *
  */
 export function state(target: _WebComponent | _ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
 /**

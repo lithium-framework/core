@@ -1,4 +1,4 @@
-import { ViewTemplate } from '@microsoft/fast-element/dist/esm';
+import { ViewTemplate } from '@microsoft/fast-element';
 import { ViewExecutionContext } from '../templateComponent/model';
 import { WebComponent } from '../webComponent';
 

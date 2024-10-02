@@ -1,7 +1,6 @@
 import { Observable, FASTElement, HTMLTemplateTag, DecoratorAttributeConfiguration, attr, ViewTemplate, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted } from "@microsoft/fast-element";
 import { Properties } from "csstype";
 import { State } from "@lithium-framework/state";
-import { ViewTemplate as _ViewTemplate1 } from "@microsoft/fast-element/dist/esm";
 export type ObservableProxy<key extends string, value extends any = any> = Record<string, value> & {
     subscribe: ObservableObject<key, value>["subscribe"];
     unsubscribe: ObservableObject<key, value>["unsubscribe"];
@@ -164,6 +163,6 @@ export class UntilDirective extends HTMLBindingDirective {
 }
 export const until: (fn: Promise<ViewTemplate>, template: ViewTemplate) => UntilDirective;
 export { when, repeat, children, elements, slotted };
-export function render<T extends Record<string, any> = {}, Storage extends Record<string, any> = Record<string, any>>(template: _ViewTemplate1<ViewExecutionContext<any, Record<string, any>>, any>, container?: HTMLElement, data?: {}): any;
+export function render<T extends Record<string, any> = {}, Storage extends Record<string, any> = Record<string, any>>(template: ViewTemplate<ViewExecutionContext<any, Record<string, any>>, any>, container?: HTMLElement, data?: {}): import("webComponent").HTMLView<ViewExecutionContext<any, Record<string, any>>, any>;
 
 //# sourceMappingURL=types.d.ts.map

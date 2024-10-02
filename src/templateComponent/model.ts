@@ -1,6 +1,4 @@
-import { ViewTemplate } from '@microsoft/fast-element/dist/esm';
 import { ObservableObject, ObservableProxy } from '../utils/observable-object/models';
-import { state } from '../decorators';
 import { ViewContext } from './types';
 import { Effects, IEffect } from '../models/effects';
 import { IWebComponent } from '../webComponent/interface';

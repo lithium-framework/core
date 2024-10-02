@@ -16,17 +16,11 @@ export class WebComponent extends FASTElement implements IWebComponent{
   result of calling the `init` method of the `ObservableObject` class, passing in the initial state
   values defined in the `states` static property of the `WebComponent` class
   (`this.constructor["states"]`). */
-  $states:ObservableProxy< any , any >;
-  $effects: Effects;
+  // $states:ObservableProxy< any , any >;
+  // $effects: Effects;
 
   constructor(){
     super();
-
-    // Initialisation de $states dans le constructeur pour chaque instance
-    // this.$states = ObservableObject.init({});
-
-    // Initialisation des effets dans le constructeur pour chaque instance
-    // this.$effects = new Effects().bind(this);
   }
 
   get bindState():< States , Value >(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void]{ return bindState.bind(this) }

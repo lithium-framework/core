@@ -218,18 +218,14 @@ class $899e8805cec15bdd$export$1053a9be1bcefef9 extends Object {
 
 
 class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) {
+    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
+  instance property named `` on the `WebComponent` class. This property is being set to the
+  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
+  values defined in the `states` static property of the `WebComponent` class
+  (`this.constructor["states"]`). */ // $states:ObservableProxy< any , any >;
+    // $effects: Effects;
     constructor(){
         super();
-        // Initialisation de $states dans le constructeur pour chaque instance
-        // this.$states = ObservableObject.init({});
-        // Initialisation des effets dans le constructeur pour chaque instance
-        // this.$effects = new Effects().bind(this);
-        /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
-    instance property named `` on the `WebComponent` class. This property is being set to the
-    result of calling the `init` method of the `ObservableObject` class, passing in the initial state
-    values defined in the `states` static property of the `WebComponent` class
-    (`this.constructor["states"]`). */ this.$states = void 0;
-        this.$effects = void 0;
     }
     get bindState() {
         return (0, $facec54f608d45db$export$ad300186e7a01246).bind(this);
@@ -332,48 +328,73 @@ $07fd0000f26edeb5$export$2b76b04f92326cd.prototype.unsubscribe = function(callba
  // }
 
 
+/** 
+ * This est l'instance ( dernier layer du WebComponent , donc le WebComponentCustom )
+ * Target est le layer WebComponent ( proto du WebComponentCustom extends WebComponent ) 
+*/ const $a1f8df21dd3b8ee9$var$initializeState = function(target, propertyKey, value) {
+    if (!this.$states) {
+        this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init({});
+        Object.defineProperty(target, "states", {
+            get: ()=>{
+                return this.$states;
+            }
+        });
+    }
+    // Initialisation de la propriété d'état dans $states si elle n'existe pas
+    if (!(propertyKey in this.$states)) this.$states[propertyKey] = value;
+    // Ajouter la propriété observable sur l'instance
+    Object.defineProperty(this, propertyKey, {
+        get: function() {
+            return target["states"][propertyKey];
+        },
+        set: function(newValue) {
+            target["states"][propertyKey] = newValue;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // Rendre l'état observable
+    (0, $hgUW1$observable)(target["states"], propertyKey);
+};
 function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e(target, propertyKey, value = null, x) {
     const isWebComponent = target instanceof (0, $284c1ee70f828408$export$7f8b9f308979d41d);
     const isViewExecutionContext = target instanceof (0, $899e8805cec15bdd$export$1053a9be1bcefef9);
     // Fonction pour initialiser l'état lors de la création de l'instance
-    const initializeState = function() {
-        if (!this.$states) {
-            this.$states = (0, $f0b90d4a5f4da766$export$b176171395436676).init({});
-            Object.defineProperty(target, "states", {
-                get: ()=>{
-                    return this.$states;
-                }
-            });
-        }
-        // Initialisation de la propriété d'état dans $states si elle n'existe pas
-        if (!(propertyKey in this.$states)) this.$states[propertyKey] = value;
-        // Ajouter la propriété observable sur l'instance
-        Object.defineProperty(this, propertyKey, {
-            get: function() {
-                return target["states"][propertyKey];
-            },
-            set: function(newValue) {
-                target["states"][propertyKey] = newValue;
-            },
-            enumerable: true,
-            configurable: true
-        });
-        // Rendre l'état observable
-        (0, $hgUW1$observable)(target["states"], propertyKey);
-    };
-    console.log({
-        target: target,
-        isWebComponent: isWebComponent,
-        isViewExecutionContext: isViewExecutionContext
-    });
+    // const initializeState = function ( this: (typeof WebComponent & { $states : ObservableProxy< any , any > }) | (typeof ViewExecutionContext & { $states : ObservableProxy< any , any > }) ) {
+    //   if (!this.$states) {
+    //     this.$states = ObservableObject.init< any , any >({});
+    //     Object.defineProperty( target , 'states' , {
+    //       get : () => {
+    //         return this.$states;
+    //       }
+    //     })
+    //   }
+    //   // Initialisation de la propriété d'état dans $states si elle n'existe pas
+    //   if (!(propertyKey in this.$states)) {
+    //     this.$states[propertyKey] = value;
+    //   }
+    //   // Ajouter la propriété observable sur l'instance
+    //   Object.defineProperty( this , propertyKey, {
+    //     get: function () {
+    //       return target["states"][propertyKey];
+    //     },
+    //     set: function (newValue) {
+    //       target["states"][propertyKey] = newValue;
+    //     },
+    //     enumerable: true,
+    //     configurable: true,
+    //   });
+    //   // Rendre l'état observable
+    //   observable( target["states"] , propertyKey);
+    // };
     // Si le décorateur est appliqué directement sur une instance
-    if (isWebComponent || isViewExecutionContext) initializeState.call(target);
+    if (isWebComponent || isViewExecutionContext) $a1f8df21dd3b8ee9$var$initializeState.call(target, target, propertyKey, value);
     else {
         // Si le décorateur est appliqué sur le prototype (classe)
         const originalConnectedCallback = target["connectedCallback"] || function() {};
         target.connectedCallback = function() {
             // Initialise l'état à la création de l'instance
-            initializeState.call(this);
+            $a1f8df21dd3b8ee9$var$initializeState.call(this);
             // Appelle la méthode originale connectedCallback si elle existe
             originalConnectedCallback.call(this);
         };
@@ -414,10 +435,10 @@ function $f24f9f18a7b99a68$export$dc573d8a6576cdb3(dependencies) {
             if ("$effects" in target == false) target.$effects = new (0, $935380081e1d8be7$export$af73ab700e00763e)().bind(target);
             Object.defineProperty(target, propertyKey, {
                 get () {
-                    return target.$effects?.get(propertyKey);
+                    return target["$effects"]?.get(propertyKey);
                 },
                 set (newValue) {
-                    target.$effects.set(propertyKey, {
+                    target["$effects"].set(propertyKey, {
                         name: propertyKey,
                         dependencies: dependencies,
                         callback: newValue

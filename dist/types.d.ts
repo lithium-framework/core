@@ -32,8 +32,6 @@ interface IWebComponent<Data = any, States extends Record<string, any> = Record<
     bindConsumable: <Value>(key: string, value: Value) => void;
 }
 export class WebComponent extends FASTElement implements IWebComponent {
-    $states: ObservableProxy<any, any>;
-    $effects: Effects;
     constructor();
     get bindState(): <States, Value>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
@@ -94,6 +92,12 @@ export class ViewExecutionContext<T = any, States extends Record<string, any> = 
  * }
  * ```
  */
+type _WebComponent = (typeof WebComponent & {
+    $states: ObservableProxy<any, any>;
+});
+type _ViewExecutionContext = (typeof ViewExecutionContext & {
+    $states: ObservableProxy<any, any>;
+});
 /**
  * @state decorator
  * Définit une propriété d'état observable sur une instance de WebComponent ou ViewExecutionContext.
@@ -101,7 +105,7 @@ export class ViewExecutionContext<T = any, States extends Record<string, any> = 
  * @param {Object} target - La cible (prototype ou instance) sur laquelle le décorateur est appliqué.
  * @param {string} propertyKey - Le nom de la propriété d'état.
  */
-export function state(target: WebComponent | ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
+export function state(target: _WebComponent | _ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
 /**
  * @AttributeState decorator
  * A decorator to define a property as both an attribute and a state on a WebComponent.

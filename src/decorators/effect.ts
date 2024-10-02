@@ -14,11 +14,11 @@ export function effect( dependencies:any[] ){
 
       Object.defineProperty( target , propertyKey , {
         get(){
-          return target.$effects?.get( propertyKey );
+          return target["$effects"]?.get( propertyKey );
         },
         set(newValue){
 
-          target.$effects.set( propertyKey , {
+          target["$effects"].set( propertyKey , {
             name : propertyKey,
             dependencies : dependencies as any,
             callback : newValue

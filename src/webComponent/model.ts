@@ -11,24 +11,22 @@ import { bindConsumable } from '../controllers/bindConsumable';
 ObservableObject. */
 export class WebComponent extends FASTElement implements IWebComponent{
 
-  /* The `static states = {};` line is declaring a static property named `states` on the `WebComponent`
-  class and initializing it as an empty object `{}`. This property is intended to hold the initial
-  state values for the component. By defining it as a static property, it is shared among all
-  instances of the `WebComponent` class rather than being specific to individual instances. This
-  allows all instances of the class to access and modify the same set of state values. */
-  static states = ObservableObject.init({});
-  static effects = {};
-
   /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
   instance property named `` on the `WebComponent` class. This property is being set to the
   result of calling the `init` method of the `ObservableObject` class, passing in the initial state
   values defined in the `states` static property of the `WebComponent` class
   (`this.constructor["states"]`). */
-  get $states():ObservableProxy< any , any > { return this.constructor["states"] };
-  get $effects():Effects { return new Effects( this.constructor["effects"] ).bind( this ) };
+  $states:ObservableProxy< any , any >;
+  $effects: Effects;
 
   constructor(){
     super();
+
+    // Initialisation de $states dans le constructeur pour chaque instance
+    // this.$states = ObservableObject.init({});
+
+    // Initialisation des effets dans le constructeur pour chaque instance
+    // this.$effects = new Effects().bind(this);
   }
 
   get bindState():< States , Value >(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void]{ return bindState.bind(this) }
@@ -36,7 +34,7 @@ export class WebComponent extends FASTElement implements IWebComponent{
   get bindEffect():( effect_name : string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
 
   connectedCallback() {
-    this.$effects.execute();
+    (this as IWebComponent).effects?.execute();
     super.connectedCallback();
   }
 

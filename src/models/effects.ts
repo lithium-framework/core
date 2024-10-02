@@ -1,5 +1,6 @@
 import { WebComponent } from "../webComponent";
 import { ViewExecutionContext } from "../templateComponent";
+import { IWebComponent } from "src/webComponent/interface";
 
 export interface IEffect{
   name:string;
@@ -9,7 +10,7 @@ export interface IEffect{
 
 export class Effects extends Map< string , IEffect >{
 
-  private target:WebComponent | ViewExecutionContext = null;
+  private target:IWebComponent = null;
 
   bind( target ){
     this.target = target;
@@ -17,8 +18,6 @@ export class Effects extends Map< string , IEffect >{
   }
 
   execute(){
-
-    let effects = this.target.constructor["effects"];
 
     let effects_without_depedencies = [...this.values()].filter(( effect ) => !effect.dependencies || effect.dependencies.length == 0 ? effect : null);
     let effects_with_depedencies = [...this.values()].filter(( effect ) => effect.dependencies && effect.dependencies.length > 0 ? effect : null);
@@ -29,9 +28,7 @@ export class Effects extends Map< string , IEffect >{
 
       dependencies.forEach(( dependency ) => {
 
-        console.log({ "subscribe" : this.target.$states })
-
-        this.target.$states.subscribe( dependency , useEffect );
+        this.target.states.subscribe( dependency , useEffect );
 
       })
 
@@ -46,21 +43,21 @@ export class Effects extends Map< string , IEffect >{
 
     })
 
-    // this.forEach( effect => {
+    this.forEach( effect => {
       
-    //   let { dependencies , callback:useEffect } = effect;
-    //   if(!dependencies)dependencies = [];
+      let { dependencies , callback:useEffect } = effect;
+      if(!dependencies)dependencies = [];
 
-    //   if(dependencies.length > 0){
+      if(dependencies.length > 0){
 
-    //     dependencies.forEach(( dependency ) => {
-    //       this.target.$states.subscribe( dependency , useEffect )
-    //     })
+        dependencies.forEach(( dependency ) => {
+          this.target.states.subscribe( dependency , useEffect )
+        })
 
-    //   }
-    //   else useEffect();
+      }
+      else useEffect();
 
-    // });
+    });
 
   }
 

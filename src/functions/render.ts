@@ -44,7 +44,7 @@ export function render< T extends Record<string , any> = {} , Storage extends Re
     ( node ) => {
 
       if( node instanceof WebComponent == false ){
-        if(context["$effects"])context["$effects"].execute();
+        if(context["effects"])context["effects"].execute();
       }
 
       observer.disconnect();

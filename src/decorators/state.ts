@@ -52,7 +52,7 @@ const initializeState = function ( this: _WebComponent | _ViewExecutionContext ,
  * @param {string} propertyKey - Le nom de la propriété d'état.
  * 
  */
-export function state(target: _WebComponent | _ViewExecutionContext, propertyKey: string, value: any = null , x?) {
+export function state(target: WebComponent | ViewExecutionContext, propertyKey: string, value: any = null , x?) {
 
   const isWebComponent = target instanceof WebComponent;
   const isViewExecutionContext = target instanceof ViewExecutionContext;

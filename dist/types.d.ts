@@ -63,12 +63,6 @@ export class ViewExecutionContext<T = any, States extends Record<string, any> = 
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
     static init<T extends Record<string, any> = {}>(data?: T): ViewContext<T>;
 }
-type _WebComponent = (typeof WebComponent & {
-    $states: ObservableProxy<any, any>;
-});
-type _ViewExecutionContext = (typeof ViewExecutionContext & {
-    $states: ObservableProxy<any, any>;
-});
 /**
  * @state decorator
  * Définit une propriété d'état observable sur une instance de WebComponent ou ViewExecutionContext.
@@ -77,7 +71,7 @@ type _ViewExecutionContext = (typeof ViewExecutionContext & {
  * @param {string} propertyKey - Le nom de la propriété d'état.
  *
  */
-export function state(target: _WebComponent | _ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
+export function state(target: WebComponent | ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
 /**
  * @AttributeState decorator
  * A decorator to define a property as both an attribute and a state on a WebComponent.

@@ -361,7 +361,7 @@ function $25b99ce497008ca4$export$ca000e230c0caa3e(target, propertyKey, value = 
             configurable: true
         });
         // Rendre l'état observable
-        (0, $8zHUo$microsoftfastelement.observable)(isViewExecutionContext ? this.$states : target["states"], propertyKey);
+        (0, $8zHUo$microsoftfastelement.observable)(target["states"], propertyKey);
     };
     console.log({
         target: target,

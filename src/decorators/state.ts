@@ -130,7 +130,7 @@ export function state(target: WebComponent | ViewExecutionContext, propertyKey: 
     });
 
     // Rendre l'état observable
-    observable( isViewExecutionContext ? this.$states : target["states"] , propertyKey);
+    observable( target["states"] , propertyKey);
   };
 
   console.log({ target , isWebComponent , isViewExecutionContext })

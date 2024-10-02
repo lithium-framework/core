@@ -359,7 +359,7 @@ function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e(target, propertyKey, value = 
             configurable: true
         });
         // Rendre l'état observable
-        (0, $hgUW1$observable)(isViewExecutionContext ? this.$states : target["states"], propertyKey);
+        (0, $hgUW1$observable)(target["states"], propertyKey);
     };
     console.log({
         target: target,

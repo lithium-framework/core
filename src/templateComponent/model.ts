@@ -1,4 +1,3 @@
-import { ObservableObject, ObservableProxy } from '../utils/observable-object/models';
 import { ViewContext } from './types';
 import { EffectRegistery, Effects, IEffect } from '../models/effects';
 import { IWebComponent } from '../webComponent/interface';
@@ -24,9 +23,6 @@ export class ViewExecutionContext< T = any , States extends Record<string , any>
   get bindEffect():( effect_name:string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
 
   handleStateChange = ( propertyName, oldValue, newValue ) => {
-
-    console.log( "handleStateChange" , { propertyName, oldValue, newValue })
-
     this[propertyName] = newValue;
     this["effects"].execute( propertyName );
   }

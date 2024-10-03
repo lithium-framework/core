@@ -8,3 +8,4 @@ export * from './templateComponent';
 export * from './functions';
 
 export { Effects } from './models/effects';
+export type { EffectRegistery } from './models/effects';

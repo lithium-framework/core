@@ -37,356 +37,39 @@ var $25b99ce497008ca4$exports = {};
 
 $parcel$export($25b99ce497008ca4$exports, "state", () => $25b99ce497008ca4$export$ca000e230c0caa3e);
 
-var $5221daf215a19ea7$exports = {};
-
-$parcel$export($5221daf215a19ea7$exports, "ViewExecutionContext", () => $5221daf215a19ea7$export$1053a9be1bcefef9);
-
-class $7ce92075f2794ab1$export$b176171395436676 extends Object {
-    static init(initialObject) {
-        let observabe = new $7ce92075f2794ab1$export$b176171395436676(initialObject);
-        return observabe.createProxy();
-    }
-    constructor(initialObject){
-        super();
-        this.$data = {};
-        this.observers = {};
-        // Enregistre un observateur pour une propriété spécifique
-        this.subscribe = (propKey, callback)=>{
-            if (!this.observers[propKey]) this.observers[propKey] = new Set();
-            this.observers[propKey].add(callback);
-        };
-        // Supprime un observateur pour une propriété spécifique
-        this.unsubscribe = (propKey, callback)=>{
-            if (this.observers[propKey]) this.observers[propKey].delete(callback);
-        };
-        this.set = (key, value)=>{
-            const oldValue = this.$data[`_${key}`];
-            this.$data[`_${key}`] = value;
-            (0, $8zHUo$microsoftfastelement.Observable).defineProperty(this.$data, key);
-            this.notify(key, value, oldValue);
-            return this.$data[key];
-        };
-        Object.assign(this.$data, initialObject);
-    }
-    // Méthode appelée pour notifier les observateurs d'un changement de valeur
-    notify(propKey, newValue, oldValue) {
-        if (this.observers[propKey]) this.observers[propKey].forEach((callback)=>callback(newValue, oldValue));
-    }
-    createProxy() {
-        return new Proxy(this.$data, {
-            get: (store, propKey)=>{
-                let result = undefined;
-                if (propKey == "subscribe") return this.subscribe;
-                else if (propKey == "unsubscribe") return this.unsubscribe;
-                else if (propKey == "keys") return ()=>Object.keys(this.$data);
-                else if (propKey == "values") return ()=>Object.values(this.$data);
-                try {
-                    result = store[propKey];
-                } catch (error) {
-                    console.error(error);
-                } finally{
-                    return result;
+function $25b99ce497008ca4$export$ca000e230c0caa3e() {
+    return function(target, propertyName, value, y) {
+        let privateName = `_${propertyName}`;
+        if (!target[propertyName]) Object.defineProperty(target, propertyName, {
+            get () {
+                // Retourne la valeur de l'état depuis l'objet 'states' pour CETTE instance
+                if (!this.states) this.states = {}; // Si l'objet 'states' n'existe pas encore, on le crée pour chaque instance
+                (0, $8zHUo$microsoftfastelement.Observable).track(this, propertyName);
+                return this.states[privateName];
+            },
+            set (newValue) {
+                // Si l'objet 'states' n'existe pas encore, le créer pour CETTE instance
+                if (!this.states) this.states = {};
+                const oldValue = this.states[privateName];
+                if (oldValue != newValue) {
+                    this.states[privateName] = newValue;
+                    (0, $8zHUo$microsoftfastelement.Observable).notify(this, propertyName);
+                    // Si l'état a changé, déclenche une action pour CETTE instance
+                    if (oldValue !== newValue) this.handleStateChange(propertyName, oldValue, newValue);
                 }
             },
-            set: (store, propKey, value)=>{
-                const oldValue = store[propKey];
-                if (store[propKey]) store[propKey] = value;
-                else {
-                    store[`_${propKey}`] = value;
-                    (0, $8zHUo$microsoftfastelement.Observable).defineProperty(store, propKey);
-                }
-                this.notify(propKey, value, oldValue);
-                return true;
-            }
+            enumerable: true,
+            configurable: true
         });
-    }
-}
-
-
-class $6b22b6b12ada86dd$export$af73ab700e00763e extends Map {
-    bind(target) {
-        this.target = target;
-        return this;
-    }
-    execute() {
-        let effects_without_depedencies = [
-            ...this.values()
-        ].filter((effect)=>!effect.dependencies || effect.dependencies.length == 0 ? effect : null);
-        let effects_with_depedencies = [
-            ...this.values()
-        ].filter((effect)=>effect.dependencies && effect.dependencies.length > 0 ? effect : null);
-        effects_with_depedencies.forEach((effect)=>{
-            let { dependencies: dependencies, callback: useEffect, name: name } = effect;
-            dependencies.forEach((dependency)=>{
-                this.target.states.subscribe(dependency, useEffect);
-            });
-        });
-        effects_without_depedencies.forEach((effect)=>{
-            let { callback: useEffect } = effect;
-            useEffect();
-        });
-    }
-    constructor(effects){
-        super();
-        this.target = null;
-        if (effects) Object.values(effects).forEach((effect)=>{
-            console.log({
-                effect: effect
-            });
-            this.set(effect.name, effect);
-        });
-    }
-}
-
-
-
-function $ad561189c3a675d2$export$855330f8a2a9f2e8(effect_name, callback, dependencies) {
-    (0, $524aec7c3c6d48fc$export$dc573d8a6576cdb3)(dependencies)(this, effect_name, callback);
-}
-
-
-
-function $e1c24cd94ecea2f8$export$ad300186e7a01246(key, value) {
-    function useState(key) {
-        return [
-            this[key],
-            (newValue)=>{
-                this[key] = newValue;
-            }
-        ];
-    }
-    (0, $25b99ce497008ca4$export$ca000e230c0caa3e)(this, key, value);
-    return useState.bind(this)(key);
-}
-
-
-
-function $5121559b99f023e4$export$366cf43304d85757(key, value) {
-    (0, $25b99ce497008ca4$export$ca000e230c0caa3e)(this, key, value, false);
-}
-
-
-class $5221daf215a19ea7$export$1053a9be1bcefef9 extends Object {
-    get states() {
-        return this.$states;
-    }
-    get effects() {
-        return this.$effects;
-    }
-    constructor(data){
-        super();
-        this.$states = (0, $7ce92075f2794ab1$export$b176171395436676).init({});
-        this.$effects = new (0, $6b22b6b12ada86dd$export$af73ab700e00763e)().bind(this);
-        Object.assign(this, data);
-    }
-    get bindState() {
-        return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
-    }
-    get bindConsumable() {
-        return (0, $5121559b99f023e4$export$366cf43304d85757).bind(this);
-    }
-    get bindEffect() {
-        return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
-    }
-    static init(data) {
-        return new $5221daf215a19ea7$export$1053a9be1bcefef9(data);
-    }
-}
-
-
-
-
-
-
-class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfastelement.FASTElement) {
-    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
-  instance property named `` on the `WebComponent` class. This property is being set to the
-  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
-  values defined in the `states` static property of the `WebComponent` class
-  (`this.constructor["states"]`). */ // $states:ObservableProxy< any , any >;
-    // $effects: Effects;
-    constructor(){
-        super();
-    }
-    get bindState() {
-        return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
-    }
-    get bindConsumable() {
-        return (0, $5121559b99f023e4$export$366cf43304d85757).bind(this);
-    }
-    get bindEffect() {
-        return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
-    }
-    connectedCallback() {
-        this.effects?.execute();
-        super.connectedCallback();
-    }
-}
-$55a177ca025730f0$export$7f8b9f308979d41d.define = (0, $8zHUo$microsoftfastelement.FASTElement).define;
-
-
-var $d7167569386d0d4c$exports = {};
-
-$parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
-$parcel$export($d7167569386d0d4c$exports, "ObservableArray", () => $32e43a82b8e36c73$export$2b76b04f92326cd);
-$parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
-$parcel$export($d7167569386d0d4c$exports, "Observable", () => $7ce92075f2794ab1$import$843d46ff018552b8$77cea355fa80b5f4);
-$parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
-$parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
-$parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
-$parcel$export($d7167569386d0d4c$exports, "uuid", () => $d7167569386d0d4c$re_export$uuid);
-
-function $529142902ff67758$export$dcc5cf24d8fb3b41(initialObject) {
-    return (0, $7ce92075f2794ab1$export$b176171395436676).init(initialObject);
-}
-
-
-function $32e43a82b8e36c73$export$2b76b04f92326cd(init = []) {
-    const observers = new Set();
-    const notifyObservers = (operation, args, result)=>{
-        observers.forEach((callback)=>callback(operation, args, result));
+        if (value && target[propertyName] == null) target[propertyName] = value;
     };
-    const arrayMethods = [
-        "push",
-        "pop",
-        "splice",
-        "shift",
-        "unshift",
-        "sort",
-        "reverse"
-    ];
-    return new Proxy(init, {
-        get (target, property, receiver) {
-            // Si on accède à une méthode de tableau, la redéfinir pour inclure la notification
-            if (arrayMethods.includes(property)) return (...args)=>{
-                const result = Array.prototype[property].apply(target, args);
-                // Notifier les observateurs du changement
-                notifyObservers(property, args, result);
-                return result;
-            };
-            return Reflect.get(target, property, receiver);
-        },
-        set (target, property, value, receiver) {
-            const oldValue = target[property];
-            const result = Reflect.set(target, property, value, receiver);
-            if (oldValue !== value) notifyObservers("set", {
-                index: property,
-                value: value
-            }, result);
-            return result;
-        }
-    });
-}
-$32e43a82b8e36c73$export$2b76b04f92326cd.prototype.subscribe = function(callback) {
-    this.observers.add(callback);
-};
-$32e43a82b8e36c73$export$2b76b04f92326cd.prototype.unsubscribe = function(callback) {
-    this.observers.delete(callback);
-};
-
-
-
-
-
-
- // export{
- //   Observable,
- //   volatile,
- // State,
- // createState,
- // createStorage,
- // Storage, 
- // StorageKeys, 
- // StorageValues, 
- // StateValidator,
- // ComponentId,
- // Segment,
- // ParentSegementId,
- // CollectionId,
- // HUID,
- // HierarchicalUUIDOptions,
- // uuid
- // }
-
-
-/** 
- * This est l'instance ( dernier layer du WebComponent , donc le WebComponentCustom )
- * Target est le layer WebComponent ( proto du WebComponentCustom extends WebComponent ) 
-*/ const $25b99ce497008ca4$var$initializeState = function(target, propertyKey, value) {
-    if (!this.$states) {
-        this.$states = (0, $7ce92075f2794ab1$export$b176171395436676).init({});
-        Object.defineProperty(target, "states", {
-            get: ()=>{
-                return this.$states;
-            }
-        });
-    }
-    // Initialisation de la propriété d'état dans $states si elle n'existe pas
-    if (!(propertyKey in this.$states)) this.$states[propertyKey] = value;
-    // Ajouter la propriété observable sur l'instance
-    Object.defineProperty(this, propertyKey, {
-        get: function() {
-            return target["states"][propertyKey];
-        },
-        set: function(newValue) {
-            target["states"][propertyKey] = newValue;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    // Rendre l'état observable
-    (0, $8zHUo$microsoftfastelement.observable)(target["states"], propertyKey);
-};
-function $25b99ce497008ca4$export$ca000e230c0caa3e(target, propertyKey, value = null, x) {
-    const isWebComponent = target instanceof (0, $55a177ca025730f0$export$7f8b9f308979d41d);
-    const isViewExecutionContext = target instanceof (0, $5221daf215a19ea7$export$1053a9be1bcefef9);
-    // Fonction pour initialiser l'état lors de la création de l'instance
-    // const initializeState = function ( this: (typeof WebComponent & { $states : ObservableProxy< any , any > }) | (typeof ViewExecutionContext & { $states : ObservableProxy< any , any > }) ) {
-    //   if (!this.$states) {
-    //     this.$states = ObservableObject.init< any , any >({});
-    //     Object.defineProperty( target , 'states' , {
-    //       get : () => {
-    //         return this.$states;
-    //       }
-    //     })
-    //   }
-    //   // Initialisation de la propriété d'état dans $states si elle n'existe pas
-    //   if (!(propertyKey in this.$states)) {
-    //     this.$states[propertyKey] = value;
-    //   }
-    //   // Ajouter la propriété observable sur l'instance
-    //   Object.defineProperty( this , propertyKey, {
-    //     get: function () {
-    //       return target["states"][propertyKey];
-    //     },
-    //     set: function (newValue) {
-    //       target["states"][propertyKey] = newValue;
-    //     },
-    //     enumerable: true,
-    //     configurable: true,
-    //   });
-    //   // Rendre l'état observable
-    //   observable( target["states"] , propertyKey);
-    // };
-    // Si le décorateur est appliqué directement sur une instance
-    if (isWebComponent || isViewExecutionContext) $25b99ce497008ca4$var$initializeState.call(target, target, propertyKey, value);
-    else {
-        // Si le décorateur est appliqué sur le prototype (classe)
-        const originalConnectedCallback = target["connectedCallback"] || function() {};
-        target.connectedCallback = function() {
-            // Initialise l'état à la création de l'instance
-            $25b99ce497008ca4$var$initializeState.call(this, target, propertyKey, value);
-            // Appelle la méthode originale connectedCallback si elle existe
-            originalConnectedCallback.call(this);
-        };
-    }
 }
 
 
 function $6b1d12931f09e2bd$export$683a0e8baad8b9c3(options = {}) {
     return (target, propertyKey)=>{
         (0, $8zHUo$microsoftfastelement.attr)(options)(target, propertyKey);
-        (0, $25b99ce497008ca4$export$ca000e230c0caa3e)(target, propertyKey);
+        (0, $25b99ce497008ca4$export$ca000e230c0caa3e)()(target, propertyKey);
     };
 }
 
@@ -395,101 +78,85 @@ function $6b1d12931f09e2bd$export$683a0e8baad8b9c3(options = {}) {
 var $524aec7c3c6d48fc$exports = {};
 
 $parcel$export($524aec7c3c6d48fc$exports, "effect", () => $524aec7c3c6d48fc$export$dc573d8a6576cdb3);
-var $67a1dbfdad6a62d9$exports = {};
-
-var $bf7368973063149f$exports = {};
-
-
-var $8e473c7aec91a0a4$exports = {};
-
-
-$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $5221daf215a19ea7$exports);
-$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $bf7368973063149f$exports);
-$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $8e473c7aec91a0a4$exports);
-
-
-
-
-const $524aec7c3c6d48fc$var$initializeEffect = function(target, propertyKey, dependencies, value) {
-    if (!this.$effects) {
-        this.$effects = new (0, $6b22b6b12ada86dd$export$af73ab700e00763e)().bind(this);
-        Object.defineProperty(target, "effects", {
-            get: ()=>{
-                return this.$effects;
+function $6b22b6b12ada86dd$export$af73ab700e00763e(effects) {
+    const effects_register = new Map();
+    if (effects) Object.values(effects).forEach((effect)=>{
+        this.set(effect.name, effect);
+    });
+    effects_register.execute = function(dependency) {
+        let effects_without_depedencies = [
+            ...this.values()
+        ].filter((effect)=>!effect.dependencies || effect.dependencies.length == 0 ? effect : null);
+        let effects_with_depedencies = [
+            ...this.values()
+        ].filter((effect)=>effect.dependencies && effect.dependencies.length > 0 ? effect : null);
+        effects_with_depedencies.forEach((effect)=>{
+            let { dependencies: dependencies, callback: useEffect, name: name } = effect;
+            if (dependency && dependencies.includes(dependency)) {
+                console.log(`Math effect ${dependency}`);
+                useEffect();
             }
         });
-    }
-    // Initialisation de la propriété d'état dans $states si elle n'existe pas
-    if (!(propertyKey in this.$effects)) this.$effects.set(propertyKey, value);
-    Object.defineProperty(target, propertyKey, {
-        get () {
-            return target.effects.get(propertyKey);
-        },
-        set (newValue) {
-            target.effects.set(propertyKey, {
-                name: propertyKey,
-                dependencies: dependencies,
-                callback: newValue
-            });
-            return true;
-        },
-        enumerable: true,
-        configurable: true
-    });
-};
+        if (!dependency) effects_without_depedencies.forEach((effect)=>{
+            let { callback: useEffect } = effect;
+            try {
+                useEffect();
+            } catch (error) {
+                console.error(error);
+            }
+        });
+    };
+    return effects_register;
+} // export class Effects extends Map< string , IEffect >{
+ //   execute( dependency?:string ){
+ //     let effects_without_depedencies = [...this.values()].filter(( effect ) => !effect.dependencies || effect.dependencies.length == 0 ? effect : null);
+ //     let effects_with_depedencies = [...this.values()].filter(( effect ) => effect.dependencies && effect.dependencies.length > 0 ? effect : null);
+ //     effects_with_depedencies.forEach(( effect ) => {
+ //       let { dependencies , callback:useEffect , name } = effect;
+ //       if(dependency && dependencies.includes( dependency )){
+ //         useEffect();
+ //       }
+ //     })
+ //     if( !dependency )effects_without_depedencies.forEach(( effect ) => {
+ //       let { callback:useEffect } = effect;
+ //       try{
+ //         useEffect();
+ //       }
+ //       catch(error){
+ //         console.error(error);
+ //       }
+ //     })
+ //   }
+ //   constructor( effects?:Record< string , IEffect > ){
+ //     super();
+ //     if(effects)Object.values(effects).forEach((effect) => {
+ //       this.set( effect.name , effect )
+ //     });
+ //   }
+ // }
+
+
 function $524aec7c3c6d48fc$export$dc573d8a6576cdb3(dependencies) {
-    return (target, propertyKey, value = null)=>{
-        const isWebComponent = target instanceof (0, $55a177ca025730f0$export$7f8b9f308979d41d);
-        const isViewExecutionContext = target instanceof (0, $5221daf215a19ea7$export$1053a9be1bcefef9);
-        // Si le décorateur est appliqué directement sur une instance
-        if (isWebComponent || isViewExecutionContext) $524aec7c3c6d48fc$var$initializeEffect.call(target, target, propertyKey, dependencies, value);
-        else {
-            // Si le décorateur est appliqué sur le prototype (classe)
-            const originalConnectedCallback = target["connectedCallback"] || function() {};
-            target.connectedCallback = function() {
-                // Initialise l'état à la création de l'instance
-                $524aec7c3c6d48fc$var$initializeEffect.call(this, target, propertyKey, dependencies, value);
-                // Appelle la méthode originale connectedCallback si elle existe
-                originalConnectedCallback.call(this, target, propertyKey, dependencies, value);
-            };
-        }
-    // if( target instanceof WebComponent ){
-    //   if('$effects' in target == false)(target as any).$effects = new Effects().bind( target );
-    //   Object.defineProperty( target , propertyKey , {
-    //     get(){
-    //       return target["$effects"]?.get( propertyKey );
-    //     },
-    //     set(newValue){
-    //       target["$effects"].set( propertyKey , {
-    //         name : propertyKey,
-    //         dependencies : dependencies as any,
-    //         callback : newValue
-    //       });
-    //       return true;
-    //     },
-    //     enumerable: true,
-    //     configurable: true
-    //   });
-    // }
-    // if( target instanceof ViewExecutionContext ){
-    //   if('$effects' in target == false)(target as any).$effects = new Effects().bind( target );
-    //   if(!target[propertyKey])Object.defineProperty( target , propertyKey , {
-    //     get(){
-    //       return target.effects.get( propertyKey );
-    //     },
-    //     set(newValue){
-    //       target.effects.set( propertyKey , {
-    //         name : propertyKey,
-    //         dependencies : dependencies as any,
-    //         callback : newValue
-    //       });
-    //       return true;
-    //     },
-    //     enumerable: true,
-    //     configurable: true
-    //   });
-    //   if( value )target[ propertyKey ] = value;
-    // }
+    return (target, propertyName, value = null)=>{
+        if (!target[propertyName]) Object.defineProperty(target, propertyName, {
+            get () {
+                // Retourne la valeur de l'état depuis l'objet 'states' pour CETTE instance
+                if (!this.effects) this.effects = (0, $6b22b6b12ada86dd$export$af73ab700e00763e)(); // Si l'objet 'states' n'existe pas encore, on le crée pour chaque instance
+                return this.effects.get(propertyName);
+            },
+            set (newValue) {
+                // Si l'objet 'states' n'existe pas encore, le créer pour CETTE instance
+                if (!this.effects) this.effects = (0, $6b22b6b12ada86dd$export$af73ab700e00763e)();
+                this.effects.set(propertyName, {
+                    name: propertyName,
+                    dependencies: dependencies,
+                    callback: newValue
+                });
+            },
+            enumerable: true,
+            configurable: true
+        });
+        if (value && target[propertyName] == null) target[propertyName] = value;
     };
 }
 
@@ -778,6 +445,151 @@ $parcel$exportWildcard($3f98161bb563abdf$exports, $4cdc3aa994dab691$exports);
 $parcel$exportWildcard($3f98161bb563abdf$exports, $76501f7f02d11920$exports);
 
 
+var $d7167569386d0d4c$exports = {};
+
+$parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
+$parcel$export($d7167569386d0d4c$exports, "ObservableArray", () => $32e43a82b8e36c73$export$2b76b04f92326cd);
+$parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
+$parcel$export($d7167569386d0d4c$exports, "Observable", () => $7ce92075f2794ab1$import$843d46ff018552b8$77cea355fa80b5f4);
+$parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
+$parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
+$parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
+$parcel$export($d7167569386d0d4c$exports, "uuid", () => $d7167569386d0d4c$re_export$uuid);
+
+class $7ce92075f2794ab1$export$b176171395436676 extends Object {
+    static init(initialObject) {
+        let observabe = new $7ce92075f2794ab1$export$b176171395436676(initialObject);
+        return observabe.createProxy.bind(observabe)();
+    }
+    constructor(initialObject){
+        super();
+        this.$data = {};
+        this.observers = {};
+        // Enregistre un observateur pour une propriété spécifique
+        this.subscribe = (propKey, callback)=>{
+            if (!this.observers[propKey]) this.observers[propKey] = new Set();
+            this.observers[propKey].add(callback);
+        };
+        // Supprime un observateur pour une propriété spécifique
+        this.unsubscribe = (propKey, callback)=>{
+            if (this.observers[propKey]) this.observers[propKey].delete(callback);
+        };
+        this.set = (key, value)=>{
+            const oldValue = this.$data[`_${key}`];
+            this.$data[`_${key}`] = value;
+            (0, $8zHUo$microsoftfastelement.Observable).defineProperty(this.$data, key);
+            this.notify(key, value, oldValue);
+            return this.$data[key];
+        };
+        Object.assign(this.$data, initialObject);
+    }
+    // Méthode appelée pour notifier les observateurs d'un changement de valeur
+    notify(propKey, newValue, oldValue) {
+        if (this.observers[propKey]) this.observers[propKey].forEach((callback)=>callback(newValue, oldValue));
+    }
+    createProxy() {
+        return new Proxy(this.$data, {
+            get: (store, propKey)=>{
+                let result = undefined;
+                if (propKey == "subscribe") return this.subscribe;
+                else if (propKey == "unsubscribe") return this.unsubscribe;
+                else if (propKey == "keys") return ()=>Object.keys(this.$data);
+                else if (propKey == "values") return ()=>Object.values(this.$data);
+                try {
+                    result = store[propKey];
+                } catch (error) {
+                    console.error(error);
+                } finally{
+                    return result;
+                }
+            },
+            set: (store, propKey, value)=>{
+                const oldValue = store[propKey];
+                if (store[propKey]) store[propKey] = value;
+                else {
+                    store[`_${propKey}`] = value;
+                    (0, $8zHUo$microsoftfastelement.Observable).defineProperty(store, propKey);
+                }
+                this.notify(propKey, value, oldValue);
+                return true;
+            }
+        });
+    }
+}
+
+
+function $529142902ff67758$export$dcc5cf24d8fb3b41(initialObject) {
+    return (0, $7ce92075f2794ab1$export$b176171395436676).init(initialObject);
+}
+
+
+function $32e43a82b8e36c73$export$2b76b04f92326cd(init = []) {
+    const observers = new Set();
+    const notifyObservers = (operation, args, result)=>{
+        observers.forEach((callback)=>callback(operation, args, result));
+    };
+    const arrayMethods = [
+        "push",
+        "pop",
+        "splice",
+        "shift",
+        "unshift",
+        "sort",
+        "reverse"
+    ];
+    return new Proxy(init, {
+        get (target, property, receiver) {
+            // Si on accède à une méthode de tableau, la redéfinir pour inclure la notification
+            if (arrayMethods.includes(property)) return (...args)=>{
+                const result = Array.prototype[property].apply(target, args);
+                // Notifier les observateurs du changement
+                notifyObservers(property, args, result);
+                return result;
+            };
+            return Reflect.get(target, property, receiver);
+        },
+        set (target, property, value, receiver) {
+            const oldValue = target[property];
+            const result = Reflect.set(target, property, value, receiver);
+            if (oldValue !== value) notifyObservers("set", {
+                index: property,
+                value: value
+            }, result);
+            return result;
+        }
+    });
+}
+$32e43a82b8e36c73$export$2b76b04f92326cd.prototype.subscribe = function(callback) {
+    this.observers.add(callback);
+};
+$32e43a82b8e36c73$export$2b76b04f92326cd.prototype.unsubscribe = function(callback) {
+    this.observers.delete(callback);
+};
+
+
+
+
+
+
+ // export{
+ //   Observable,
+ //   volatile,
+ // State,
+ // createState,
+ // createStorage,
+ // Storage, 
+ // StorageKeys, 
+ // StorageValues, 
+ // StateValidator,
+ // ComponentId,
+ // Segment,
+ // ParentSegementId,
+ // CollectionId,
+ // HUID,
+ // HierarchicalUUIDOptions,
+ // uuid
+ // }
+
 
 var $5e6879fad66e268c$exports = {};
 
@@ -790,8 +602,115 @@ $parcel$export($5e6879fad66e268c$exports, "volatile", () => $5e6879fad66e268c$re
 $parcel$export($5e6879fad66e268c$exports, "WebComponent", () => $55a177ca025730f0$export$7f8b9f308979d41d);
 
 
+
+function $ad561189c3a675d2$export$855330f8a2a9f2e8(effect_name, callback, dependencies) {
+    (0, $524aec7c3c6d48fc$export$dc573d8a6576cdb3)(dependencies)(this, effect_name, callback);
+}
+
+
+
+function $e1c24cd94ecea2f8$export$ad300186e7a01246(key, value) {
+    function useState(key) {
+        return [
+            this[key],
+            (newValue)=>{
+                this[key] = newValue;
+            }
+        ];
+    }
+    (0, $25b99ce497008ca4$export$ca000e230c0caa3e)()(this, key, value);
+    return useState.bind(this)(key);
+}
+
+
+
+function $5121559b99f023e4$export$366cf43304d85757(key, value) {
+    (0, $25b99ce497008ca4$export$ca000e230c0caa3e)()(this, key, value, false);
+}
+
+
+class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfastelement.FASTElement) {
+    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
+  instance property named `` on the `WebComponent` class. This property is being set to the
+  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
+  values defined in the `states` static property of the `WebComponent` class
+  (`this.constructor["states"]`). */ // $states:ObservableProxy< any , any >;
+    // $effects: Effects;
+    constructor(){
+        super();
+        this.handleStateChange = (propertyName, oldValue, newValue)=>{
+            this[propertyName] = newValue;
+            this["effects"].execute(propertyName);
+        };
+    }
+    get bindState() {
+        return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
+    }
+    get bindConsumable() {
+        return (0, $5121559b99f023e4$export$366cf43304d85757).bind(this);
+    }
+    get bindEffect() {
+        return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
+    }
+    connectedCallback() {
+        this.effects?.execute();
+        super.connectedCallback();
+    }
+}
+$55a177ca025730f0$export$7f8b9f308979d41d.define = (0, $8zHUo$microsoftfastelement.FASTElement).define;
+
+
 const $5e6879fad66e268c$export$c0bb0b647f701bb5 = (0, $8zHUo$microsoftfastelement.html);
 
+
+var $67a1dbfdad6a62d9$exports = {};
+var $5221daf215a19ea7$exports = {};
+
+$parcel$export($5221daf215a19ea7$exports, "ViewExecutionContext", () => $5221daf215a19ea7$export$1053a9be1bcefef9);
+
+
+
+
+class $5221daf215a19ea7$export$1053a9be1bcefef9 extends Object {
+    constructor(data){
+        super();
+        this.states = {};
+        this.effects = (0, $6b22b6b12ada86dd$export$af73ab700e00763e)();
+        this.handleStateChange = (propertyName, oldValue, newValue)=>{
+            console.log("handleStateChange", {
+                propertyName: propertyName,
+                oldValue: oldValue,
+                newValue: newValue
+            });
+            this[propertyName] = newValue;
+            this["effects"].execute(propertyName);
+        };
+        Object.assign(this, data);
+    }
+    get bindState() {
+        return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
+    }
+    get bindConsumable() {
+        return (0, $5121559b99f023e4$export$366cf43304d85757).bind(this);
+    }
+    get bindEffect() {
+        return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
+    }
+    static init(data) {
+        return new $5221daf215a19ea7$export$1053a9be1bcefef9(data);
+    }
+}
+
+
+var $bf7368973063149f$exports = {};
+
+
+var $8e473c7aec91a0a4$exports = {};
+
+
+$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $5221daf215a19ea7$exports);
+$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $bf7368973063149f$exports);
+$parcel$exportWildcard($67a1dbfdad6a62d9$exports, $8e473c7aec91a0a4$exports);
 
 
 var $a995219139975453$exports = {};

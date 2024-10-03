@@ -1,4 +1,4 @@
-import { FASTElement } from "@microsoft/fast-element";
+import { FASTElement, Observable } from "@microsoft/fast-element";
 import { ObservableObject, ObservableProxy } from '../utils/observable-object/models';
 import { IWebComponent } from "./interface";
 import { Effects } from "../models/effects";
@@ -26,6 +26,11 @@ export class WebComponent extends FASTElement implements IWebComponent{
   get bindState():< States , Value >(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void]{ return bindState.bind(this) }
   get bindConsumable():< Value >(key: string, value: Value) => void{ return bindConsumable.bind(this) }
   get bindEffect():( effect_name : string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
+
+  handleStateChange = ( propertyName, oldValue, newValue ) => {
+    this[propertyName] = newValue;
+    this["effects"].execute( propertyName );
+  }
 
   connectedCallback( this:IWebComponent ) {
     this.effects?.execute();

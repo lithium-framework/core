@@ -8,7 +8,7 @@ export type ObservableProxy<key extends string, value extends any = any> = Recor
     values(): any[];
 };
 export class ObservableObject<key extends string, value extends any = any> extends Object {
-    static init<key extends string, value extends any>(initialObject: Record<key, value>): ObservableProxy<key, value>;
+    static init<key extends string, value extends any>(initialObject: Record<key, value>): any;
     $data: Record<string, value>;
     constructor(initialObject: Record<key, value>);
     subscribe: (propKey: key, callback: (newValue: any, oldValue: any) => void) => void;
@@ -18,14 +18,14 @@ export class ObservableObject<key extends string, value extends any = any> exten
 }
 export { Observable };
 export type ViewContext<T = Record<string, any>, States = Record<string, any>> = ViewExecutionContext<T, States> & T;
-export function createObservableObject<Key extends string, Value extends any>(initialObject: Record<Key, Value>): import("utils/observable-object/models").ObservableProxy<Key, Value>;
+export function createObservableObject<Key extends string, Value extends any>(initialObject: Record<Key, Value>): any;
 export function ObservableArray(init?: Array<any>): any[];
 export { State, createState } from '@lithium-framework/state';
 export { createStorage, } from '@lithium-framework/context';
 export { uuid } from '@lithium-framework/huid';
 interface IWebComponent<Data = any, States extends Record<string, any> = Record<string, any>> extends Partial<FASTElement> {
-    states?: ObservableProxy<any, any>;
-    effects?: Effects;
+    states?: Record<string, any>;
+    effects?: EffectRegistery;
     bindEffect: (effect_name: string, callback: () => void, dependencies: any[]) => void;
     bindState: <Value = never>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     bindConsumable: <Value>(key: string, value: Value) => void;
@@ -35,6 +35,7 @@ export class WebComponent extends FASTElement implements IWebComponent {
     get bindState(): <States, Value>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
+    handleStateChange: (propertyName: any, oldValue: any, newValue: any) => void;
     connectedCallback(this: IWebComponent): void;
     static define: {
         <TType extends import("@microsoft/fast-element").Constructable<HTMLElement> = import("@microsoft/fast-element").Constructable<HTMLElement>>(this: TType, nameOrDef: string | import("@microsoft/fast-element").PartialFASTElementDefinition): TType;
@@ -43,34 +44,26 @@ export class WebComponent extends FASTElement implements IWebComponent {
 }
 export { customElement, css, ViewTemplate, HTMLView, volatile, } from "@microsoft/fast-element";
 export const html: HTMLTemplateTag;
+type EffectRegistery = (Map<string, IEffect> & {
+    execute(dependency?: string): void;
+});
 interface IEffect {
     name: string;
     dependencies: string[];
     callback: any;
 }
-export class Effects extends Map<string, IEffect> {
-    bind(target: any): this;
-    execute(): void;
-    constructor(effects?: Record<string, IEffect>);
-}
+export function Effects(effects?: Record<string, IEffect>): EffectRegistery;
 export class ViewExecutionContext<T = any, States extends Record<string, any> = Record<string, any>> extends Object implements IWebComponent {
-    get states(): ObservableProxy<any, any>;
-    get effects(): Effects;
+    states: {};
+    effects?: EffectRegistery;
     constructor(data?: T);
     get bindState(): <Value = never>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
+    handleStateChange: (propertyName: any, oldValue: any, newValue: any) => void;
     static init<T extends Record<string, any> = {}>(data?: T): ViewContext<T>;
 }
-/**
- * @state decorator
- * Définit une propriété d'état observable sur une instance de WebComponent ou ViewExecutionContext.
- *
- * @param {Object} target - La cible (prototype ou instance) sur laquelle le décorateur est appliqué.
- * @param {string} propertyKey - Le nom de la propriété d'état.
- *
- */
-export function state(target: WebComponent | ViewExecutionContext, propertyKey: string, value?: any, x?: any): void;
+export function state(): (target: any, propertyName: string, value?: any, y?: any) => void;
 /**
  * @AttributeState decorator
  * A decorator to define a property as both an attribute and a state on a WebComponent.
@@ -104,7 +97,7 @@ export function state(target: WebComponent | ViewExecutionContext, propertyKey: 
  */
 export function attrState(options?: DecoratorAttributeConfiguration): (target: any, propertyKey: string) => void;
 export { attr };
-export function effect(dependencies: any[]): (target: IWebComponent, propertyKey: string, value?: any) => void;
+export function effect(dependencies: any[]): (target: IWebComponent, propertyName: string, value?: any) => void;
 export class AsyncAppendBindig extends Binding {
     createObserver(subscriber: Subscriber, directive: BindingDirective): ExpressionObserver<any, any, any>;
 }

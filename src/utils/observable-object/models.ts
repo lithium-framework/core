@@ -11,7 +11,7 @@ export class ObservableObject< key extends string , value extends any = any > ex
 
   static init< key extends string , value extends any >( initialObject:Record<key , value> ){
     let observabe = new ObservableObject< key , value >( initialObject );
-    return observabe.createProxy();
+    return observabe.createProxy.bind(observabe)();
   }
 
   $data:Record<string , value> = {};

@@ -36,7 +36,7 @@ export function attrState( options:DecoratorAttributeConfiguration = {} ){
 
   return ( target, propertyKey: string ) => {
     attr( options )( target , propertyKey );
-    state( target , propertyKey );
+    state()( target , propertyKey );
   }
 
 }

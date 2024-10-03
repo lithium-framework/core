@@ -2,22 +2,23 @@ import { WebComponent } from "../webComponent";
 import { ViewExecutionContext } from "../templateComponent";
 import { IWebComponent } from "src/webComponent/interface";
 
+export type EffectRegistery = ( Map< string , IEffect > & { execute( dependency?:string ):void } );
+
 export interface IEffect{
   name:string;
   dependencies : string[];
   callback:any;
 }
 
-export class Effects extends Map< string , IEffect >{
+export function Effects( effects?:Record< string , IEffect > ):EffectRegistery{
 
-  private target:IWebComponent = null;
+  const effects_register = new Map() as EffectRegistery;
 
-  bind( target ){
-    this.target = target;
-    return this;
-  }
+  if(effects)Object.values(effects).forEach((effect) => {
+    this.set( effect.name , effect )
+  });
 
-  execute(){
+  effects_register.execute = function( dependency?:string ){
 
     let effects_without_depedencies = [...this.values()].filter(( effect ) => !effect.dependencies || effect.dependencies.length == 0 ? effect : null);
     let effects_with_depedencies = [...this.values()].filter(( effect ) => effect.dependencies && effect.dependencies.length > 0 ? effect : null);
@@ -26,31 +27,69 @@ export class Effects extends Map< string , IEffect >{
 
       let { dependencies , callback:useEffect , name } = effect;
 
-      dependencies.forEach(( dependency ) => {
-
-        this.target.states.subscribe( dependency , useEffect );
-
-      })
+      if(dependency && dependencies.includes( dependency )){
+        console.log( `Math effect ${dependency}` )
+        useEffect();
+      }
 
     })
 
-    effects_without_depedencies.forEach(( effect ) => {
+    if( !dependency )effects_without_depedencies.forEach(( effect ) => {
 
       let { callback:useEffect } = effect;
-      useEffect();
+      try{
+        useEffect();
+      }
+      catch(error){
+        console.error(error);
+      }
 
     })
 
   }
 
-  constructor( effects?:Record< string , IEffect > ){
-    super();
-
-    if(effects)Object.values(effects).forEach((effect) => {
-      console.log({ effect })
-      this.set( effect.name , effect )
-    });
-
-  }
+  return effects_register;
 
 }
+
+// export class Effects extends Map< string , IEffect >{
+
+//   execute( dependency?:string ){
+
+//     let effects_without_depedencies = [...this.values()].filter(( effect ) => !effect.dependencies || effect.dependencies.length == 0 ? effect : null);
+//     let effects_with_depedencies = [...this.values()].filter(( effect ) => effect.dependencies && effect.dependencies.length > 0 ? effect : null);
+
+//     effects_with_depedencies.forEach(( effect ) => {
+
+//       let { dependencies , callback:useEffect , name } = effect;
+
+//       if(dependency && dependencies.includes( dependency )){
+//         useEffect();
+//       }
+
+//     })
+
+//     if( !dependency )effects_without_depedencies.forEach(( effect ) => {
+
+//       let { callback:useEffect } = effect;
+//       try{
+//         useEffect();
+//       }
+//       catch(error){
+//         console.error(error);
+//       }
+
+//     })
+
+//   }
+
+//   constructor( effects?:Record< string , IEffect > ){
+//     super();
+
+//     if(effects)Object.values(effects).forEach((effect) => {
+//       this.set( effect.name , effect )
+//     });
+
+//   }
+
+// }

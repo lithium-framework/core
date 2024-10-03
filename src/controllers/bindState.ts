@@ -13,7 +13,7 @@ export function bindState< States , Value >( this:WebComponent | ViewExecutionCo
 
   }
 
-  state( this , key as string , value );
+  state()( this , key as string , value );
   return useState.bind( this )( key );
 
 }

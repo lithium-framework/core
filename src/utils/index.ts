@@ -15,7 +15,6 @@ export {
 export {
   ObservableObject,
   type ObservableProxy,
-  Observable
 } from './observable-object/models';
 
 export { 
@@ -40,22 +39,3 @@ export {
   // HierarchicalUUIDOptions,
   uuid
 } from '@lithium-framework/huid';
-
-// export{
-//   Observable,
-//   volatile,
-  // State,
-  // createState,
-  // createStorage,
-  // Storage, 
-  // StorageKeys, 
-  // StorageValues, 
-  // StateValidator,
-  // ComponentId,
-  // Segment,
-  // ParentSegementId,
-  // CollectionId,
-  // HUID,
-  // HierarchicalUUIDOptions,
-  // uuid
-// }

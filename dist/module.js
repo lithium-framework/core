@@ -448,7 +448,6 @@ var $fde9406d76ec24a9$exports = {};
 $parcel$export($fde9406d76ec24a9$exports, "createObservableObject", () => $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41);
 $parcel$export($fde9406d76ec24a9$exports, "ObservableArray", () => $07fd0000f26edeb5$export$2b76b04f92326cd);
 $parcel$export($fde9406d76ec24a9$exports, "ObservableObject", () => $f0b90d4a5f4da766$export$b176171395436676);
-$parcel$export($fde9406d76ec24a9$exports, "Observable", () => $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4);
 $parcel$export($fde9406d76ec24a9$exports, "State", () => $fde9406d76ec24a9$re_export$State);
 $parcel$export($fde9406d76ec24a9$exports, "createState", () => $fde9406d76ec24a9$re_export$createState);
 $parcel$export($fde9406d76ec24a9$exports, "createStorage", () => $fde9406d76ec24a9$re_export$createStorage);
@@ -569,24 +568,6 @@ $07fd0000f26edeb5$export$2b76b04f92326cd.prototype.unsubscribe = function(callba
 
 
 
- // export{
- //   Observable,
- //   volatile,
- // State,
- // createState,
- // createStorage,
- // Storage, 
- // StorageKeys, 
- // StorageValues, 
- // StateValidator,
- // ComponentId,
- // Segment,
- // ParentSegementId,
- // CollectionId,
- // HUID,
- // HierarchicalUUIDOptions,
- // uuid
- // }
 
 
 var $c5a7ff2cef84a00c$exports = {};
@@ -628,18 +609,8 @@ function $7d8e02f1fed4bf94$export$366cf43304d85757(key, value) {
 
 
 class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) {
-    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
-  instance property named `` on the `WebComponent` class. This property is being set to the
-  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
-  values defined in the `states` static property of the `WebComponent` class
-  (`this.constructor["states"]`). */ // $states:ObservableProxy< any , any >;
-    // $effects: Effects;
     constructor(){
         super();
-        this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            this[propertyName] = newValue;
-            this["effects"].execute(propertyName);
-        };
     }
     get bindState() {
         return (0, $facec54f608d45db$export$ad300186e7a01246).bind(this);
@@ -649,6 +620,10 @@ class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) 
     }
     get bindEffect() {
         return (0, $46dc60c1cf1be4f3$export$855330f8a2a9f2e8).bind(this);
+    }
+    handleStateChange(propertyName, oldValue, newValue) {
+        this[propertyName] = newValue;
+        this.effects?.execute(propertyName);
     }
     connectedCallback() {
         this.effects?.execute();
@@ -675,11 +650,6 @@ class $899e8805cec15bdd$export$1053a9be1bcefef9 extends Object {
         this.states = {};
         this.effects = (0, $935380081e1d8be7$export$af73ab700e00763e)();
         this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            console.log("handleStateChange", {
-                propertyName: propertyName,
-                oldValue: oldValue,
-                newValue: newValue
-            });
             this[propertyName] = newValue;
             this["effects"].execute(propertyName);
         };
@@ -760,5 +730,5 @@ $parcel$exportWildcard($4c5fb5bb6e826a01$exports, $ea70625fa1b5e3d6$exports);
 
 
 
-export {$935380081e1d8be7$export$af73ab700e00763e as Effects, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $f24f9f18a7b99a68$export$dc573d8a6576cdb3 as effect, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $07fd0000f26edeb5$export$2b76b04f92326cd as ObservableArray, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $f0b90d4a5f4da766$import$843d46ff018552b8$77cea355fa80b5f4 as Observable, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent, $899e8805cec15bdd$export$1053a9be1bcefef9 as ViewExecutionContext, $ea70625fa1b5e3d6$export$b3890eb0ae9dca99 as render};
+export {$935380081e1d8be7$export$af73ab700e00763e as Effects, $b1b98f19caab25c2$export$683a0e8baad8b9c3 as attrState, $b1b98f19caab25c2$import$843d46ff018552b8$7aabe8b3a840d2fd as attr, $a1f8df21dd3b8ee9$export$ca000e230c0caa3e as state, $f24f9f18a7b99a68$export$dc573d8a6576cdb3 as effect, $5193209399721411$re_export$when as when, $5193209399721411$re_export$repeat as repeat, $5193209399721411$re_export$children as children, $5193209399721411$re_export$elements as elements, $5193209399721411$re_export$slotted as slotted, $21522158c10703ef$export$ca3487b83ec6860a as AsyncAppendBindig, $21522158c10703ef$export$5761d9f85430a54b as AsyncAppendDirective, $21522158c10703ef$export$eaa89ade56b7c0c1 as asyncAppend, $f6651d38d609160e$export$7d1e3a5e95ceca43 as createRef, $f6651d38d609160e$export$1ef8aea9a6de98d as RefDirective, $f6651d38d609160e$export$eff4d24c3ff7876e as ref, $c66c6ea353620255$export$28205fa712822499 as StateBindig, $c66c6ea353620255$export$792c882b75ca2192 as StateDirective, $c66c6ea353620255$export$60241385465d0a34 as useState, $6e530dd7df9f7fe5$export$81053cd05d55c9d8 as StyleBindig, $6e530dd7df9f7fe5$export$18211b6e76035cfa as StyleDirective, $6e530dd7df9f7fe5$export$1d567c320f4763bc as style, $15db1e855f042fe6$export$f36d8f10294685f8 as UntilBindig, $15db1e855f042fe6$export$51c6edf8ee19b71a as UntilDirective, $15db1e855f042fe6$export$a40009bd2c363351 as until, $592e71a4a1bc8d5d$export$dcc5cf24d8fb3b41 as createObservableObject, $07fd0000f26edeb5$export$2b76b04f92326cd as ObservableArray, $f0b90d4a5f4da766$export$b176171395436676 as ObservableObject, $fde9406d76ec24a9$re_export$State as State, $fde9406d76ec24a9$re_export$createState as createState, $fde9406d76ec24a9$re_export$createStorage as createStorage, $fde9406d76ec24a9$re_export$uuid as uuid, $c5a7ff2cef84a00c$export$c0bb0b647f701bb5 as html, $c5a7ff2cef84a00c$re_export$customElement as customElement, $c5a7ff2cef84a00c$re_export$css as css, $c5a7ff2cef84a00c$re_export$ViewTemplate as ViewTemplate, $c5a7ff2cef84a00c$re_export$HTMLView as HTMLView, $c5a7ff2cef84a00c$re_export$volatile as volatile, $284c1ee70f828408$export$7f8b9f308979d41d as WebComponent, $899e8805cec15bdd$export$1053a9be1bcefef9 as ViewExecutionContext, $ea70625fa1b5e3d6$export$b3890eb0ae9dca99 as render};
 //# sourceMappingURL=module.js.map

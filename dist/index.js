@@ -450,7 +450,6 @@ var $d7167569386d0d4c$exports = {};
 $parcel$export($d7167569386d0d4c$exports, "createObservableObject", () => $529142902ff67758$export$dcc5cf24d8fb3b41);
 $parcel$export($d7167569386d0d4c$exports, "ObservableArray", () => $32e43a82b8e36c73$export$2b76b04f92326cd);
 $parcel$export($d7167569386d0d4c$exports, "ObservableObject", () => $7ce92075f2794ab1$export$b176171395436676);
-$parcel$export($d7167569386d0d4c$exports, "Observable", () => $7ce92075f2794ab1$import$843d46ff018552b8$77cea355fa80b5f4);
 $parcel$export($d7167569386d0d4c$exports, "State", () => $d7167569386d0d4c$re_export$State);
 $parcel$export($d7167569386d0d4c$exports, "createState", () => $d7167569386d0d4c$re_export$createState);
 $parcel$export($d7167569386d0d4c$exports, "createStorage", () => $d7167569386d0d4c$re_export$createStorage);
@@ -571,24 +570,6 @@ $32e43a82b8e36c73$export$2b76b04f92326cd.prototype.unsubscribe = function(callba
 
 
 
- // export{
- //   Observable,
- //   volatile,
- // State,
- // createState,
- // createStorage,
- // Storage, 
- // StorageKeys, 
- // StorageValues, 
- // StateValidator,
- // ComponentId,
- // Segment,
- // ParentSegementId,
- // CollectionId,
- // HUID,
- // HierarchicalUUIDOptions,
- // uuid
- // }
 
 
 var $5e6879fad66e268c$exports = {};
@@ -630,18 +611,8 @@ function $5121559b99f023e4$export$366cf43304d85757(key, value) {
 
 
 class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfastelement.FASTElement) {
-    /* The line ` = ObservableObject.init( this.constructor["states"] );` is initializing an
-  instance property named `` on the `WebComponent` class. This property is being set to the
-  result of calling the `init` method of the `ObservableObject` class, passing in the initial state
-  values defined in the `states` static property of the `WebComponent` class
-  (`this.constructor["states"]`). */ // $states:ObservableProxy< any , any >;
-    // $effects: Effects;
     constructor(){
         super();
-        this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            this[propertyName] = newValue;
-            this["effects"].execute(propertyName);
-        };
     }
     get bindState() {
         return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
@@ -651,6 +622,10 @@ class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfast
     }
     get bindEffect() {
         return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
+    }
+    handleStateChange(propertyName, oldValue, newValue) {
+        this[propertyName] = newValue;
+        this.effects?.execute(propertyName);
     }
     connectedCallback() {
         this.effects?.execute();
@@ -677,11 +652,6 @@ class $5221daf215a19ea7$export$1053a9be1bcefef9 extends Object {
         this.states = {};
         this.effects = (0, $6b22b6b12ada86dd$export$af73ab700e00763e)();
         this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            console.log("handleStateChange", {
-                propertyName: propertyName,
-                oldValue: oldValue,
-                newValue: newValue
-            });
             this[propertyName] = newValue;
             this["effects"].execute(propertyName);
         };

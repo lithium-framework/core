@@ -61,6 +61,7 @@ interface IWebComponent<Data = any, States extends Record<string, any> = Record<
     bindEffect: (effect_name: string, callback: () => void, dependencies: any[]) => void;
     bindState: <Value = never>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     bindConsumable: <Value>(key: string, value: Value) => void;
+    onStateChange?: (name: string, oldValue: any, newValue: any) => void;
 }
 export type ViewContext<T = Record<string, any>, States = Record<string, any>> = ViewExecutionContext<T, States> & T;
 export class ViewExecutionContext<T = any, States extends Record<string, any> = Record<string, any>> extends Object implements IWebComponent {
@@ -70,6 +71,7 @@ export class ViewExecutionContext<T = any, States extends Record<string, any> = 
     get bindState(): <Value = never>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
+    onStateChange?: (name: string, oldValue: any, newValue: any) => void;
     handleStateChange: (propertyName: any, oldValue: any, newValue: any) => void;
     static init<T extends Record<string, any> = {}>(data?: T): ViewContext<T>;
 }
@@ -78,6 +80,7 @@ export class WebComponent extends FASTElement implements IWebComponent {
     get bindState(): <States, Value>(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
     get bindConsumable(): <Value>(key: string, value: Value) => void;
     get bindEffect(): (effect_name: string, callback: () => void, dependencies: any[]) => void;
+    onStateChange?: (name: string, oldValue: any, newValue: any) => void;
     handleStateChange(this: IWebComponent, propertyName: any, oldValue: any, newValue: any): void;
     connectedCallback(this: IWebComponent): void;
     static define: {

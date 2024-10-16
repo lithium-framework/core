@@ -11,4 +11,6 @@ export interface IWebComponent< Data = any , States extends Record< string , any
   bindState:< Value = never >(key: keyof States, value: Value) => [state: Value, setter: (newValue: Value) => void];
   bindConsumable:< Value >(key: string, value: Value) => void;
 
+  onStateChange?:( name:string , oldValue:any , newValue:any ) => void;
+
 }

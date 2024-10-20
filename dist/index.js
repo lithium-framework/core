@@ -613,7 +613,8 @@ function $5121559b99f023e4$export$366cf43304d85757(key, value) {
 class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfastelement.FASTElement) {
     constructor(){
         super();
-        this.onStateChange = null;
+        // onStateChange?: (name: string, oldValue: any, newValue: any) => void = null;
+        this.stateChangeCallbacks = new Set();
     }
     get bindState() {
         return (0, $e1c24cd94ecea2f8$export$ad300186e7a01246).bind(this);
@@ -624,8 +625,15 @@ class $55a177ca025730f0$export$7f8b9f308979d41d extends (0, $8zHUo$microsoftfast
     get bindEffect() {
         return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
     }
+    get onStateChange() {
+        return (function(callback) {
+            if (!this.stateChangeCallbacks.has(callback)) this.stateChangeCallbacks.add(callback);
+        }).bind(this);
+    }
     handleStateChange(propertyName, oldValue, newValue) {
-        if (this.onStateChange) this.onStateChange(propertyName, oldValue, newValue);
+        (this.stateChangeCallbacks || []).forEach((callback)=>{
+            callback(propertyName, oldValue, newValue);
+        });
         this[propertyName] = newValue;
         this.effects?.execute(propertyName);
     }
@@ -653,9 +661,11 @@ class $5221daf215a19ea7$export$1053a9be1bcefef9 extends Object {
         super();
         this.states = {};
         this.effects = (0, $6b22b6b12ada86dd$export$af73ab700e00763e)();
-        this.onStateChange = null;
+        this.stateChangeCallbacks = new Set();
         this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            if (this.onStateChange) this.onStateChange(propertyName, oldValue, newValue);
+            (this.stateChangeCallbacks || []).forEach((callback)=>{
+                callback(propertyName, oldValue, newValue);
+            });
             this[propertyName] = newValue;
             this["effects"].execute(propertyName);
         };
@@ -669,6 +679,11 @@ class $5221daf215a19ea7$export$1053a9be1bcefef9 extends Object {
     }
     get bindEffect() {
         return (0, $ad561189c3a675d2$export$855330f8a2a9f2e8).bind(this);
+    }
+    get onStateChange() {
+        return (function(callback) {
+            if (!this.stateChangeCallbacks.has(callback)) this.stateChangeCallbacks.add(callback);
+        }).bind(this);
     }
     static init(data) {
         return new $5221daf215a19ea7$export$1053a9be1bcefef9(data);

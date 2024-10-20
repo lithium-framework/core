@@ -22,10 +22,21 @@ export class ViewExecutionContext< T = any , States extends Record<string , any>
   get bindConsumable():< Value >(key: string, value: Value) => void{ return bindConsumable.bind(this) }
   get bindEffect():( effect_name:string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
 
-  onStateChange?: (name: string, oldValue: any, newValue: any) => void = null;
+  private stateChangeCallbacks:Set< ( (name: string, oldValue: any, newValue: any) => void ) > = new Set();
+  get onStateChange(){
+    return (function( this : ViewExecutionContext , callback : (name: string, oldValue: any, newValue: any) => void ){
+  
+      if(!this.stateChangeCallbacks.has( callback )){
+        this.stateChangeCallbacks.add( callback );
+      }
+  
+    }).bind(this)
+  }
 
   handleStateChange = ( propertyName, oldValue, newValue ) => {
-    if(this.onStateChange)this.onStateChange( propertyName, oldValue, newValue )
+    (this.stateChangeCallbacks || []).forEach(( callback ) => {
+      callback( propertyName, oldValue, newValue );
+    })
     this[propertyName] = newValue;
     this["effects"].execute( propertyName );
   }

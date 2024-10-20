@@ -17,12 +17,27 @@ export class WebComponent extends FASTElement implements IWebComponent{
   get bindConsumable():< Value >(key: string, value: Value) => void{ return bindConsumable.bind(this) }
   get bindEffect():( effect_name : string , callback: () => void, dependencies: any[])=> void{ return bindEffect.bind( this ) }
 
-  onStateChange?: (name: string, oldValue: any, newValue: any) => void = null;
+  // onStateChange?: (name: string, oldValue: any, newValue: any) => void = null;
+  stateChangeCallbacks:Set< ( (name: string, oldValue: any, newValue: any) => void ) > = new Set();
+  get onStateChange(){
+    return (function( this : WebComponent & IWebComponent , callback : (name: string, oldValue: any, newValue: any) => void ){
+  
+      if(!this.stateChangeCallbacks.has( callback )){
+        this.stateChangeCallbacks.add( callback );
+      }
+  
+    }).bind(this)
+  }
 
-  handleStateChange( this:IWebComponent , propertyName, oldValue, newValue ){
-    if(this.onStateChange)this.onStateChange( propertyName, oldValue, newValue )
+  handleStateChange( this:WebComponent & IWebComponent, propertyName, oldValue, newValue ){
+
+    (this.stateChangeCallbacks || []).forEach(( callback ) => {
+      callback( propertyName, oldValue, newValue );
+    })
+
     this[propertyName] = newValue;
     this.effects?.execute( propertyName );
+
   }
 
   connectedCallback( this:IWebComponent ) {

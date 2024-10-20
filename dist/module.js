@@ -611,7 +611,8 @@ function $7d8e02f1fed4bf94$export$366cf43304d85757(key, value) {
 class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) {
     constructor(){
         super();
-        this.onStateChange = null;
+        // onStateChange?: (name: string, oldValue: any, newValue: any) => void = null;
+        this.stateChangeCallbacks = new Set();
     }
     get bindState() {
         return (0, $facec54f608d45db$export$ad300186e7a01246).bind(this);
@@ -622,8 +623,15 @@ class $284c1ee70f828408$export$7f8b9f308979d41d extends (0, $hgUW1$FASTElement) 
     get bindEffect() {
         return (0, $46dc60c1cf1be4f3$export$855330f8a2a9f2e8).bind(this);
     }
+    get onStateChange() {
+        return (function(callback) {
+            if (!this.stateChangeCallbacks.has(callback)) this.stateChangeCallbacks.add(callback);
+        }).bind(this);
+    }
     handleStateChange(propertyName, oldValue, newValue) {
-        if (this.onStateChange) this.onStateChange(propertyName, oldValue, newValue);
+        (this.stateChangeCallbacks || []).forEach((callback)=>{
+            callback(propertyName, oldValue, newValue);
+        });
         this[propertyName] = newValue;
         this.effects?.execute(propertyName);
     }
@@ -651,9 +659,11 @@ class $899e8805cec15bdd$export$1053a9be1bcefef9 extends Object {
         super();
         this.states = {};
         this.effects = (0, $935380081e1d8be7$export$af73ab700e00763e)();
-        this.onStateChange = null;
+        this.stateChangeCallbacks = new Set();
         this.handleStateChange = (propertyName, oldValue, newValue)=>{
-            if (this.onStateChange) this.onStateChange(propertyName, oldValue, newValue);
+            (this.stateChangeCallbacks || []).forEach((callback)=>{
+                callback(propertyName, oldValue, newValue);
+            });
             this[propertyName] = newValue;
             this["effects"].execute(propertyName);
         };
@@ -667,6 +677,11 @@ class $899e8805cec15bdd$export$1053a9be1bcefef9 extends Object {
     }
     get bindEffect() {
         return (0, $46dc60c1cf1be4f3$export$855330f8a2a9f2e8).bind(this);
+    }
+    get onStateChange() {
+        return (function(callback) {
+            if (!this.stateChangeCallbacks.has(callback)) this.stateChangeCallbacks.add(callback);
+        }).bind(this);
     }
     static init(data) {
         return new $899e8805cec15bdd$export$1053a9be1bcefef9(data);

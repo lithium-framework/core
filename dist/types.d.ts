@@ -1,7 +1,10 @@
 import { DecoratorAttributeConfiguration, attr, FASTElement, HTMLTemplateTag, ViewTemplate, HTMLBindingDirective, Binding, Subscriber, BindingDirective, ExpressionObserver, HTMLView, StatelessAttachedAttributeDirective, Subscriber as _Subscriber1, when, repeat, children, elements, slotted } from "@microsoft/fast-element";
 import { Properties } from "csstype";
 import { State } from "@lithium-framework/state";
-export function state(): (target: any, propertyName: string, value?: any, y?: any) => void;
+export interface IStateOptions {
+    lazy?: boolean;
+}
+export function state(options?: IStateOptions): (target: any, propertyName: string, value?: any, y?: any) => void;
 /**
  * @AttributeState decorator
  * A decorator to define a property as both an attribute and a state on a WebComponent.

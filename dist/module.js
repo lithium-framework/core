@@ -35,7 +35,10 @@ var $a1f8df21dd3b8ee9$exports = {};
 
 $parcel$export($a1f8df21dd3b8ee9$exports, "state", () => $a1f8df21dd3b8ee9$export$ca000e230c0caa3e);
 
-function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e() {
+function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e(options) {
+    options = Object.assign({
+        lazy: false
+    }, options || {});
     return function(target, propertyName, value, y) {
         let privateName = `_${propertyName}`;
         if (!target[propertyName]) Object.defineProperty(target, propertyName, {
@@ -51,7 +54,7 @@ function $a1f8df21dd3b8ee9$export$ca000e230c0caa3e() {
                 const oldValue = this.states[privateName];
                 if (oldValue != newValue) {
                     this.states[privateName] = newValue;
-                    (0, $hgUW1$Observable).notify(this, propertyName);
+                    if (!options.lazy) (0, $hgUW1$Observable).notify(this, propertyName);
                     // Si l'état a changé, déclenche une action pour CETTE instance
                     if (oldValue !== newValue) this.handleStateChange(propertyName, oldValue, newValue);
                 }

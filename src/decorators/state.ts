@@ -1,6 +1,15 @@
 import { Observable } from "@microsoft/fast-element";
 
-export function state(  ) {
+export interface IStateOptions {
+    lazy? : boolean;
+}
+
+export function state( options ? : IStateOptions ) {
+
+    options = Object.assign( {
+        lazy : false
+    } , options || {} );
+
   return function (target: any, propertyName: string , value?:any , y?) {
       let privateName = `_${propertyName}`
 
@@ -27,7 +36,7 @@ export function state(  ) {
 
                 this.states[privateName] = newValue;
 
-                Observable.notify( this, propertyName);
+                if(!options.lazy)Observable.notify( this, propertyName);
 
                 // Si l'état a changé, déclenche une action pour CETTE instance
                 if (oldValue !== newValue) {
